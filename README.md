@@ -1,4 +1,4 @@
-# app
+# Fitbird Application
 
 ## Getting Started
 
