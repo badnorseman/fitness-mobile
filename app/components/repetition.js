@@ -7,9 +7,12 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import { Icon } from 'react-native-icons';
+import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
+
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     height: 45,
     backgroundColor: 'rgba(51, 56, 72, 1)',
     alignSelf: 'stretch',
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
     lineHeight: 25
   },
   left: {
-    flex: 1
+    flex: 2
   },
   middle: {
     flex: 1,
@@ -33,6 +36,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   },
+  check: {
+    flex: 0.5,
+    flexDirection: 'row'
+  },
   reps: {
     height: 35,
     width: 48,
@@ -40,6 +47,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     backgroundColor: 'rgba(69, 74, 91, 1)',
     color: 'rgba(169, 169, 169, 1)'
+  },
+  c1: {
+    lineHeight: 27,
+    fontSize: 18,
+    color: 'rgb(255, 255, 255)'
+  },
+  c1t: {
+    color: 'rgb(128, 128, 128)'
+  },
+  c2: {
+    lineHeight: 27,
+    fontSize: 18,
+    color: 'rgb(255, 255, 255)'
+  },
+  c2t: {
+    color: 'rgb(128, 128, 128)'
+  },
+  missingFieldInputContainer: {
+    flexDirection: 'row'
+  },
+  checkIcon: {
+    width: 35,
+    height: 35,
+    opacity: 1,
+    backgroundColor: 'transparent'
   }
 });
 
@@ -48,19 +80,79 @@ export default class Repetition extends Component {
     super(props);
   }
 
+  onPressCheck() {
+    const { checkSet, workoutNum, exerciseGroupId, setId } = this.props;
+    const workoutId = workoutNum - 1;
+
+    checkSet(workoutId, exerciseGroupId, setId);
+  }
+
   render() {
+    const { navigator, workout, exerciseGroup, overview, set, setId } = this.props;
+    const inputDisabled = !workout.startDT || workout.endDT;
+    let left;
+    let middle;
+    let right;
+    let check;
+
+    const inputProps = {
+      keyboardType: 'number-pad',
+      keyboardAppearance: 'dark',
+      placeholder: 'MAX',
+      placeholderTextColor: 'rgba(169, 169, 169, 1)',
+      style: styles.reps,
+      onBlur: dismissKeyboard
+    };
+
+    if(set.c1){
+      middle = <Text style={styles.text}><Text style={styles.c1}>{set.c1}</Text><Text>{' '}</Text><Text style={styles.c1t}>{set.c1t}</Text></Text>
+    } else if(set.missingField && set.c1Missing) {
+      middle = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
+    }
+
+    if(set.c2){
+      right = <Text style={styles.text}><Text style={styles.c2}>{set.c2}</Text><Text>{' '}</Text><Text style={styles.c2t}>{set.c2t}</Text></Text>
+    } else if(set.missingField && set.c2Missing) {
+      right = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
+    }
+
+    if(!set.missingField && !inputDisabled) {
+      if(set.dateDT){
+        check = (
+          <Icon
+            name='ion|ios-checkmark-outline'
+            size={35}
+            color='white'
+            style={styles.checkIcon}
+          />
+        );
+      } else {
+        check = (
+          <TouchableOpacity onPress={this.onPressCheck.bind(this)}>
+            <Icon
+              name='ion|ios-circle-outline'
+              size={35}
+              color='grey'
+              style={styles.checkIcon}
+            />
+          </TouchableOpacity>
+        );
+      }
+    }
+
     return (
-      <View style={styles.main}>
+      <View style={[styles.main, (!set.rest ? {marginBottom: 1} : {})]} onStartShouldSetResponder={dismissKeyboard}>
         <View style={styles.left}>
-          <Text style={styles.text}>Pull Ups</Text>
+          <Text style={styles.text}>{set.ex.shortName}</Text>
         </View>
         <View style={styles.middle}>
-          <TextInput keyboardType='numeric' placeholder='MAX' placeholderTextColor='rgba(169, 169, 169, 1)' style={styles.reps}/>
-          <Text style={styles.text}>reps</Text>
+          {middle}
         </View>
         <View style={styles.right}>
-          <TextInput keyboardType='numeric' placeholder='MAX' placeholderTextColor='rgba(169, 169, 169, 1)' style={styles.reps}/>
-          <Text style={styles.text}>kg</Text>
+          {right}
+        </View>
+        <View style={styles.check}>
+          {check}
         </View>
       </View>
     );

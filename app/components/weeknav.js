@@ -6,13 +6,15 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import getWeek from '../utils/getWeek';
+
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     height: 60,
     backgroundColor: 'rgba(41, 44, 53, 0.95)',
     alignItems: 'center',
-    textAlign: 'center',
+    // textAlign: 'center',
     justifyContent: 'center'
   },
   weekTitle: {
@@ -47,12 +49,43 @@ export default class WeekNav extends Component {
     super(props);
   }
 
+  onPressPrev(){
+    this.props.prevWeek();
+  }
+
+  onPressNext(){
+    this.props.nextWeek();
+  }
+
   render() {
+    const { state } = this.props;
+    const currentWeekNo = state.dashboard.week;
+    const week = state.plan.data.weeks[currentWeekNo];
+    const totalWeeks = state.plan.data.weeks.length;
+    const currentWeek = getWeek();
+    let label = '';
+    let prevWeekButton;
+    let nextWeekButton;
+
+    if(week && week.weekNo === currentWeek){
+      label = 'This week';
+    } else if(week) {
+      label = `Week ${week.weekNo}`;
+    }
+
+    if(currentWeekNo > 0){
+      prevWeekButton = (<TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>);
+    }
+
+    if(currentWeekNo <= totalWeeks - 2){
+      nextWeekButton = (<TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>);
+    }
+
     return (
       <View style={styles.main}>
-        <TouchableOpacity style={styles.leftArrow}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>
-        <Text style={styles.weekTitle}>Week 34</Text>
-        <TouchableOpacity style={styles.rightArrow}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>
+        {prevWeekButton}
+        <Text style={styles.weekTitle}>{label}</Text>
+        {nextWeekButton}
       </View>
     );
   }

@@ -28,7 +28,6 @@ class NavButton extends React.Component {
 }
 
 var NavigationBarRouteMapper = {
-
   LeftButton: function(route, navigator, index, navState) {
     if (index === 0) {
       return null;
@@ -39,9 +38,14 @@ var NavigationBarRouteMapper = {
 
     switch(route.id){
       case 'exercise':
+      case 'feedback':
         leftButtonText = 'Workout'; break;
       case 'video':
         leftButtonText = 'Exercise'; break;
+    }
+
+    if(route.id === 'edit'){
+      return;
     }
 
     return (
@@ -64,7 +68,7 @@ var NavigationBarRouteMapper = {
   RightButton: function(route, navigator, index, navState) {
     if(route.id === 'dashboard'){
       return <TouchableOpacity
-        onPress={() => navigator.pop()}
+        onPress={() => navigator.props.logout()}
         style={styles.navBarRightButton}>
         <Text style={[styles.navBarText, styles.navBarButtonText]}>
           Log out
@@ -72,15 +76,42 @@ var NavigationBarRouteMapper = {
       </TouchableOpacity>;
     } else if(route.id === 'exercise'){
       return <TouchableOpacity
-        onPress={() => navigator.pop()}
+        onPress={() => navigator.push({
+          id: 'edit',
+          props: route.props
+        })}
         style={styles.navBarRightButton}>
         <Text style={[styles.navBarText, styles.navBarButtonText]}>
           Edit
         </Text>
       </TouchableOpacity>;
+    } else if(
+        route.id === 'workout'        &&
+        route.props.workout           &&
+        route.props.workout.feedback  &&
+        route.props.workout.feedback.type
+    ){
+      return <TouchableOpacity
+        onPress={() => navigator.push({
+          id: 'feedback',
+          props: route.props
+        })}
+        style={styles.navBarRightButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+          Edit
+        </Text>
+      </TouchableOpacity>;
+    } else if(route.id === 'edit'){
+      return <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarRightButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+          Done
+        </Text>
+      </TouchableOpacity>;
     }
 
-    return;
+    return <Text></Text>;
   },
 
   Title: function(route, navigator, index, navState) {

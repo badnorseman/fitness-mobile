@@ -1,5 +1,11 @@
-import counter from './counter';
+import app from './app';
+import auth from './auth';
+import plan from './plan';
+import dashboard from './dashboard';
 
 export {
-  counter
+  app,
+  auth,
+  plan,
+  dashboard
 };

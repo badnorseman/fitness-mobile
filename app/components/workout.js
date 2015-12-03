@@ -6,11 +6,11 @@ import React, {
 } from 'react-native';
 
 import ExercisesList from './exerciseslist';
-import EndWorkout from './endworkout';
+import FooterButton from './footerbutton';
+import Feedback from './feedback';
 
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
     flex: 1,
     paddingTop: 64,
     backgroundColor: 'rgba(46, 49, 58, 1)'
@@ -23,23 +23,13 @@ export default class Workout extends Component {
   }
 
   render() {
-    const exercises = [
-      {
-        name: 'Bench Press (Test)',
-        active: true
-      },
-      {
-        name: 'Pull Ups (Wide Grip)'
-      },
-      {
-        name: 'Shoulder Press (Test)'
-      }
-    ];
+    const { workout } = this.props;
 
     return (
       <View style={styles.main}>
-        <ExercisesList {...this.props} exercises={exercises}/>
-        <EndWorkout/>
+        <Feedback {...this.props} />
+        <ExercisesList {...this.props} overview={workout.overview} workout={workout} exerciseGroups={workout.exerciseGroups} />
+        <FooterButton {...this.props} />
       </View>
     );
   }

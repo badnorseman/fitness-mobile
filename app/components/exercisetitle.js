@@ -7,22 +7,21 @@ import React, {
 } from 'react-native';
 
 import { Icon } from 'react-native-icons';
+import hasAllSetsDone from '../utils/hasAllSetsDone';
 
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     height: 65,
     padding: 10,
-    backgroundColor: 'rgba(58, 77, 153, 1)',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    marginBottom: 1
   },
   name: {
-    color: 'white',
     fontSize: 19,
     fontWeight: 'bold'
   },
   details: {
-    color: 'rgba(120, 141, 216, 1)',
     fontSize: 14,
     fontWeight: 'bold',
     lineHeight: 20
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 3,
-    backgroundColor: 'rgba(46, 63, 120, 1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.15)',
     padding: 3,
     width: 45,
     alignItems: 'center'
@@ -55,13 +54,78 @@ export default class ExerciseTitle extends Component {
     super(props);
   }
 
+  getTempoFromExOrSets() {
+    const { exercise } = this.props;
+    const sets = this.props.exerciseGroup.sets;
+  	let exSetTempo;
+
+  	for (var i = 0; i < sets.length; i++) {
+  		// Doesn't set twice
+  		if (sets[i].exerciseId === exercise.id && !exSetTempo) {
+  			exSetTempo = sets[i].tempo;
+  		}
+  	}
+
+  	if (exSetTempo) {
+  		return exSetTempo;
+  	} else if (exercise.tempo) {
+  		return exercise.tempo;
+  	}
+  }
+
+  exerciseColor() {
+    const { workout, exerciseGroup } = this.props;
+    const style = {
+      opacity: workout.endDT ? 0.7 : 1
+    };
+
+    if (!workout.startDT) {
+			style.backgroundColor = 'rgb(51, 56, 72)';
+		} else {
+			style.backgroundColor = hasAllSetsDone(exerciseGroup) ? 'rgba(62, 152, 91, 1)' : 'rgba(59, 79, 151, 1)';
+		}
+
+    return style;
+	}
+
+  detailsColor() {
+    const { workout, exerciseGroup } = this.props;
+    const style = {
+      opacity: workout.endDT ? 0.7 : 1
+    };
+
+    if (!workout.startDT) {
+			style.color = 'rgb(107, 121, 177)';
+		} else {
+			style.color = hasAllSetsDone(exerciseGroup) ? 'rgb(176, 214, 189)' : 'rgb(119, 139, 218)';
+		}
+
+    return style;
+	}
+
+  nameColor() {
+    const { workout, exerciseGroup } = this.props;
+    if (!workout.startDT) {
+      return { color: 'rgb(128, 128, 128)' };
+    } else {
+      return { color: 'rgb(255, 255, 255)' };
+    }
+  }
+
   render() {
-    const {exercise, navigator} = this.props;
+    const { exercise, exerciseId, overview, navigator } = this.props;
+    const tempo = this.getTempoFromExOrSets(exercise);
+    const tempoDetail = (tempo ? <Text>Tempo {tempo}</Text> : null);
+    const setsDetail = (overview.loadTest || overview.loadTestOptional) ? (<Text>Test</Text>) : (<Text>{overview.setsNo + ' sets'}</Text>);
 
     return (
-      <View style={styles.main}>
-        <Text style={styles.name}>{exercise.name}</Text>
-        <Text style={styles.details}>Tempo 2021 3 sets</Text>
+      <View style={[styles.main, this.exerciseColor()]}>
+        <Text style={[styles.name, this.nameColor()]}>{exercise.name}</Text>
+        <Text style={[styles.details, this.detailsColor()]}>
+          <Text>{tempoDetail}</Text>
+          <Text>{' '}</Text>
+          <Text>{setsDetail}</Text>
+        </Text>
         <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({id: 'video', title: exercise.name})}>
           <View style={styles.button}>
             <Icon

@@ -7,9 +7,13 @@ import React, {
   Text
 } from 'react-native';
 
+import { Icon } from 'react-native-icons';
+
+import ExerciseRow from './exerciserow';
+
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     flex: 1,
     backgroundColor: 'rgba(41, 44, 53, 0.95)'
   },
@@ -42,8 +46,27 @@ const styles = StyleSheet.create({
   },
   detailsActive: {
     color: 'rgba(176, 214, 189, 1)'
+  },
+  container: {},
+  exchange: {
+    width: 20,
+    height: 20,
+    position: 'absolute',
+    right: 20,
+    top: 55,
+    transform: [{rotate:'90deg'}],
+    opacity: 1,
+    backgroundColor: 'transparent'
   }
 });
+
+function getIconColor(workout) {
+  if (!workout.startDT) {
+    return 'rgb(128, 128, 128)';
+  } else {
+    return 'rgb(255, 255, 255)';
+  }
+}
 
 export default class ExercisesList extends Component {
   constructor(props) {
@@ -51,31 +74,33 @@ export default class ExercisesList extends Component {
   }
 
   _renderRow(rowData, sectionID, rowID) {
+    const { workout, workoutNum } = this.props;
+
+    const exercises = rowData.exercises.map((exercise, i) => {
+      return (<ExerciseRow key={i} workout={workout} workoutNum={workoutNum} exerciseGroup={rowData} exercise={exercise} overview={workout.overview[rowID][i]}/>);
+    });
+
+    const exchange = (rowData.exercises.length > 1 ? (<Icon
+      name='ion|arrow-swap'
+      size={20}
+      color={getIconColor(workout)}
+      style={[styles.exchange, { opacity: (!workout.endDT ? 1 : 0.7) }]}
+    />) : null);
+
     return (
-      <TouchableHighlight onPress={() => this.props.navigator.push({id: 'exercise', props: {exercise: rowData}})}>
-        <View>
-          <View style={(rowData.active ? [styles.row, styles.rowActive] : styles.row)}>
-            <Text style={[styles.text, styles.name]}>
-              {rowData.name}
-            </Text>
-            <Text style={(rowData.active ? [styles.text, styles.details, styles.detailsActive] : [styles.text, styles.details])}>
-              Test
-            </Text>
-          </View>
+      <TouchableHighlight onPress={() => this.props.navigator.push({id: 'exercise', props: {workout: workout, workoutNum: workoutNum, exerciseGroup: rowData, exerciseGroupId: rowID, overview: workout.overview[rowID]}})}>
+        <View style={styles.container}>
+          {exercises}
+          {exchange}
           <View style={styles.separator} />
         </View>
       </TouchableHighlight>
     );
   }
 
-  _pressRow(rowID, rowData){
-    console.log('pressed', rowID);
-    this.props.navigator.push({id: 'exercise'});
-  }
-
   render() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var dataSource = ds.cloneWithRows(this.props.exercises || []);
+    var dataSource = ds.cloneWithRows(this.props.exerciseGroups || []);
 
     return (
       <ListView

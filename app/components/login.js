@@ -10,7 +10,7 @@ import React, {
 
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,10 +59,15 @@ const styles = StyleSheet.create({
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
-  onPressLogin(){
-    this.props.navigator.replace({ id: 'dashboard', title: 'Dashboard' });
+  onPressLogin() {
+    const { login } = this.props;
+    const { email, password } = this.state;
+
+    login(email, password);
+    // this.props.navigator.replace({ id: 'dashboard', title: 'Dashboard' });
   }
 
   render() {
@@ -73,6 +78,8 @@ export default class Login extends Component {
           source={{uri: 'http://app.fitbird.com/app/static/img/background-bird.png'}}
         >
           <TextInput
+            onChangeText={(email) => this.setState({email})}
+            value={this.state.email}
             style={styles.emailInput}
             autoCapitalize='none'
             keyboardType='email-address'
@@ -80,6 +87,8 @@ export default class Login extends Component {
             placeholderTextColor='#a9a9a9'
           />
           <TextInput
+            onChangeText={(password) => this.setState({password})}
+            value={this.state.password}
             style={styles.passwordInput}
             autoCapitalize='none'
             keyboardType='default'

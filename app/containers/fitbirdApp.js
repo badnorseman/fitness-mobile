@@ -1,40 +1,85 @@
 'use strict';
 
-import React, { Component, Navigator, StatusBarIOS } from 'react-native';
+import React, { Component, Navigator, StatusBarIOS, AlertIOS } from 'react-native';
 import {bindActionCreators} from 'redux';
-import Counter from '../components/counter';
 
 import NavigationBarRouteMapper from '../components/navbar';
 import Login from '../components/login';
 import Dashboard from '../components/dashboard';
 import Workout from '../components/workout';
+import EditWorkout from '../components/editworkout';
 import Exercise from '../components/exercise';
 import Video from '../components/video';
+import EditFeedback from '../components/editfeedback';
 
-import * as counterActions from '../actions/counterActions';
+import * as authActions from '../actions/authActions';
+import * as planActions from '../actions/planActions';
+import * as dashboardActions from '../actions/dashboardActions';
+import * as appActions from '../actions/appActions';
 import { connect } from 'react-redux/native';
 
-
-@connect(state => ({
-  state: state.counter
-}))
 class FitbirdApp extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentWillMount(nextProps){
+    this.props.dispatch(authActions.authByCookie());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const currentRoute = this.refs.navigator.getCurrentRoutes()[0];
+
+    if(nextProps.state.auth.ok && !Object.keys(nextProps.state.plan).length) {
+      nextProps.dispatch(planActions.planLoad());
+    }
+
+    if(currentRoute.id !== 'login' && nextProps.state.auth.logout) {
+      nextProps.dispatch(authActions.clear());
+      this.refs.navigator.replace({ id: 'login', title: 'Login' });
+      return nextProps;
+    }
+
+    if(currentRoute.id === 'login' && nextProps.state.auth.ok) {
+      this.refs.navigator.replace({ id: 'dashboard', title: 'Dashboard' });
+      return nextProps;
+    }
+
+    if(nextProps.state.auth.ok === false && nextProps.state.auth.ok !== this.props.state.auth.ok){
+      nextProps.dispatch(appActions.alert('Authentication Failed', 'Please enter a valid e-mail and password'));
+      nextProps.dispatch(authActions.clear());
+      return nextProps;
+    }
+  }
+
   renderScene(route, navigator) {
+    let sharedProps = {};
+
+    Object.assign(
+      sharedProps,
+      route.props,
+      {
+        navigator: navigator,
+        state: this.props.state,
+        dispatch: this.props.dispatch
+      }
+    );
+
     switch(route.id){
       case 'login':
-        return <Login {...route.props} navigator={navigator} {...bindActionCreators(counterActions, this.props.dispatch)}/>;
+        return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;
       case 'dashboard':
-        return <Dashboard {...route.props} navigator={navigator} {...bindActionCreators(counterActions, this.props.dispatch)}/>;
+        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions }, this.props.dispatch)}/>;
       case 'workout':
-        return <Workout {...route.props} navigator={navigator} {...bindActionCreators(counterActions, this.props.dispatch)}/>;
+        return <Workout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+      case 'edit':
+        return <EditWorkout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+      case 'feedback':
+        return <EditFeedback {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'exercise':
-        return <Exercise {...route.props} navigator={navigator} {...bindActionCreators(counterActions, this.props.dispatch)}/>;
+        return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'video':
-        return <Video {...route.props} navigator={navigator} {...bindActionCreators(counterActions, this.props.dispatch)}/>;
+        return <Video {...sharedProps} />;
     }
   }
 
@@ -44,13 +89,14 @@ class FitbirdApp extends Component {
 
     return (
       <Navigator
+        ref="navigator"
         style={{
           flex: 1,
           backgroundColor: 'rgba(46, 49, 58, 1)'
         }}
         //barTintColor='#292c34'
         //titleTextColor='#ffffff'
-        initialRoute={{id: 'login', title: 'Login'}}
+        initialRoute={{id: 'login', title: 'Fitbird'}}
         renderScene={this.renderScene.bind(this)}
         navigationBar={
           <Navigator.NavigationBar
@@ -60,9 +106,10 @@ class FitbirdApp extends Component {
             }}
           />
         }
+        logout={() => this.props.dispatch(authActions.logout())}
       />
     );
   }
 }
 
-export default FitbirdApp;
+export default connect(state => ({ state: state }))(FitbirdApp);

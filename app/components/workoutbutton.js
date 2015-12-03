@@ -6,9 +6,11 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import getDayName from '../utils/getDayName';
+
 const styles = StyleSheet.create({
   main: {
-    fontFamily: 'PT Sans',
+    // fontFamily: 'PT Sans',
     height: 60,
     backgroundColor: 'rgba(49, 53, 67, 0.98)',
     alignItems: 'center',
@@ -20,13 +22,22 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   inProgress: {
-    backgroundColor: 'rgba(115, 170, 133, 0.98)',
+    backgroundColor: 'rgba(115, 170, 133, 1)'
+  },
+  completed: {
+    backgroundColor: 'rgba(58, 153, 89, 1)'
+  },
+  next: {
+    backgroundColor: 'rgba(58, 77, 153, 1)'
   },
   firstLine: {
     color: 'rgba(192, 192, 195, 1)',
     fontWeight: 'bold'
   },
   firstLineInProgress: {
+    color: 'white'
+  },
+  firstLineCompleted: {
     color: 'white'
   },
   secondLine: {
@@ -40,25 +51,33 @@ export default class WorkoutButton extends Component {
   }
 
   render() {
-    const {inProgress, workoutNum, navigator} = this.props;
-
-    if(inProgress){
-      return (
-        <TouchableOpacity style={styles.touchable} onPress={() => navigator.push({id: 'workout', title: `Workout ${workoutNum}`})}>
-          <View style={[styles.main, styles.inProgress]}>
-            <Text style={[styles.firstLine, styles.firstLineInProgress]}>Workout in progress</Text>
-            <Text style={styles.secondLine}>Tap to resume</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity style={styles.touchable} onPress={() => navigator.push({id: 'workout', title: `Workout ${workoutNum}`})}>
-          <View style={styles.main}>
-            <Text style={styles.firstLine}>Week {workoutNum}</Text>
-          </View>
-        </TouchableOpacity>
-      );
+    const { state, workout, workoutNum, navigator } = this.props;
+    const plan = state.plan.data;
+    const buttonStyles = [styles.main];
+    const firstLineStyles = [styles.firstLine]
+    let secondLine;
+    let label = `Workout ${workoutNum}`;
+    
+    if(workout.endDT){
+      buttonStyles.push(styles.completed);
+      firstLineStyles.push(styles.firstLineCompleted);
+      label = getDayName(new Date(workout.startDT));
+    } else if(workout.startDT && workout.id === plan.activeWorkoutId){
+      buttonStyles.push(styles.inProgress);
+      firstLineStyles.push(styles.firstLineInProgress);
+      secondLine = (<Text style={styles.secondLine}>Tap to resume</Text>);
+      label = 'Workout in progress';
+    } else if(workout.id === plan.nextWorkoutId){
+      buttonStyles.push(styles.next);
     }
+
+    return (
+      <TouchableOpacity style={styles.touchable} onPress={() => navigator.push({ id: 'workout', title: `Workout ${workoutNum}`, props: { workout: workout, workoutNum: workoutNum } })}>
+        <View style={buttonStyles}>
+          <Text style={[styles.firstLine, styles.firstLineCompleted]}>{label}</Text>
+          {secondLine}
+        </View>
+      </TouchableOpacity>
+    );
   }
 }
