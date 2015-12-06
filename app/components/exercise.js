@@ -4,10 +4,10 @@ import React, {
   View
 } from 'react-native';
 
-import ExerciseTitle from './exercisetitle';
-import Repetition from './repetition';
-import BreakTimer from './breaktimer';
-import ExerciseNav from './exercisenav';
+import ExerciseTitle from './ExerciseTitle';
+import Repetition from './Repetition';
+import BreakTimer from './BreakTimer';
+import ExerciseNav from './ExerciseNav';
 
 const styles = StyleSheet.create({
   main: {

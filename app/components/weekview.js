@@ -5,7 +5,7 @@ import React, {
   Text
 } from 'react-native';
 
-import WorkoutButton from './workoutbutton';
+import WorkoutButton from './WorkoutButton';
 
 const styles = StyleSheet.create({
   halves: {

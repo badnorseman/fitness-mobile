@@ -4,9 +4,9 @@ import React, {
   View
 } from 'react-native';
 
-import ExercisesList from './exerciseslist';
-import FooterButton from './footerbutton';
-import Feedback from './feedback';
+import ExercisesList from './ExercisesList';
+import FooterButton from './FooterButton';
+import Feedback from './Feedback';
 
 const styles = StyleSheet.create({
   main: {

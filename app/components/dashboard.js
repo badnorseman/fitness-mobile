@@ -5,9 +5,9 @@ import React, {
   Image
 } from 'react-native';
 
-import WeekNav from './weeknav';
-import WeekView from './weekview';
-import CenteredText from './centeredtext';
+import WeekNav from './WeekNav';
+import WeekView from './WeekView';
+import CenteredText from './CenteredText';
 
 const styles = StyleSheet.create({
   main: {

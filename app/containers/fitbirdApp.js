@@ -3,14 +3,14 @@
 import React, { Component, Navigator, StatusBarIOS } from 'react-native';
 import { bindActionCreators } from 'redux';
 
-import NavigationBarRouteMapper from '../components/navbar';
-import Login from '../components/login';
-import Dashboard from '../components/dashboard';
-import Workout from '../components/workout';
-import EditWorkout from '../components/editworkout';
-import Exercise from '../components/exercise';
-import Video from '../components/video';
-import EditFeedback from '../components/editfeedback';
+import NavigationBarRouteMapper from '../components/NavBar';
+import Login from '../components/Login';
+import Dashboard from '../components/Dashboard';
+import Workout from '../components/Workout';
+import EditWorkout from '../components/EditWorkout';
+import Exercise from '../components/Exercise';
+import Video from '../components/Video';
+import EditFeedback from '../components/EditFeedback';
 
 import * as authActions from '../actions/auth_actions';
 import * as planActions from '../actions/plan_actions';

@@ -4,8 +4,8 @@ import React, {
   View
 } from 'react-native';
 
-import EditRepetition from './editrepetition';
-import BreakTimer from './breaktimer';
+import EditRepetition from './EditRepetition';
+import BreakTimer from './BreakTimer';
 
 const styles = StyleSheet.create({
   main: {

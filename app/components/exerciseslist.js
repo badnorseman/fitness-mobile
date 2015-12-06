@@ -8,7 +8,7 @@ import React, {
 
 import { Icon } from 'react-native-icons';
 
-import ExerciseRow from './exerciserow';
+import ExerciseRow from './ExerciseRow';
 
 const styles = StyleSheet.create({
   main: {
