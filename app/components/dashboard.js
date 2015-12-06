@@ -30,7 +30,9 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    if (this.props.state && this.props.state.plan && this.props.state.plan.ok) {
+    const { state } = this.props;
+
+    if (state && state.plan && state.plan.ok) {
       return (
         <View style={styles.main}>
           <Image
@@ -44,7 +46,7 @@ export default class Dashboard extends Component {
       );
     }
 
-    if (this.props.state && this.props.state.plan && this.props.state.plan.ok === false) {
+    if (state && state.plan && state.plan.ok === false) {
       return (
         <View style={styles.main}>
           <Image

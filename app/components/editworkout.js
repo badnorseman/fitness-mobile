@@ -1,9 +1,7 @@
 import React, {
   StyleSheet,
   Component,
-  View,
-  Text,
-  TouchableOpacity
+  View
 } from 'react-native';
 
 import EditRepetition from './editrepetition';
@@ -18,12 +16,16 @@ const styles = StyleSheet.create({
 });
 
 export default class EditWorkout extends Component {
+  static propTypes = {
+    exerciseGroup: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { navigator, workout, exerciseGroup, overview } = this.props;
+    const { exerciseGroup } = this.props;
 
     const repetitions = exerciseGroup.sets.map((set, i) => {
       return set.warmup ? null : (
@@ -36,7 +38,7 @@ export default class EditWorkout extends Component {
 
     return (
       <View style={styles.main}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           {repetitions}
         </View>
       </View>

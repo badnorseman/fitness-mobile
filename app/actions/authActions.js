@@ -11,7 +11,7 @@ function send() {
 }
 
 export function checkCookie() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return fetch('http://app.fitbird.com/api/login/check', {
       method: 'GET',
       headers: {
@@ -23,34 +23,37 @@ export function checkCookie() {
     })
       .then(response => response.json())
       .then(json => {
-        // dispatch(appReceive(json, types.AUTH_CHECK_COOKIE_SUCCESS, types.AUTH_CHECK_COOKIE_FAIL));
         dispatch(appReceive(json, types.AUTH_BY_COOKIE_SUCCESS, types.AUTH_BY_COOKIE_FAIL));
       })
       .catch(error => appError(error));
-  }
+  };
 }
 
 export function authByCookie() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(() => {
-      type: types.AUTH_BY_COOKIE
+      return {
+        type: types.AUTH_BY_COOKIE
+      };
     });
 
     AsyncStorage.getItem(STORAGE_KEY, (err, res) => {
-      if(res){
-        let cookie = JSON.parse(res);
+      if (res) {
+        const cookie = JSON.parse(res);
 
         CookieManager.set({
           origin: '',
           version: '1',
           expiration: '3015-05-30T12:30:00.00-05:00', // Some ridiculous time in future
           ...cookie
-        }, (err, res) => {
+        }, () => {
           dispatch(checkCookie());
         });
       } else {
         dispatch(() => {
-          type: types.AUTH_BY_COOKIE_FAIL
+          return {
+            type: types.AUTH_BY_COOKIE_FAIL
+          };
         });
       }
     });
@@ -58,15 +61,19 @@ export function authByCookie() {
 }
 
 export function storeCookie() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(() => {
-      type: types.AUTH_STORE_COOKIE
+      return {
+        type: types.AUTH_STORE_COOKIE
+      };
     });
 
-    CookieManager.getAll((cookie, res) => {
-      if(!cookie || !cookie.SS){
+    CookieManager.getAll((cookie) => {
+      if (!cookie || !cookie.SS) {
         dispatch(() => {
-          type: types.AUTH_STORE_COOKIE_FAIL
+          return {
+            type: types.AUTH_STORE_COOKIE_FAIL
+          };
         });
         return;
       }
@@ -74,12 +81,16 @@ export function storeCookie() {
       try {
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cookie.SS), () => {
           dispatch(() => {
-            type: types.AUTH_STORE_COOKIE_SUCCESS
+            return {
+              type: types.AUTH_STORE_COOKIE_SUCCESS
+            };
           });
         });
       } catch (error) {
         dispatch(() => {
-          type: types.AUTH_STORE_COOKIE_FAIL
+          return {
+            type: types.AUTH_STORE_COOKIE_FAIL
+          };
         });
       }
     });
@@ -89,9 +100,8 @@ export function storeCookie() {
 export function clear() {
   AsyncStorage.removeItem(STORAGE_KEY)
     .then(() => {
-      CookieManager.clearAll(() => {})
-    })
-    .catch(error => {});
+      CookieManager.clearAll(() => {});
+    });
 
   return {
     type: types.AUTH_CLEAR
@@ -105,7 +115,7 @@ export function logout() {
 }
 
 export function login(email, password) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(send());
 
     return fetch('http://app.fitbird.com/api/login/email', {

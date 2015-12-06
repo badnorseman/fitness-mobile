@@ -28,6 +28,7 @@ export default class CenteredText extends Component {
 
   render() {
     const text = this.props.text || '';
+
     return (
       <View style={styles.main}>
         <Text style={styles.text}>{text}</Text>

@@ -3,7 +3,7 @@ import { appError, appReceive } from './appActions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboardActions';
 
-function load(){
+function load() {
   return {
     type: types.PLAN_LOAD
   };
@@ -14,28 +14,21 @@ function fail(error) {
 }
 
 function processJson(json) {
-  if(json.ok && json.data){
+  if (json.ok && json.data) {
     json.data = processPlan(json.data);
   }
 
   return json;
 }
 
-export function endWorkout(workoutKey){
-  return {
-    type: types.PLAN_END_WORKOUT,
-    workoutKey: workoutKey
-  };
-}
-
-export function startWorkout(workoutKey){
+export function startWorkout(workoutKey) {
   return {
     type: types.PLAN_START_WORKOUT,
     workoutKey: workoutKey
   };
 }
 
-export function updateWorkout(workoutKey, exerciseGroupKey, setKey, field, value){
+export function updateWorkout(workoutKey, exerciseGroupKey, setKey, field, value) {
   return {
     type: types.PLAN_UPDATE_WORKOUT,
     workoutKey: workoutKey,
@@ -46,7 +39,7 @@ export function updateWorkout(workoutKey, exerciseGroupKey, setKey, field, value
   };
 }
 
-export function checkSet(workoutKey, exerciseGroupKey, setKey){
+export function checkSet(workoutKey, exerciseGroupKey, setKey) {
   return {
     type: types.PLAN_CHECK_SET,
     workoutKey: workoutKey,
@@ -55,7 +48,7 @@ export function checkSet(workoutKey, exerciseGroupKey, setKey){
   };
 }
 
-export function checkSetWithValue(workoutKey, exerciseGroupKey, setKey, value){
+export function checkSetWithValue(workoutKey, exerciseGroupKey, setKey, value) {
   return {
     type: types.PLAN_CHECK_SET_WITH_VALUE,
     workoutKey: workoutKey,
@@ -65,7 +58,7 @@ export function checkSetWithValue(workoutKey, exerciseGroupKey, setKey, value){
   };
 }
 
-export function endWorkout(workoutKey, feedback){
+export function endWorkout(workoutKey, feedback) {
   return {
     type: types.PLAN_END_WORKOUT,
     workoutKey: workoutKey,
@@ -74,7 +67,7 @@ export function endWorkout(workoutKey, feedback){
 }
 
 
-export function persistFeedback(workoutKey, feedback){
+export function persistFeedback(workoutKey, feedback) {
   return {
     type: types.PLAN_PERSIST_FEEDBACK,
     workoutKey: workoutKey,
@@ -82,8 +75,8 @@ export function persistFeedback(workoutKey, feedback){
   };
 }
 
-export function planLoad(email, password) {
-  return (dispatch, getState) => {
+export function planLoad() {
+  return (dispatch) => {
     dispatch(load());
 
     return fetch('http://app.fitbird.com/api/plan', {

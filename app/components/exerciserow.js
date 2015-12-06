@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: 'rgba(46, 49, 58, 1)',
+    backgroundColor: 'rgba(46, 49, 58, 1)'
   },
   text: {
     flex: 1
@@ -41,41 +41,50 @@ const styles = StyleSheet.create({
   }
 });
 
-function getExerciseColor(workout, exerciseGroup){
-  let style = {
+function getExerciseColor(workout, exerciseGroup) {
+  const style = {
     opacity: (!workout.endDT ? 1 : 0.7)
   };
 
   if (!workout.startDT) {
-		style.backgroundColor = 'rgb(51, 56, 72)';
-	} else if (hasAllSetsDone(exerciseGroup)) {
-		style.backgroundColor = 'rgba(62, 152, 91, 1)';
-	} else {
+    style.backgroundColor = 'rgb(51, 56, 72)';
+  } else if (hasAllSetsDone(exerciseGroup)) {
+    style.backgroundColor = 'rgba(62, 152, 91, 1)';
+  } else {
     style.backgroundColor = 'rgba(59, 79, 151, 1)';
-	}
+  }
 
   return style;
 }
 
 function getExerciseDetailsColor(workout, exerciseGroup) {
-	if (!workout.startDT) {
-		return { color: 'rgb(107, 121, 177)' };
-	} else if (hasAllSetsDone(exerciseGroup)) {
-		return { color: 'rgb(176, 214, 189)' };
-	} else {
-		return { color: 'rgb(119, 139, 218)' };
-	}
-};
+  if (!workout.startDT) {
+    return { color: 'rgb(107, 121, 177)' };
+  }
+
+  if (hasAllSetsDone(exerciseGroup)) {
+    return { color: 'rgb(176, 214, 189)' };
+  }
+
+  return { color: 'rgb(119, 139, 218)' };
+}
 
 function getExerciseNameColor(workout) {
   if (!workout.startDT) {
     return { color: 'rgb(128, 128, 128)' };
-  } else {
-    return { color: 'rgb(255, 255, 255)' };
   }
+
+  return { color: 'rgb(255, 255, 255)' };
 }
 
 export default class ExerciseRow extends Component {
+  static propTypes = {
+    workout: React.PropTypes.object,
+    exercise: React.PropTypes.object,
+    exerciseGroup: React.PropTypes.object,
+    overview: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }

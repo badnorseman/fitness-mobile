@@ -49,27 +49,35 @@ const styles = StyleSheet.create({
 });
 
 export default class ExerciseTitle extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    overview: React.PropTypes.object,
+    exerciseGroup: React.PropTypes.object,
+    exercise: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
 
   getTempoFromExOrSets() {
-    const { exercise } = this.props;
-    const sets = this.props.exerciseGroup.sets;
-  	let exSetTempo;
+    const { exerciseGroup, exercise } = this.props;
+    const sets = exerciseGroup.sets;
+    let exSetTempo;
 
-  	for (var i = 0; i < sets.length; i++) {
-  		// Doesn't set twice
-  		if (sets[i].exerciseId === exercise.id && !exSetTempo) {
-  			exSetTempo = sets[i].tempo;
-  		}
-  	}
+    for (let i = 0; i < sets.length; i++) {
+      // Doesn't set twice
+      if (sets[i].exerciseId === exercise.id && !exSetTempo) {
+        exSetTempo = sets[i].tempo;
+      }
+    }
 
-  	if (exSetTempo) {
-  		return exSetTempo;
-  	} else if (exercise.tempo) {
-  		return exercise.tempo;
-  	}
+    if (exSetTempo) {
+      return exSetTempo;
+    }
+
+    return exercise.tempo;
   }
 
   exerciseColor() {
@@ -79,13 +87,13 @@ export default class ExerciseTitle extends Component {
     };
 
     if (!workout.startDT) {
-			style.backgroundColor = 'rgb(51, 56, 72)';
-		} else {
-			style.backgroundColor = hasAllSetsDone(exerciseGroup) ? 'rgba(62, 152, 91, 1)' : 'rgba(59, 79, 151, 1)';
-		}
+      style.backgroundColor = 'rgb(51, 56, 72)';
+    } else {
+      style.backgroundColor = hasAllSetsDone(exerciseGroup) ? 'rgba(62, 152, 91, 1)' : 'rgba(59, 79, 151, 1)';
+    }
 
     return style;
-	}
+  }
 
   detailsColor() {
     const { workout, exerciseGroup } = this.props;
@@ -94,25 +102,25 @@ export default class ExerciseTitle extends Component {
     };
 
     if (!workout.startDT) {
-			style.color = 'rgb(107, 121, 177)';
-		} else {
-			style.color = hasAllSetsDone(exerciseGroup) ? 'rgb(176, 214, 189)' : 'rgb(119, 139, 218)';
-		}
+      style.color = 'rgb(107, 121, 177)';
+    } else {
+      style.color = hasAllSetsDone(exerciseGroup) ? 'rgb(176, 214, 189)' : 'rgb(119, 139, 218)';
+    }
 
     return style;
-	}
+  }
 
   nameColor() {
-    const { workout, exerciseGroup } = this.props;
+    const { workout } = this.props;
     if (!workout.startDT) {
       return { color: 'rgb(128, 128, 128)' };
-    } else {
-      return { color: 'rgb(255, 255, 255)' };
     }
+
+    return { color: 'rgb(255, 255, 255)' };
   }
 
   render() {
-    const { exercise, exerciseId, overview, navigator } = this.props;
+    const { exercise, overview, navigator } = this.props;
     const tempo = this.getTempoFromExOrSets(exercise);
     const tempoDetail = (tempo ? <Text>Tempo {tempo}</Text> : null);
     const setsDetail = (overview.loadTest || overview.loadTestOptional) ? (<Text>Test</Text>) : (<Text>{overview.setsNo + ' sets'}</Text>);
@@ -125,12 +133,12 @@ export default class ExerciseTitle extends Component {
           <Text>{' '}</Text>
           <Text>{setsDetail}</Text>
         </Text>
-        <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({id: 'video', title: exercise.name})}>
+        <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({ id: 'video', title: exercise.name })}>
           <View style={styles.button}>
             <Icon
-              name='ion|play'
+              name="ion|play"
               size={20}
-              color='white'
+              color="white"
               style={styles.play}
             />
           </View>
@@ -138,9 +146,9 @@ export default class ExerciseTitle extends Component {
         <TouchableOpacity style={styles.historyButton}>
           <View style={styles.button}>
             <Icon
-              name='ion|clipboard'
+              name="ion|clipboard"
               size={20}
-              color='white'
+              color="white"
               style={styles.play}
             />
           </View>

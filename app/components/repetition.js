@@ -12,7 +12,6 @@ import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 45,
     backgroundColor: 'rgba(51, 56, 72, 1)',
     alignSelf: 'stretch',
@@ -76,6 +75,15 @@ const styles = StyleSheet.create({
 });
 
 export default class Repetition extends Component {
+  static propTypes = {
+    workout: React.PropTypes.object,
+    set: React.PropTypes.object,
+    checkSet: React.PropTypes.func,
+    workoutNum: React.PropTypes.number,
+    exerciseGroupId: React.PropTypes.number,
+    setId: React.PropTypes.number
+  }
+
   constructor(props) {
     super(props);
   }
@@ -88,9 +96,8 @@ export default class Repetition extends Component {
   }
 
   render() {
-    const { navigator, workout, exerciseGroup, overview, set, setId } = this.props;
+    const { workout, set } = this.props;
     const inputDisabled = !workout.startDT || workout.endDT;
-    let left;
     let middle;
     let right;
     let check;
@@ -104,25 +111,25 @@ export default class Repetition extends Component {
       onBlur: dismissKeyboard
     };
 
-    if(set.c1){
-      middle = <Text style={styles.text}><Text style={styles.c1}>{set.c1}</Text><Text>{' '}</Text><Text style={styles.c1t}>{set.c1t}</Text></Text>
-    } else if(set.missingField && set.c1Missing) {
+    if (set.c1) {
+      middle = <Text style={styles.text}><Text style={styles.c1}>{set.c1}</Text><Text>{' '}</Text><Text style={styles.c1t}>{set.c1t}</Text></Text>;
+    } else if (set.missingField && set.c1Missing) {
       middle = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
     }
 
-    if(set.c2){
-      right = <Text style={styles.text}><Text style={styles.c2}>{set.c2}</Text><Text>{' '}</Text><Text style={styles.c2t}>{set.c2t}</Text></Text>
-    } else if(set.missingField && set.c2Missing) {
+    if (set.c2) {
+      right = <Text style={styles.text}><Text style={styles.c2}>{set.c2}</Text><Text>{' '}</Text><Text style={styles.c2t}>{set.c2t}</Text></Text>;
+    } else if (set.missingField && set.c2Missing) {
       right = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
     }
 
-    if(!set.missingField && !inputDisabled) {
-      if(set.dateDT){
+    if (!set.missingField && !inputDisabled) {
+      if (set.dateDT) {
         check = (
           <Icon
-            name='ion|ios-checkmark-outline'
+            name="ion|ios-checkmark-outline"
             size={35}
-            color='white'
+            color="white"
             style={styles.checkIcon}
           />
         );
@@ -130,9 +137,9 @@ export default class Repetition extends Component {
         check = (
           <TouchableOpacity onPress={this.onPressCheck.bind(this)}>
             <Icon
-              name='ion|ios-circle-outline'
+              name="ion|ios-circle-outline"
               size={35}
-              color='grey'
+              color="grey"
               style={styles.checkIcon}
             />
           </TouchableOpacity>
@@ -141,7 +148,7 @@ export default class Repetition extends Component {
     }
 
     return (
-      <View style={[styles.main, (!set.rest ? {marginBottom: 1} : {})]} onStartShouldSetResponder={dismissKeyboard}>
+      <View style={[styles.main, (!set.rest ? { marginBottom: 1 } : {})]} onStartShouldSetResponder={dismissKeyboard}>
         <View style={styles.left}>
           <Text style={styles.text}>{set.ex.shortName}</Text>
         </View>

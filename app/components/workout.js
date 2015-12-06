@@ -1,8 +1,7 @@
 import React, {
   StyleSheet,
   Component,
-  View,
-  Text
+  View
 } from 'react-native';
 
 import ExercisesList from './exerciseslist';
@@ -18,6 +17,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Workout extends Component {
+  static propTypes = {
+    workout: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }

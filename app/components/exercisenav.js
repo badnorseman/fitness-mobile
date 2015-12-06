@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: 'rgba(36, 39, 46, 1)',
     textAlign: 'center',
-    lineHeight: 39,
+    lineHeight: 39
   },
   leftArrow: {
     position: 'absolute',
@@ -46,13 +46,20 @@ const styles = StyleSheet.create({
 });
 
 export default class ExerciseNav extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    exerciseGroup: React.PropTypes.object,
+    exerciseGroupId: React.PropTypes.number
+  }
+
   constructor(props) {
     super(props);
   }
 
-  onPressPrev(){
+  onPressPrev() {
     const { workout, exerciseGroupId } = this.props;
-    let prevId = parseInt(exerciseGroupId)-1;
+    const prevId = parseInt(exerciseGroupId, 10) - 1;
 
     this.props.navigator.replace({
       id: 'exercise',
@@ -65,9 +72,9 @@ export default class ExerciseNav extends Component {
     });
   }
 
-  onPressNext(){
+  onPressNext() {
     const { workout, exerciseGroupId } = this.props;
-    let nextId = parseInt(exerciseGroupId)+1;
+    const nextId = parseInt(exerciseGroupId, 10) + 1;
 
     this.props.navigator.replace({
       id: 'exercise',
@@ -80,7 +87,7 @@ export default class ExerciseNav extends Component {
     });
   }
 
-  onPressNextFinal(){
+  onPressNextFinal() {
     this.props.navigator.pop();
   }
 
@@ -89,20 +96,20 @@ export default class ExerciseNav extends Component {
     let left;
     let right;
 
-    if(parseInt(exerciseGroupId) > 0) {
+    if (parseInt(exerciseGroupId, 10) > 0) {
       left = <TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>;
     }
 
-    if(parseInt(exerciseGroupId) + 1 < workout.exerciseGroups.length) {
+    if (parseInt(exerciseGroupId, 10) + 1 < workout.exerciseGroups.length) {
       right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>;
-    } else if(parseInt(exerciseGroupId) + 1 === workout.exerciseGroups.length) {
+    } else if (parseInt(exerciseGroupId, 10) + 1 === workout.exerciseGroups.length) {
       right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNextFinal.bind(this)}><Text style={[styles.arrow, styles.rightArrowFinal]}>&gt;</Text></TouchableOpacity>;
     }
 
     return (
       <View style={styles.main}>
         {left}
-        <Text style={styles.weekTitle}>{(parseInt(exerciseGroupId)+1)} of {workout.exerciseGroups.length}</Text>
+        <Text style={styles.weekTitle}>{(parseInt(exerciseGroupId, 10) + 1)} of {workout.exerciseGroups.length}</Text>
         {right}
       </View>
     );

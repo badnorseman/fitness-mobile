@@ -3,11 +3,9 @@ import React, {
   Component,
   View,
   Text,
-  TextInput,
-  TouchableOpacity
+  TextInput
 } from 'react-native';
 
-import { Icon } from 'react-native-icons';
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
 
 const styles = StyleSheet.create({
@@ -70,6 +68,18 @@ const styles = StyleSheet.create({
 });
 
 export default class EditRepetition extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    overview: React.PropTypes.array,
+    set: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    exerciseGroup: React.PropTypes.object,
+    workoutNum: React.PropTypes.number,
+    exerciseGroupId: React.PropTypes.number,
+    setId: React.PropTypes.number,
+    updateWorkout: React.PropTypes.func
+  }
+
   constructor(props) {
     super(props);
     const { set } = props;
@@ -103,12 +113,7 @@ export default class EditRepetition extends Component {
   }
 
   render() {
-    const { navigator, workout, exerciseGroup, overview, set, setId } = this.props;
-    const inputDisabled = !workout.startDT || workout.endDT;
-
-    let left;
-    let middle;
-    let right;
+    const { set } = this.props;
 
     const inputProps = {
       keyboardType: 'number-pad',
@@ -119,7 +124,7 @@ export default class EditRepetition extends Component {
     };
 
     return (
-      <View style={[styles.main, (!set.rest ? {marginBottom: 1} : {})]} onStartShouldSetResponder={dismissKeyboard}>
+      <View style={[styles.main, (!set.rest ? { marginBottom: 1 } : {})]} onStartShouldSetResponder={dismissKeyboard}>
         <View style={styles.left}>
           <Text style={styles.text}>{set.ex.shortName}</Text>
         </View>

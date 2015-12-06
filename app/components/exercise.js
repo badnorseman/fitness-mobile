@@ -1,9 +1,7 @@
 import React, {
   StyleSheet,
   Component,
-  View,
-  Text,
-  TouchableOpacity
+  View
 } from 'react-native';
 
 import ExerciseTitle from './exercisetitle';
@@ -21,6 +19,13 @@ const styles = StyleSheet.create({
 });
 
 export default class Exercise extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    exerciseGroup: React.PropTypes.object,
+    overview: React.PropTypes.array
+  }
+
   constructor(props) {
     super(props);
   }
@@ -47,7 +52,7 @@ export default class Exercise extends Component {
 
     return (
       <View style={styles.main}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           {titles}
           {repetitions}
         </View>

@@ -1,7 +1,7 @@
 'use strict';
 
-import React, { Component, Navigator, StatusBarIOS, AlertIOS } from 'react-native';
-import {bindActionCreators} from 'redux';
+import React, { Component, Navigator, StatusBarIOS } from 'react-native';
+import { bindActionCreators } from 'redux';
 
 import NavigationBarRouteMapper from '../components/navbar';
 import Login from '../components/login';
@@ -19,33 +19,38 @@ import * as appActions from '../actions/appActions';
 import { connect } from 'react-redux/native';
 
 class FitbirdApp extends Component {
+  static propTypes = {
+    dispatch: React.PropTypes.func,
+    state: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
 
-  componentWillMount(nextProps){
+  componentWillMount() {
     this.props.dispatch(authActions.authByCookie());
   }
 
   componentWillReceiveProps(nextProps) {
     const currentRoute = this.refs.navigator.getCurrentRoutes()[0];
 
-    if(nextProps.state.auth.ok && !Object.keys(nextProps.state.plan).length) {
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.plan).length) {
       nextProps.dispatch(planActions.planLoad());
     }
 
-    if(currentRoute.id !== 'login' && nextProps.state.auth.logout) {
+    if (currentRoute.id !== 'login' && nextProps.state.auth.logout) {
       nextProps.dispatch(authActions.clear());
       this.refs.navigator.replace({ id: 'login', title: 'Login' });
       return nextProps;
     }
 
-    if(currentRoute.id === 'login' && nextProps.state.auth.ok) {
+    if (currentRoute.id === 'login' && nextProps.state.auth.ok) {
       this.refs.navigator.replace({ id: 'dashboard', title: 'Dashboard' });
       return nextProps;
     }
 
-    if(nextProps.state.auth.ok === false && nextProps.state.auth.ok !== this.props.state.auth.ok){
+    if (nextProps.state.auth.ok === false && nextProps.state.auth.ok !== this.props.state.auth.ok) {
       nextProps.dispatch(appActions.alert('Authentication Failed', 'Please enter a valid e-mail and password'));
       nextProps.dispatch(authActions.clear());
       return nextProps;
@@ -53,7 +58,7 @@ class FitbirdApp extends Component {
   }
 
   renderScene(route, navigator) {
-    let sharedProps = {};
+    const sharedProps = {};
 
     Object.assign(
       sharedProps,
@@ -65,9 +70,7 @@ class FitbirdApp extends Component {
       }
     );
 
-    switch(route.id){
-      case 'login':
-        return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;
+    switch (route.id) {
       case 'dashboard':
         return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions }, this.props.dispatch)}/>;
       case 'workout':
@@ -80,12 +83,14 @@ class FitbirdApp extends Component {
         return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'video':
         return <Video {...sharedProps} />;
+      case 'login':
+      default:
+        return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;
     }
   }
 
   render() {
     StatusBarIOS.setStyle('light-content');
-    const { state, dispatch } = this.props;
 
     return (
       <Navigator
@@ -94,9 +99,7 @@ class FitbirdApp extends Component {
           flex: 1,
           backgroundColor: 'rgba(46, 49, 58, 1)'
         }}
-        //barTintColor='#292c34'
-        //titleTextColor='#ffffff'
-        initialRoute={{id: 'login', title: 'Fitbird'}}
+        initialRoute={{ id: 'login', title: 'Fitbird' }}
         renderScene={this.renderScene.bind(this)}
         navigationBar={
           <Navigator.NavigationBar

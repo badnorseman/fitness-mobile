@@ -1,14 +1,15 @@
 import { AlertIOS } from 'react-native';
 import * as types from './actionTypes';
 
-export function appError(error){
+export function appError(error) {
   return {
-    type: types.APP_ERROR
+    type: types.APP_ERROR,
+    error: error
   };
 }
 
 export function appReceive(json, successAction, failAction) {
-  switch(json.ok){
+  switch (json.ok) {
     case true:
       return {
         type: successAction,
@@ -20,14 +21,15 @@ export function appReceive(json, successAction, failAction) {
         type: failAction,
         response: json
       };
-      break;
   }
 }
 
-export function alert(title, message){
-  return (dispatch, getState) => {
+export function alert(title, message) {
+  return (dispatch) => {
     dispatch(() => {
-      type: types.ALERT
+      return {
+        type: types.ALERT
+      };
     });
 
     AlertIOS.alert(title, message);

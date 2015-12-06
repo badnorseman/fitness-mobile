@@ -10,7 +10,6 @@ import React, {
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,6 +56,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Login extends Component {
+  static propTypes = {
+    login: React.PropTypes.func
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -67,7 +70,6 @@ export default class Login extends Component {
     const { email, password } = this.state;
 
     login(email, password);
-    // this.props.navigator.replace({ id: 'dashboard', title: 'Dashboard' });
   }
 
   render() {
@@ -75,26 +77,26 @@ export default class Login extends Component {
       <View style={styles.main}>
         <Image
           style={styles.background}
-          source={{uri: 'http://app.fitbird.com/app/static/img/background-bird.png'}}
+          source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
         >
           <TextInput
-            onChangeText={(email) => this.setState({email})}
+            onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
             style={styles.emailInput}
-            autoCapitalize='none'
-            keyboardType='email-address'
-            placeholder='Email...'
-            placeholderTextColor='#a9a9a9'
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder="Email..."
+            placeholderTextColor="#a9a9a9"
           />
           <TextInput
-            onChangeText={(password) => this.setState({password})}
+            onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
             style={styles.passwordInput}
-            autoCapitalize='none'
-            keyboardType='default'
-            placeholder='Password...'
-            placeholderTextColor='#a9a9a9'
-            secureTextEntry={true}
+            autoCapitalize="none"
+            keyboardType="default"
+            placeholder="Password..."
+            placeholderTextColor="#a9a9a9"
+            secureTextEntry
           />
           <TouchableOpacity style={styles.touchable} onPress={this.onPressLogin.bind(this)}>
             <Text style={styles.button}>Login</Text>

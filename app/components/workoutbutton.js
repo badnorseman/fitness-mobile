@@ -10,7 +10,6 @@ import getDayName from '../utils/getDayName';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 60,
     backgroundColor: 'rgba(49, 53, 67, 0.98)',
     alignItems: 'center',
@@ -46,6 +45,13 @@ const styles = StyleSheet.create({
 });
 
 export default class WorkoutButton extends Component {
+  static propTypes = {
+    state: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    workoutNum: React.PropTypes.number,
+    navigator: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
@@ -54,20 +60,20 @@ export default class WorkoutButton extends Component {
     const { state, workout, workoutNum, navigator } = this.props;
     const plan = state.plan.data;
     const buttonStyles = [styles.main];
-    const firstLineStyles = [styles.firstLine]
+    const firstLineStyles = [styles.firstLine];
     let secondLine;
     let label = `Workout ${workoutNum}`;
-    
-    if(workout.endDT){
+
+    if (workout.endDT) {
       buttonStyles.push(styles.completed);
       firstLineStyles.push(styles.firstLineCompleted);
       label = getDayName(new Date(workout.startDT));
-    } else if(workout.startDT && workout.id === plan.activeWorkoutId){
+    } else if (workout.startDT && workout.id === plan.activeWorkoutId) {
       buttonStyles.push(styles.inProgress);
       firstLineStyles.push(styles.firstLineInProgress);
       secondLine = (<Text style={styles.secondLine}>Tap to resume</Text>);
       label = 'Workout in progress';
-    } else if(workout.id === plan.nextWorkoutId){
+    } else if (workout.id === plan.nextWorkoutId) {
       buttonStyles.push(styles.next);
     }
 

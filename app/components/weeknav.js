@@ -10,11 +10,9 @@ import getWeek from '../utils/getWeek';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 60,
     backgroundColor: 'rgba(41, 44, 53, 0.95)',
     alignItems: 'center',
-    // textAlign: 'center',
     justifyContent: 'center'
   },
   weekTitle: {
@@ -30,7 +28,7 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: 'rgba(36, 39, 46, 1)',
     textAlign: 'center',
-    lineHeight: 39,
+    lineHeight: 39
   },
   leftArrow: {
     position: 'absolute',
@@ -45,15 +43,21 @@ const styles = StyleSheet.create({
 });
 
 export default class WeekNav extends Component {
+  static propTypes = {
+    state: React.PropTypes.object,
+    prevWeek: React.PropTypes.func,
+    nextWeek: React.PropTypes.func
+  }
+
   constructor(props) {
     super(props);
   }
 
-  onPressPrev(){
+  onPressPrev() {
     this.props.prevWeek();
   }
 
-  onPressNext(){
+  onPressNext() {
     this.props.nextWeek();
   }
 
@@ -67,17 +71,17 @@ export default class WeekNav extends Component {
     let prevWeekButton;
     let nextWeekButton;
 
-    if(week && week.weekNo === currentWeek){
+    if (week && week.weekNo === currentWeek) {
       label = 'This week';
-    } else if(week) {
+    } else if (week) {
       label = `Week ${week.weekNo}`;
     }
 
-    if(currentWeekNo > 0){
+    if (currentWeekNo > 0) {
       prevWeekButton = (<TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>);
     }
 
-    if(currentWeekNo <= totalWeeks - 2){
+    if (currentWeekNo <= totalWeeks - 2) {
       nextWeekButton = (<TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>);
     }
 

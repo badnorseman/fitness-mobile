@@ -3,8 +3,7 @@ import React, {
   Component,
   TouchableHighlight,
   ListView,
-  View,
-  Text
+  View
 } from 'react-native';
 
 import { Icon } from 'react-native-icons';
@@ -21,14 +20,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     height: 65,
-    backgroundColor: 'rgba(59, 79, 151, 1)',
+    backgroundColor: 'rgba(59, 79, 151, 1)'
   },
   rowActive: {
     backgroundColor: 'rgba(62, 152, 91, 1)'
   },
   separator: {
     height: 1,
-    backgroundColor: 'rgba(46, 49, 58, 1)',
+    backgroundColor: 'rgba(46, 49, 58, 1)'
   },
   text: {
     flex: 1
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     top: 55,
-    transform: [{rotate:'90deg'}],
+    transform: [{ rotate: '90deg' }],
     opacity: 1,
     backgroundColor: 'transparent'
   }
@@ -63,32 +62,40 @@ const styles = StyleSheet.create({
 function getIconColor(workout) {
   if (!workout.startDT) {
     return 'rgb(128, 128, 128)';
-  } else {
-    return 'rgb(255, 255, 255)';
   }
+
+  return 'rgb(255, 255, 255)';
 }
 
 export default class ExercisesList extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    exerciseGroups: React.PropTypes.array,
+    workout: React.PropTypes.object,
+    workoutNum: React.PropTypes.number
+  }
+
   constructor(props) {
     super(props);
   }
 
   _renderRow(rowData, sectionID, rowID) {
-    const { workout, workoutNum } = this.props;
+    const { navigator, workout, workoutNum } = this.props;
+    const exerciseGroupId = parseInt(rowID, 10);
 
     const exercises = rowData.exercises.map((exercise, i) => {
-      return (<ExerciseRow key={i} workout={workout} workoutNum={workoutNum} exerciseGroup={rowData} exercise={exercise} overview={workout.overview[rowID][i]}/>);
+      return (<ExerciseRow key={i} workout={workout} workoutNum={workoutNum} exerciseGroup={rowData} exercise={exercise} overview={workout.overview[exerciseGroupId][i]}/>);
     });
 
     const exchange = (rowData.exercises.length > 1 ? (<Icon
-      name='ion|arrow-swap'
+      name="ion|arrow-swap"
       size={20}
       color={getIconColor(workout)}
       style={[styles.exchange, { opacity: (!workout.endDT ? 1 : 0.7) }]}
     />) : null);
 
     return (
-      <TouchableHighlight onPress={() => this.props.navigator.push({id: 'exercise', props: {workout: workout, workoutNum: workoutNum, exerciseGroup: rowData, exerciseGroupId: rowID, overview: workout.overview[rowID]}})}>
+      <TouchableHighlight onPress={() => navigator.push({ id: 'exercise', props: { workout: workout, workoutNum: workoutNum, exerciseGroup: rowData, exerciseGroupId: exerciseGroupId, overview: workout.overview[exerciseGroupId] } })}>
         <View style={styles.container}>
           {exercises}
           {exchange}
@@ -99,8 +106,9 @@ export default class ExercisesList extends Component {
   }
 
   render() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var dataSource = ds.cloneWithRows(this.props.exerciseGroups || []);
+    const { exerciseGroups } = this.props;
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    const dataSource = ds.cloneWithRows(exerciseGroups || []);
 
     return (
       <ListView

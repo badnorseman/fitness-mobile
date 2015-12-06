@@ -9,7 +9,6 @@ import React, {
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -26,9 +25,15 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
 export default class FooterButton extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    state: React.PropTypes.object,
+    workout: React.PropTypes.object,
+    workoutNum: React.PropTypes.number,
+    startWorkout: React.PropTypes.func
+  }
+
   constructor(props) {
     super(props);
   }
@@ -36,7 +41,7 @@ export default class FooterButton extends Component {
   endWorkout() {
     const { navigator, workout, workoutNum } = this.props;
 
-    this.props.navigator.push({
+    navigator.push({
       id: 'feedback',
       props: {
         workout: workout,
@@ -53,26 +58,26 @@ export default class FooterButton extends Component {
       '',
       'Are you ready to start?',
       [
-        {text: 'Yes', onPress: () => {
+        { text: 'Yes', onPress: () => {
           startWorkout(workoutId);
-        }},
-        {text: 'Not yet', onPress: () => {}, style: 'cancel'},
+        } },
+        { text: 'Not yet', onPress: () => {}, style: 'cancel' }
       ]
     );
   }
 
   render() {
-    const { workout } = this.props;
-    const plan = this.props.state.plan.data;
+    const { state, workout } = this.props;
+    const plan = state.plan.data;
     let backgroundColor;
     let label;
     let onPress;
 
-    if(workout.id === plan.activeWorkoutId) {
+    if (workout.id === plan.activeWorkoutId) {
       backgroundColor = 'rgba(41, 44, 52, 1)';
       label = 'End workout';
       onPress = this.endWorkout.bind(this);
-    } else if(workout.id === plan.nextWorkoutId) {
+    } else if (workout.id === plan.nextWorkoutId) {
       backgroundColor = 'rgba(58, 77, 153, 1)';
       label = 'Start workout';
       onPress = this.startWorkout.bind(this);
@@ -80,7 +85,7 @@ export default class FooterButton extends Component {
 
     return label ? (
       <TouchableOpacity style={styles.touchable} onPress={onPress}>
-        <View style={[styles.main, {backgroundColor: backgroundColor}]}>
+        <View style={[styles.main, { backgroundColor: backgroundColor }]}>
           <Text style={styles.text}>{label}</Text>
         </View>
       </TouchableOpacity>

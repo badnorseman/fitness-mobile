@@ -3,14 +3,11 @@ import React, {
   Component,
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   Image
 } from 'react-native';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     backgroundColor: 'rgba(36, 39, 46, 1)',
     alignSelf: 'stretch',
     alignItems: 'center',
@@ -45,6 +42,10 @@ const styles = StyleSheet.create({
 });
 
 export default class Feedback extends Component {
+  static propTypes = {
+    workout: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
@@ -56,22 +57,22 @@ export default class Feedback extends Component {
     let feedbackImgText;
 
     if (workout.feedback && workout.feedback.type === 'EASY') {
-			feedbackImg = require('image!smiley_too-easy');
-			feedbackImgText = 'Too easy';
-		} else if (workout.feedback && workout.feedback.type === 'OK') {
-			feedbackImg = require('image!smiley_just-right');
-			feedbackImgText = 'Just right';
-		} else if (workout.feedback && workout.feedback.type === 'HARD') {
-			feedbackImg = require('image!smiley_too-hard');
-			feedbackImgText = 'Too hard';
-		}
+      feedbackImg = require('image!smiley_too-easy');
+      feedbackImgText = 'Too easy';
+    } else if (workout.feedback && workout.feedback.type === 'OK') {
+      feedbackImg = require('image!smiley_just-right');
+      feedbackImgText = 'Just right';
+    } else if (workout.feedback && workout.feedback.type === 'HARD') {
+      feedbackImg = require('image!smiley_too-hard');
+      feedbackImgText = 'Too hard';
+    }
 
     return feedbackImg && feedbackImgText ? (
       <View style={styles.main}>
         <View style={styles.smileyContainer}>
           <Image
             style={styles.smiley}
-            resizeMode='contain'
+            resizeMode="contain"
             source={feedbackImg}
           />
           <Text style={styles.feedback}>{feedbackImgText}</Text>
