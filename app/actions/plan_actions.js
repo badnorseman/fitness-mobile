@@ -1,7 +1,7 @@
-import * as types from './actionTypes';
-import { appError, appReceive } from './appActions';
+import * as types from './action_types';
+import { appError, appReceive } from './app_actions';
 import processPlan from '../utils/processPlan';
-import { initWeek } from './dashboardActions';
+import { initWeek } from './dashboard_actions';
 
 function load() {
   return {

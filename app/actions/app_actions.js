@@ -1,5 +1,5 @@
 import { AlertIOS } from 'react-native';
-import * as types from './actionTypes';
+import * as types from './action_types';
 
 export function appError(error) {
   return {

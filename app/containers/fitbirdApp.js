@@ -12,10 +12,10 @@ import Exercise from '../components/exercise';
 import Video from '../components/video';
 import EditFeedback from '../components/editfeedback';
 
-import * as authActions from '../actions/authActions';
-import * as planActions from '../actions/planActions';
-import * as dashboardActions from '../actions/dashboardActions';
-import * as appActions from '../actions/appActions';
+import * as authActions from '../actions/auth_actions';
+import * as planActions from '../actions/plan_actions';
+import * as dashboardActions from '../actions/dashboard_actions';
+import * as appActions from '../actions/app_actions';
 import { connect } from 'react-redux/native';
 
 class FitbirdApp extends Component {

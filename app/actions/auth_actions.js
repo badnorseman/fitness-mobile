@@ -1,5 +1,5 @@
-import * as types from './actionTypes';
-import { appError, appReceive } from './appActions';
+import * as types from './action_types';
+import { appError, appReceive } from './app_actions';
 import CookieManager from 'react-native-cookies';
 import { AsyncStorage } from 'react-native';
 const STORAGE_KEY = '@Fitbird:authCookie';
