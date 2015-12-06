@@ -11,6 +11,7 @@ import EditWorkout from '../components/EditWorkout';
 import Exercise from '../components/Exercise';
 import Video from '../components/Video';
 import EditFeedback from '../components/EditFeedback';
+import ExerciseHistory from '../components/ExerciseHistory';
 
 import * as authActions from '../actions/auth_actions';
 import * as planActions from '../actions/plan_actions';
@@ -83,6 +84,8 @@ class FitbirdApp extends Component {
         return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'video':
         return <Video {...sharedProps} />;
+      case 'history':
+        return <ExerciseHistory {...sharedProps} />;
       case 'login':
       default:
         return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;

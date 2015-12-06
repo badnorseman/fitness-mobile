@@ -57,6 +57,7 @@ const NavigationBarRouteMapper = {
       case 'feedback':
         leftButtonText = 'Workout'; break;
       case 'video':
+      case 'history':
         leftButtonText = 'Exercise'; break;
       case 'workout':
         leftButtonText = 'Dashboard'; break;

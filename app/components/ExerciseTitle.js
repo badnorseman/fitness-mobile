@@ -133,7 +133,7 @@ export default class ExerciseTitle extends Component {
           <Text>{' '}</Text>
           <Text>{setsDetail}</Text>
         </Text>
-        <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({ id: 'video', title: exercise.name })}>
+        <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({ id: 'video', title: exercise.shortName, props: { ...this.props } })}>
           <View style={styles.button}>
             <Icon
               name="ion|play"
@@ -143,7 +143,7 @@ export default class ExerciseTitle extends Component {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.historyButton}>
+        <TouchableOpacity style={styles.historyButton} onPress={() => navigator.push({ id: 'history', title: exercise.shortName, props: { ...this.props } })}>
           <View style={styles.button}>
             <Icon
               name="ion|clipboard"

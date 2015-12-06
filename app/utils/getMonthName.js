@@ -6,6 +6,6 @@
 
 import months from './months';
 
-function getMonthName(date) {
-	return months[date.getMonth()];
-};
+export default function getMonthName(date) {
+  return months[date.getMonth()];
+}

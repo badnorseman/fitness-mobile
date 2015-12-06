@@ -9,6 +9,7 @@
 import getWeek from './getWeek';
 import processExerciseGroup from './processExerciseGroup';
 import prepareWorkoutOverview from './prepareWorkoutOverview';
+import prepareColumns from './prepareColumns';
 
 function hasSets(sets, exId) {
   let i;
@@ -57,7 +58,7 @@ export default function processPlan(plan) {
   }
 
   // get weekNo of first workout if started, or set weekNo of today
-  week = {weekNo: {}, workouts: []};
+  week = { weekNo: {}, workouts: [] };
   week.weekNo = plan.workouts[0].startDT ? getWeek(new Date(plan.workouts[0].startDT))
       : getWeek(new Date());
 
@@ -76,7 +77,7 @@ export default function processPlan(plan) {
     } else if (week.weekNo && week.workouts.length < plan.workoutsPerWeek) {
       week.workouts.push(w);
     } else {
-      week = {weekNo: {}, workouts: []};
+      week = { weekNo: {}, workouts: [] };
 
       if (wStartW) {
         week.weekNo = wStartW;
@@ -120,6 +121,16 @@ export default function processPlan(plan) {
   for (i = 0; i < plan.workouts.length; i++) {
     plan.workouts[i].overview = prepareWorkoutOverview(plan.workouts[i]);
   }
+
+  Object.keys(plan.history).forEach((exerciseId) => {
+    let exerciseHistory = plan.history[exerciseId];
+
+    for (j = 0; j < exerciseHistory.length; j++) {
+      exerciseHistory[j] = prepareColumns(exerciseHistory[j]);
+    }
+
+    plan.history[exerciseId] = exerciseHistory;
+  });
 
   return plan;
 }
