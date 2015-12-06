@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
 });
 
 export default class CenteredText extends Component {
+  static propTypes = {
+    text: React.PropTypes.string
+  }
+
   constructor(props) {
     super(props);
   }

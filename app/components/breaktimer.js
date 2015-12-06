@@ -2,14 +2,11 @@ import React, {
   StyleSheet,
   Component,
   View,
-  Text,
-  TextInput,
-  TouchableOpacity
+  Text
 } from 'react-native';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 25,
     backgroundColor: 'rgba(36, 39, 46, 1)',
     alignSelf: 'stretch',
@@ -24,6 +21,10 @@ const styles = StyleSheet.create({
 });
 
 export default class BreakTimer extends Component {
+  static propTypes = {
+    set: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }

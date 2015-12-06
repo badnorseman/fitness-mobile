@@ -11,7 +11,6 @@ import hasAllSetsDone from '../utils/hasAllSetsDone';
 
 const styles = StyleSheet.create({
   main: {
-    // fontFamily: 'PT Sans',
     height: 65,
     padding: 10,
     alignSelf: 'stretch',

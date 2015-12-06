@@ -76,24 +76,25 @@ const styles = StyleSheet.create({
 });
 
 export default class EditFeedback extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    persistFeedback: React.PropTypes.func,
+    startWorkout: React.PropTypes.func,
+    endWorkout: React.PropTypes.func,
+    workoutNum: React.PropTypes.number,
+    workout: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
     this.state = props.workout.feedback || {};
 
-    if(!this.state.type){
+    if (!this.state.type) {
       this.state.type = 'OK';
     }
 
-    if(!this.state.comments){
+    if (!this.state.comments) {
       this.state.comments = '';
-    }
-  }
-
-  getSmileyBackground(feedback) {
-    if(this.state.type === feedback) {
-      return 'rgba(58, 77, 153, 1)';
-    } else {
-      return 'transparent';
     }
   }
 
@@ -109,15 +110,27 @@ export default class EditFeedback extends Component {
     }));
   }
 
+  getSmileyBackground(feedback) {
+    let backgroundColor;
+
+    if (this.state.type === feedback) {
+      backgroundColor = 'rgba(58, 77, 153, 1)';
+    } else {
+      backgroundColor = 'transparent';
+    }
+
+    return backgroundColor;
+  }
+
   persistFeedback() {
     const { navigator, persistFeedback, workoutNum } = this.props;
-    persistFeedback(workoutNum-1, this.state);
+    persistFeedback(workoutNum - 1, this.state);
     navigator.pop();
   }
 
   endWorkout() {
     const { navigator, endWorkout, workoutNum } = this.props;
-    endWorkout(workoutNum-1, this.state);
+    endWorkout(workoutNum - 1, this.state);
     navigator.pop();
   }
 
@@ -126,7 +139,7 @@ export default class EditFeedback extends Component {
     let label;
     let onPressAction;
 
-    if(workout.feedback) {
+    if (workout.feedback) {
       label = 'Save changes';
       onPressAction = this.persistFeedback.bind(this);
     } else {
@@ -142,7 +155,7 @@ export default class EditFeedback extends Component {
             <View style={[styles.smileyContainer, { backgroundColor: this.getSmileyBackground('EASY') }]}>
               <Image
                 style={styles.smiley}
-                resizeMode='contain'
+                resizeMode="contain"
                 source={require('image!smiley_too-easy')}
               />
               <Text style={styles.feedback}>Too easy</Text>
@@ -152,7 +165,7 @@ export default class EditFeedback extends Component {
             <View style={[styles.smileyContainer, { backgroundColor: this.getSmileyBackground('OK') }]}>
               <Image
                 style={styles.smiley}
-                resizeMode='contain'
+                resizeMode="contain"
                 source={require('image!smiley_just-right')}
               />
               <Text style={styles.feedback}>Just right</Text>
@@ -162,7 +175,7 @@ export default class EditFeedback extends Component {
             <View style={[styles.smileyContainer, { backgroundColor: this.getSmileyBackground('HARD') }]}>
               <Image
                 style={styles.smiley}
-                resizeMode='contain'
+                resizeMode="contain"
                 source={require('image!smiley_too-hard')}
               />
               <Text style={styles.feedback}>Too hard</Text>
@@ -171,7 +184,7 @@ export default class EditFeedback extends Component {
         </View>
         <Text style={styles.title}>Any comments?</Text>
         <TextInput
-          multiline={true}
+          multiline
           style={styles.commentsInput}
           onChangeText={this.onChangeComments.bind(this)}
           value={this.state.comments}
