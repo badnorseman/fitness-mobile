@@ -9,7 +9,8 @@ Requirements:
 
 First you need to clone the repository, and install dependencies:
 ```bash
-git clone https://github.com/fitbird/app.git
+git clone https://github.com/fitbird/app.git Fitbird
+cd Fitbird
 npm install
 ```
 
