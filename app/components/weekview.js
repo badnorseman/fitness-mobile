@@ -10,7 +10,7 @@ import WorkoutButton from './WorkoutButton';
 const styles = StyleSheet.create({
   halves: {
     flexDirection: 'row',
-    flex: 1,
+    flex: 1
   },
   leftHalf: {
     flex: 1,
@@ -32,22 +32,27 @@ const styles = StyleSheet.create({
 });
 
 export default class WeekView extends Component {
+  static propTypes = {
+    state: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props);
   }
 
   getWorkoutCompliance() {
     const { state } = this.props;
-    let workouts = state.plan.data.workouts;
+    const workouts = state.plan.data.workouts;
 
-    var c = 0;
-		var dif = 100 / workouts.length;
-		for (var i = 0; i < workouts.length; i++) {
-			if (workouts[i].endDT) {
-				c += dif;
-			}
-		}
-		return Math.round(c);
+    let c = 0;
+    const dif = 100 / workouts.length;
+
+    for (let i = 0; i < workouts.length; i++) {
+      if (workouts[i].endDT) {
+        c += dif;
+      }
+    }
+    return Math.round(c);
   }
 
   render() {
@@ -56,10 +61,10 @@ export default class WeekView extends Component {
     const week = state.plan.data.weeks[currentWeekNo];
     let workouts;
 
-    if(week && week.workouts && week.workouts.length){
+    if (week && week.workouts && week.workouts.length) {
       workouts = week.workouts.map((row, i) => {
         return (
-          <WorkoutButton {...this.props} workout={row} key={i} workoutNum={i+1} />
+          <WorkoutButton {...this.props} workout={row} key={i} workoutNum={i + 1} />
         );
       });
     }
@@ -68,12 +73,12 @@ export default class WeekView extends Component {
       <View style={styles.halves}>
         <View style={styles.leftHalf}>
           <Text style={styles.halfHeader}>Workouts</Text>
-          <Text style={[styles.halfHeader, {marginBottom: 20}]}>{this.getWorkoutCompliance()}%</Text>
+          <Text style={[styles.halfHeader, { marginBottom: 20 }]}>{this.getWorkoutCompliance()}%</Text>
           {workouts}
         </View>
         <View style={styles.rightHalf}>
           <Text style={styles.halfHeader}>Habits</Text>
-          <Text style={[styles.halfHeader, {marginBottom: 20}]}>0%</Text>
+          <Text style={[styles.halfHeader, { marginBottom: 20 }]}>0%</Text>
         </View>
       </View>
     );
