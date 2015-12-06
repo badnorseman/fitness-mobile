@@ -26,11 +26,7 @@ export function appReceive(json, successAction, failAction) {
 
 export function alert(title, message) {
   return (dispatch) => {
-    dispatch(() => {
-      return {
-        type: types.ALERT
-      };
-    });
+    dispatch({ type: types.ALERT });
 
     AlertIOS.alert(title, message);
   };

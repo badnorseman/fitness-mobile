@@ -3,7 +3,6 @@ import * as types from '../actions/action_types';
 const initialState = {};
 
 export default function plan(state = initialState, action = {}) {
-  console.log('plan action', action);
   switch (action.type) {
     case types.PLAN_LOAD_FAIL:
     case types.PLAN_LOAD_SUCCESS:

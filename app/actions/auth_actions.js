@@ -31,11 +31,7 @@ export function checkCookie() {
 
 export function authByCookie() {
   return (dispatch) => {
-    dispatch(() => {
-      return {
-        type: types.AUTH_BY_COOKIE
-      };
-    });
+    dispatch({ type: types.AUTH_BY_COOKIE });
 
     AsyncStorage.getItem(STORAGE_KEY, (err, res) => {
       if (res) {
@@ -50,11 +46,7 @@ export function authByCookie() {
           dispatch(checkCookie());
         });
       } else {
-        dispatch(() => {
-          return {
-            type: types.AUTH_BY_COOKIE_FAIL
-          };
-        });
+        dispatch({ type: types.AUTH_BY_COOKIE_FAIL });
       }
     });
   };
@@ -62,36 +54,20 @@ export function authByCookie() {
 
 export function storeCookie() {
   return (dispatch) => {
-    dispatch(() => {
-      return {
-        type: types.AUTH_STORE_COOKIE
-      };
-    });
+    dispatch({ type: types.AUTH_STORE_COOKIE });
 
     CookieManager.getAll((cookie) => {
       if (!cookie || !cookie.SS) {
-        dispatch(() => {
-          return {
-            type: types.AUTH_STORE_COOKIE_FAIL
-          };
-        });
+        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
         return;
       }
 
       try {
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cookie.SS), () => {
-          dispatch(() => {
-            return {
-              type: types.AUTH_STORE_COOKIE_SUCCESS
-            };
-          });
+          dispatch({ type: types.AUTH_STORE_COOKIE_SUCCESS });
         });
       } catch (error) {
-        dispatch(() => {
-          return {
-            type: types.AUTH_STORE_COOKIE_FAIL
-          };
-        });
+        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
       }
     });
   };

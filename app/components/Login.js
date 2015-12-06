@@ -8,6 +8,8 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import CenteredText from './CenteredText';
+
 const styles = StyleSheet.create({
   main: {
     flex: 1,
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
 
 export default class Login extends Component {
   static propTypes = {
+    state: React.PropTypes.object,
     login: React.PropTypes.func
   }
 
@@ -73,6 +76,16 @@ export default class Login extends Component {
   }
 
   render() {
+    const { state } = this.props;
+
+    if (state.auth.loggingIn) {
+      return (
+        <View style={styles.main}>
+          <CenteredText text="Logging in..."/>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.main}>
         <Image
