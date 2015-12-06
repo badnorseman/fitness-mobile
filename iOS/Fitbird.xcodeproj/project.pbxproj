@@ -144,9 +144,6 @@
 		30CCF4DD1C105391009DCFEF /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
 		30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		30CCF4E61C10540A009DCFEF /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
-		30CCF4E81C106831009DCFEF /* smiley_just-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley_just-right.png"; sourceTree = "<group>"; };
-		30CCF4E91C106831009DCFEF /* smiley_too-easy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley_too-easy.png"; sourceTree = "<group>"; };
-		30CCF4EA1C106831009DCFEF /* smiley_too-hard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley_too-hard.png"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -339,9 +336,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				30CCF4E81C106831009DCFEF /* smiley_just-right.png */,
-				30CCF4E91C106831009DCFEF /* smiley_too-easy.png */,
-				30CCF4EA1C106831009DCFEF /* smiley_too-hard.png */,
 				30CCF4E61C10540A009DCFEF /* ionicons.ttf */,
 				30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */,
 				30CCF4DB1C105391009DCFEF /* RNCookieManagerIOS */,
