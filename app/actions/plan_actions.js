@@ -1,13 +1,9 @@
 import * as types from './action_types';
 import { appError, appReceive } from './app_actions';
+import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
-
-function load() {
-  return {
-    type: types.PLAN_LOAD
-  };
-}
+import { load } from '../api/plan';
 
 function fail(error) {
   return appError(error);
@@ -77,18 +73,9 @@ export function persistFeedback(workoutKey, feedback) {
 
 export function planLoad() {
   return (dispatch) => {
-    dispatch(load());
+    dispatch({ type: types.PLAN_LOAD });
 
-    return fetch('http://app.fitbird.com/api/plan', {
-      method: 'GET',
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'app.fitbird.com'
-      }
-    })
+    return request(load())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(

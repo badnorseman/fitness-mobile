@@ -1,7 +1,9 @@
 import * as types from './action_types';
 import { appError, appReceive } from './app_actions';
+import { request } from './network_actions';
 import CookieManager from 'react-native-cookies';
 import { AsyncStorage } from 'react-native';
+import { check, loginEmail } from '../api/auth';
 const STORAGE_KEY = '@Fitbird:authCookie';
 
 function send() {
@@ -12,15 +14,7 @@ function send() {
 
 export function checkCookie() {
   return (dispatch) => {
-    return fetch('http://app.fitbird.com/api/login/check', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'app.fitbird.com'
-      }
-    })
+    return request(check())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(json, types.AUTH_BY_COOKIE_SUCCESS, types.AUTH_BY_COOKIE_FAIL));
@@ -94,19 +88,7 @@ export function login(email, password) {
   return (dispatch) => {
     dispatch(send());
 
-    return fetch('http://app.fitbird.com/api/login/email', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': '',
-        'Host': 'app.fitbird.com'
-      },
-      body: JSON.stringify({
-        'email': email,
-        'password': password
-      })
-    })
+    return request(loginEmail(email, password))(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(storeCookie());
