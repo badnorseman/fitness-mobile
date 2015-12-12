@@ -79,6 +79,7 @@ export default class Repetition extends Component {
     workout: React.PropTypes.object,
     set: React.PropTypes.object,
     checkSet: React.PropTypes.func,
+    checkSetWithValue: React.PropTypes.func,
     workoutNum: React.PropTypes.number,
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
@@ -87,12 +88,26 @@ export default class Repetition extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      missingValue: null
+    };
   }
 
   onPressCheck() {
     const { checkSet, currentWeekNo, workoutNum, exerciseGroupId, setId } = this.props;
     const workoutKey = workoutNum - 1;
     checkSet(currentWeekNo, workoutKey, exerciseGroupId, setId);
+  }
+
+  handleInputBlur() {
+    const { checkSetWithValue, currentWeekNo, workoutNum, exerciseGroupId, setId } = this.props;
+    const workoutKey = workoutNum - 1;
+    checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupId, setId, this.state.missingValue);
+    dismissKeyboard();
+  }
+
+  handleInputChange(newValue) {
+    this.setState({ missingValue: newValue });
   }
 
   render() {
@@ -108,7 +123,9 @@ export default class Repetition extends Component {
       placeholder: 'MAX',
       placeholderTextColor: 'rgba(169, 169, 169, 1)',
       style: styles.reps,
-      onBlur: dismissKeyboard
+      onBlur: this.handleInputBlur.bind(this),
+      onChangeText: this.handleInputChange.bind(this),
+      value: this.state.missingValue
     };
 
     if (set.c1) {

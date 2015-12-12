@@ -37,3 +37,13 @@ export function check(id) {
     headers: HEADERS
   });
 }
+
+export function checkWithValue(id, value) {
+  return fetch(`${API}/workout/set/${id}/check-with-value`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({
+      value: value
+    })
+  });
+}

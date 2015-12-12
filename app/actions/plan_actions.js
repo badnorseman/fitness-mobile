@@ -4,7 +4,7 @@ import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
 import { load } from '../api/plan';
-import { end, updateFeedback, start, check } from '../api/workout';
+import { end, updateFeedback, start, check, checkWithValue } from '../api/workout';
 
 function fail(error) {
   return appError(error);
@@ -76,13 +76,32 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
   };
 }
 
-export function checkSetWithValue(workoutKey, exerciseGroupKey, setKey, value) {
-  return {
-    type: types.PLAN_CHECK_SET_WITH_VALUE,
-    workoutKey: workoutKey,
-    exerciseGroupKey: exerciseGroupKey,
-    setKey: setKey,
-    value: value
+export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, setKey, value) {
+  return (dispatch, getState) => {
+    const props = {
+      currentWeekNo: currentWeekNo,
+      workoutKey: workoutKey,
+      exerciseGroupKey: exerciseGroupKey,
+      setKey: setKey,
+      value: value
+    };
+
+    const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
+
+    dispatch({
+      type: types.PLAN_CHECK_SET_WITH_VALUE,
+      ...props
+    });
+
+    return request(checkWithValue(set.id, value))(dispatch)
+      .then(response => response.json())
+      .then(json => dispatch(appReceive(
+        processPlanJson(json),
+        types.PLAN_CHECK_SET_WITH_VALUE_SUCCESS,
+        types.PLAN_CHECK_SET_WITH_VALUE_FAIL,
+        props
+      )))
+      .catch(error => fail(error));
   };
 }
 
