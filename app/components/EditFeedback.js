@@ -38,10 +38,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    overflow: 'hidden'
   },
   smiley: {
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 100
   },
   commentsInput: {
     flex: 1,
