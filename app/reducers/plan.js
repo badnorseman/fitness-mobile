@@ -7,6 +7,7 @@ export default function plan(state = initialState, action = {}) {
     case types.PLAN_LOAD_FAIL:
     case types.PLAN_LOAD_SUCCESS:
     case types.PLAN_END_WORKOUT_SUCCESS:
+    case types.PLAN_START_WORKOUT_SUCCESS:
       return {
         ...state,
         ...action.response,

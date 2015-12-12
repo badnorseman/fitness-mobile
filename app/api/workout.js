@@ -23,3 +23,10 @@ export function updateFeedback(id, type, comments) {
     })
   });
 }
+
+export function start(id) {
+  return fetch(`${API}/workout/${id}/start`, {
+    method: 'POST',
+    headers: HEADERS
+  });
+}

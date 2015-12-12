@@ -4,7 +4,7 @@ import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
 import { load } from '../api/plan';
-import { end, updateFeedback } from '../api/workout';
+import { end, updateFeedback, start } from '../api/workout';
 
 function fail(error) {
   return appError(error);
@@ -18,10 +18,22 @@ function processPlanJson(json) {
   return json;
 }
 
-export function startWorkout(workoutKey) {
-  return {
-    type: types.PLAN_START_WORKOUT,
-    workoutKey: workoutKey
+export function startWorkout(nextWorkoutId) {
+  return (dispatch) => {
+    dispatch({
+      type: types.PLAN_START_WORKOUT,
+      nextWorkoutId: nextWorkoutId
+    });
+
+    return request(start(nextWorkoutId))(dispatch)
+      .then(response => response.json())
+      .then(json => dispatch(appReceive(
+        processPlanJson(json),
+        types.PLAN_START_WORKOUT_SUCCESS,
+        types.PLAN_START_WORKOUT_FAIL,
+        { nextWorkoutId: nextWorkoutId }
+      )))
+      .catch(error => fail(error));
   };
 }
 

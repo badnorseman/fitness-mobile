@@ -51,15 +51,16 @@ export default class FooterButton extends Component {
   }
 
   startWorkout() {
-    const { startWorkout, workoutNum } = this.props;
-    const workoutId = workoutNum - 1;
+    const { startWorkout, navigator, state } = this.props;
+    const nextWorkoutId = state.plan.data.nextWorkoutId;
 
     AlertIOS.alert(
       '',
       'Are you ready to start?',
       [
         { text: 'Yes', onPress: () => {
-          startWorkout(workoutId);
+          startWorkout(nextWorkoutId);
+          navigator.popToTop();
         } },
         { text: 'Not yet', onPress: () => {}, style: 'cancel' }
       ]
