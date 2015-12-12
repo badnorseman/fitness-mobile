@@ -81,7 +81,8 @@ export default class Repetition extends Component {
     checkSet: React.PropTypes.func,
     workoutNum: React.PropTypes.number,
     exerciseGroupId: React.PropTypes.number,
-    setId: React.PropTypes.number
+    setId: React.PropTypes.number,
+    currentWeekNo: React.PropTypes.number
   }
 
   constructor(props) {
@@ -89,10 +90,9 @@ export default class Repetition extends Component {
   }
 
   onPressCheck() {
-    const { checkSet, workoutNum, exerciseGroupId, setId } = this.props;
-    const workoutId = workoutNum - 1;
-
-    checkSet(workoutId, exerciseGroupId, setId);
+    const { checkSet, currentWeekNo, workoutNum, exerciseGroupId, setId } = this.props;
+    const workoutKey = workoutNum - 1;
+    checkSet(currentWeekNo, workoutKey, exerciseGroupId, setId);
   }
 
   render() {

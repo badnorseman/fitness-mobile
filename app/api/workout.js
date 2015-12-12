@@ -30,3 +30,10 @@ export function start(id) {
     headers: HEADERS
   });
 }
+
+export function check(id) {
+  return fetch(`${API}/workout/set/${id}/check`, {
+    method: 'POST',
+    headers: HEADERS
+  });
+}

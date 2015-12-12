@@ -80,7 +80,7 @@ export default class ExercisesList extends Component {
   }
 
   _renderRow(rowData, sectionID, rowID) {
-    const { navigator, workout, workoutNum } = this.props;
+    const { navigator, workout, workoutNum, currentWeekNo } = this.props;
     const exerciseGroupId = parseInt(rowID, 10);
 
     const exercises = rowData.exercises.map((exercise, i) => {
@@ -95,7 +95,7 @@ export default class ExercisesList extends Component {
     />) : null);
 
     return (
-      <TouchableHighlight onPress={() => navigator.push({ id: 'exercise', props: { workout: workout, workoutNum: workoutNum, exerciseGroup: rowData, exerciseGroupId: exerciseGroupId, overview: workout.overview[exerciseGroupId] } })}>
+      <TouchableHighlight onPress={() => navigator.push({ id: 'exercise', props: { workout: workout, workoutNum: workoutNum, exerciseGroup: rowData, exerciseGroupId: exerciseGroupId, overview: workout.overview[exerciseGroupId], currentWeekNo: currentWeekNo } })}>
         <View style={styles.container}>
           {exercises}
           {exchange}

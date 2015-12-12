@@ -21,10 +21,16 @@ export default function plan(state = initialState, action = {}) {
     case types.PLAN_PERSIST_FEEDBACK_SUCCESS:
       state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].feedback = action.feedback;
       return state;
+    case types.PLAN_CHECK_SET:
+    case types.PLAN_CHECK_SET_SUCCESS:
+      state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].exerciseGroups[action.exerciseGroupKey].sets[action.setKey].dateDT = Date.now();
+      return state;
+    case types.PLAN_CHECK_SET_FAIL:
+      state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].exerciseGroups[action.exerciseGroupKey].sets[action.setKey].dateDT = null;
+      return state;
     case types.PLAN_PERSIST_FEEDBACK:
     case types.PLAN_START_WORKOUT:
     case types.PLAN_END_WORKOUT:
-    case types.PLAN_CHECK_SET:
     default:
       return state;
   }
