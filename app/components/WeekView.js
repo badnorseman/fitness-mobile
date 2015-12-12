@@ -64,7 +64,7 @@ export default class WeekView extends Component {
     if (week && week.workouts && week.workouts.length) {
       workouts = week.workouts.map((row, i) => {
         return (
-          <WorkoutButton {...this.props} workout={row} key={i} workoutNum={i + 1} />
+          <WorkoutButton {...this.props} workout={row} key={i} workoutNum={i + 1} currentWeekNo={currentWeekNo} week={week} />
         );
       });
     }

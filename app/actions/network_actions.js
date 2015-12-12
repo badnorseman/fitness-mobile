@@ -9,7 +9,8 @@ export function request(apiRequest) {
     return apiRequest
       .then((response) => {
         dispatch({
-          type: types.NETWORK_REQUEST_COMPLETED
+          type: types.NETWORK_REQUEST_COMPLETED,
+          response: response
         });
 
         return response;

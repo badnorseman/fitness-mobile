@@ -8,18 +8,20 @@ export function appError(error) {
   };
 }
 
-export function appReceive(json, successAction, failAction) {
+export function appReceive(json, successAction, failAction, params) {
   switch (json.ok) {
     case true:
       return {
         type: successAction,
-        response: json
+        response: json,
+        ...params
       };
     case false:
     default:
       return {
         type: failAction,
-        response: json
+        response: json,
+        ...params
       };
   }
 }

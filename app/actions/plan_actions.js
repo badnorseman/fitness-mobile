@@ -4,12 +4,13 @@ import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
 import { load } from '../api/plan';
+import { end, updateFeedback } from '../api/workout';
 
 function fail(error) {
   return appError(error);
 }
 
-function processJson(json) {
+function processPlanJson(json) {
   if (json.ok && json.data) {
     json.data = processPlan(json.data);
   }
@@ -55,19 +56,53 @@ export function checkSetWithValue(workoutKey, exerciseGroupKey, setKey, value) {
 }
 
 export function endWorkout(workoutKey, feedback) {
-  return {
-    type: types.PLAN_END_WORKOUT,
-    workoutKey: workoutKey,
-    feedback: feedback
+  return (dispatch) => {
+    const params = {
+      workoutKey: workoutKey,
+      feedback: feedback
+    };
+
+    dispatch({
+      type: types.PLAN_END_WORKOUT,
+      ...params
+    });
+
+    return request(end(feedback.type, feedback.comments))(dispatch)
+      .then(response => response.json())
+      .then(json => dispatch(appReceive(
+        processPlanJson(json),
+        types.PLAN_END_WORKOUT_SUCCESS,
+        types.PLAN_END_WORKOUT_FAIL,
+        params
+      )))
+      .catch(error => fail(error));
   };
 }
 
 
-export function persistFeedback(workoutKey, feedback) {
-  return {
-    type: types.PLAN_PERSIST_FEEDBACK,
-    workoutKey: workoutKey,
-    feedback: feedback
+export function persistFeedback(currentWeekNo, workoutKey, feedback) {
+  return (dispatch, getState) => {
+    const params = {
+      currentWeekNo: currentWeekNo,
+      workoutKey: workoutKey,
+      feedback: feedback
+    };
+    const workoutId = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].id;
+
+    dispatch({
+      type: types.PLAN_PERSIST_FEEDBACK,
+      ...params
+    });
+
+    return request(updateFeedback(workoutId, feedback.type, feedback.comments))(dispatch)
+      .then(response => response.json())
+      .then(json => dispatch(appReceive(
+        processPlanJson(json),
+        types.PLAN_PERSIST_FEEDBACK_SUCCESS,
+        types.PLAN_PERSIST_FEEDBACK_FAIL,
+        params
+      )))
+      .catch(error => fail(error));
   };
 }
 
@@ -79,7 +114,7 @@ export function planLoad() {
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
-          processJson(json),
+          processPlanJson(json),
           types.PLAN_LOAD_SUCCESS,
           types.PLAN_LOAD_FAIL
         ));

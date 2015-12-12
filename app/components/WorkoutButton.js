@@ -48,7 +48,9 @@ export default class WorkoutButton extends Component {
   static propTypes = {
     state: React.PropTypes.object,
     workout: React.PropTypes.object,
+    week: React.PropTypes.object,
     workoutNum: React.PropTypes.number,
+    currentWeekNo: React.PropTypes.number,
     navigator: React.PropTypes.object
   }
 
@@ -57,7 +59,7 @@ export default class WorkoutButton extends Component {
   }
 
   render() {
-    const { state, workout, workoutNum, navigator } = this.props;
+    const { state, workout, workoutNum, currentWeekNo, week, navigator } = this.props;
     const plan = state.plan.data;
     const buttonStyles = [styles.main];
     const firstLineStyles = [styles.firstLine];
@@ -78,7 +80,7 @@ export default class WorkoutButton extends Component {
     }
 
     return (
-      <TouchableOpacity style={styles.touchable} onPress={() => navigator.push({ id: 'workout', title: `Workout ${workoutNum}`, props: { workout: workout, workoutNum: workoutNum } })}>
+      <TouchableOpacity style={styles.touchable} onPress={() => navigator.push({ id: 'workout', title: `Workout ${workoutNum}`, props: { workout: workout, workoutNum: workoutNum, currentWeekNo: currentWeekNo, week: week } })}>
         <View style={buttonStyles}>
           <Text style={[styles.firstLine, styles.firstLineCompleted]}>{label}</Text>
           {secondLine}
