@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
         <View style={styles.main}>
           <Image
             style={styles.background}
-            source={ { uri: 'http://app.fitbird.com/app/static/img/background-bird.png' } }
+            source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
           >
             <WeekView {...this.props}/>
             <WeekNav {...this.props}/>
@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
         <View style={styles.main}>
           <Image
             style={styles.background}
-            source={ { uri: 'http://app.fitbird.com/app/static/img/background-bird.png' } }
+            source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
           >
             <CenteredText text="You will recieve an e-mail notification when your coach has reviewed your profile and created your plan."/>
           </Image>
@@ -63,7 +63,7 @@ export default class Dashboard extends Component {
       <View style={styles.main}>
         <Image
           style={styles.background}
-          source={ { uri: 'http://app.fitbird.com/app/static/img/background-bird.png' } }
+          source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
         >
           <CenteredText text="Loading your plan..."/>
         </Image>

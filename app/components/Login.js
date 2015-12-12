@@ -13,7 +13,7 @@ import CenteredText from './CenteredText';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
     backgroundColor: '#2e313a'
   },
@@ -35,13 +35,11 @@ const styles = StyleSheet.create({
     padding: 5
   },
   background: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
+    flex: 1,
+    alignSelf: 'stretch',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    resizeMode: 'cover'
   },
   button: {
     width: 100,
