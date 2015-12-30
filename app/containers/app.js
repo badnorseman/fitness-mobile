@@ -4,7 +4,7 @@ import { Provider } from 'react-redux/native';
 import thunk from 'redux-thunk';
 
 import * as reducers from '../reducers';
-import FitbirdApp from './fitbirdApp';
+import Layout from './layout';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -14,7 +14,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        {() => <FitbirdApp />}
+        {() => <Layout />}
       </Provider>
     );
   }

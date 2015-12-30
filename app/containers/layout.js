@@ -22,7 +22,7 @@ import * as dashboardActions from '../actions/dashboard_actions';
 import * as appActions from '../actions/app_actions';
 import { connect } from 'react-redux/native';
 
-class FitbirdApp extends Component {
+class Layout extends Component {
   static propTypes = {
     dispatch: React.PropTypes.func,
     state: React.PropTypes.object
@@ -133,4 +133,4 @@ class FitbirdApp extends Component {
   }
 }
 
-export default connect(state => ({ state: state }))(FitbirdApp);
+export default connect(state => ({ state: state }))(Layout);
