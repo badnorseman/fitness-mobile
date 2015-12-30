@@ -48,7 +48,7 @@ export function updateWorkout(workoutKey, exerciseGroupKey, setKey, field, value
   };
 }
 
-export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {  
+export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
   return (dispatch, getState) => {
     const props = {
       currentWeekNo: currentWeekNo,

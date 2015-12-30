@@ -14,5 +14,5 @@ export default function dashboard(state = initialState, action = {}) {
     case types.DASHBOARD_NEXT_WEEK:
     default:
       return state;
-  };
+  }
 }

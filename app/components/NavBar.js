@@ -60,7 +60,10 @@ const NavigationBarRouteMapper = {
       case 'history':
         leftButtonText = 'Exercise'; break;
       case 'workout':
+      case 'habits':
         leftButtonText = 'Dashboard'; break;
+      case 'habit':
+        leftButtonText = 'Habits'; break;
       default:
         leftButtonText = 'Back'; break;
     }

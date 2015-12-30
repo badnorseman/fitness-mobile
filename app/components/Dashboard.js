@@ -31,8 +31,9 @@ export default class Dashboard extends Component {
 
   render() {
     const { state } = this.props;
+    let loadingText;
 
-    if (state && state.plan && state.plan.ok) {
+    if (state && state.plan && state.plan.ok && state.habits.all.ok && state.habits.started.ok) {
       return (
         <View style={styles.main}>
           <Image
@@ -59,13 +60,21 @@ export default class Dashboard extends Component {
       );
     }
 
+    if (state.habits.started.loading) {
+      loadingText = 'Loading your habits...';
+    } else if (state.habits.all.loading) {
+      loadingText = 'Loading list of available habits...';
+    } else if (state.plan.loading) {
+      loadingText = 'Loading your plan...';
+    }
+
     return (
       <View style={styles.main}>
         <Image
           style={styles.background}
           source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
         >
-          <CenteredText text="Loading your plan..."/>
+          <CenteredText text={loadingText}/>
         </Image>
       </View>
     );

@@ -12,9 +12,12 @@ import Exercise from '../components/Exercise';
 import Video from '../components/Video';
 import EditFeedback from '../components/EditFeedback';
 import ExerciseHistory from '../components/ExerciseHistory';
+import Habits from '../components/Habits';
+import Habit from '../components/Habit';
 
 import * as authActions from '../actions/auth_actions';
 import * as planActions from '../actions/plan_actions';
+import * as habitsActions from '../actions/habits_actions';
 import * as dashboardActions from '../actions/dashboard_actions';
 import * as appActions from '../actions/app_actions';
 import { connect } from 'react-redux/native';
@@ -38,6 +41,14 @@ class FitbirdApp extends Component {
 
     if (nextProps.state.auth.ok && !Object.keys(nextProps.state.plan).length) {
       nextProps.dispatch(planActions.planLoad());
+    }
+
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.all).length && !nextProps.state.habits.all.loading && !nextProps.state.habits.all.loaded) {
+      nextProps.dispatch(habitsActions.habitsLoadAll());
+    }
+
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.started).length && !nextProps.state.habits.started.loading && !nextProps.state.habits.started.loaded) {
+      nextProps.dispatch(habitsActions.habitsLoadStarted());
     }
 
     if (currentRoute.id !== 'login' && nextProps.state.auth.logout) {
@@ -73,9 +84,13 @@ class FitbirdApp extends Component {
 
     switch (route.id) {
       case 'dashboard':
-        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions }, this.props.dispatch)}/>;
+        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions, ...habitsActions }, this.props.dispatch)}/>;
       case 'workout':
         return <Workout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+      case 'habits':
+        return <Habits {...sharedProps} {...bindActionCreators({ ...habitsActions }, this.props.dispatch)} />;
+      case 'habit':
+        return <Habit {...sharedProps} {...bindActionCreators({ ...habitsActions }, this.props.dispatch)} />;
       case 'edit':
         return <EditWorkout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'feedback':

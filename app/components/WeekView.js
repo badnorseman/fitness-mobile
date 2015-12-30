@@ -6,6 +6,8 @@ import React, {
 } from 'react-native';
 
 import WorkoutButton from './WorkoutButton';
+import HabitButton from './HabitButton';
+import getHabitStartedOccurences from '../utils/getHabitStartedOccurences';
 
 const styles = StyleSheet.create({
   halves: {
@@ -17,6 +19,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     paddingTop: 20
+  },
+  separator: {
+    width: 1
   },
   rightHalf: {
     flex: 1,
@@ -55,16 +60,32 @@ export default class WeekView extends Component {
     return Math.round(c);
   }
 
+  getHabitsCompliance(occurences) {
+    return Math.round((occurences && occurences.userHabit && occurences.userHabit.compliance) || 0);
+  }
+
   render() {
     const { state } = this.props;
-    const currentWeekNo = state.dashboard.week;
+    const currentWeekNo = state.dashboard.week || 0;
+    const habitsStarted = state.habits.started.habitsStarted;
+    const year = (new Date()).getFullYear();
     const week = state.plan.data.weeks[currentWeekNo];
+    const occurences = getHabitStartedOccurences(habitsStarted, year, week);
     let workouts;
+    let habits;
 
     if (week && week.workouts && week.workouts.length) {
       workouts = week.workouts.map((row, i) => {
         return (
           <WorkoutButton {...this.props} workout={row} key={i} workoutNum={i + 1} currentWeekNo={currentWeekNo} week={week} />
+        );
+      });
+    }
+
+    if (occurences && occurences.days && occurences.days.length) {
+      habits = occurences.days.map((occurence, i) => {
+        return (
+          <HabitButton {...this.props} habitsStarted={habitsStarted} occurences={occurences} occurence={occurence} key={i} />
         );
       });
     }
@@ -76,9 +97,11 @@ export default class WeekView extends Component {
           <Text style={[styles.halfHeader, { marginBottom: 20 }]}>{this.getWorkoutCompliance()}%</Text>
           {workouts}
         </View>
+        <View style={styles.separator}/>
         <View style={styles.rightHalf}>
           <Text style={styles.halfHeader}>Habits</Text>
-          <Text style={[styles.halfHeader, { marginBottom: 20 }]}>0%</Text>
+          <Text style={[styles.halfHeader, { marginBottom: 20 }]}>{this.getHabitsCompliance(occurences)}%</Text>
+          {habits}
         </View>
       </View>
     );
