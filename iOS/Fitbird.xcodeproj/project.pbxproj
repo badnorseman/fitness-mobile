@@ -26,6 +26,7 @@
 		302698CF1C47B5E90064787E /* RNCookieManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 302698CE1C47B5E90064787E /* RNCookieManagerIOS.m */; };
 		302698D71C47B6160064787E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 302698D61C47B6160064787E /* ionicons.ttf */; };
 		30A2E5F71C47D9000066DB25 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A2E5F61C47D8A90066DB25 /* libReactNativeIcons.a */; };
+		30A2E5F91C47EA600066DB25 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A2E5F81C47EA600066DB25 /* Default-568h@2x.png */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,7 @@
 		302698CE1C47B5E90064787E /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
 		302698D61C47B6160064787E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
+		30A2E5F81C47EA600066DB25 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -336,6 +338,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				30A2E5F81C47EA600066DB25 /* Default-568h@2x.png */,
 				30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */,
 				302698D61C47B6160064787E /* ionicons.ttf */,
 				302698CC1C47B5E90064787E /* RNCookieManagerIOS */,
@@ -409,6 +412,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = D7MTB9WD2K;
 					};
 				};
 			};
@@ -570,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				302698D71C47B6160064787E /* ionicons.ttf in Resources */,
+				30A2E5F91C47EA600066DB25 /* Default-568h@2x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -679,6 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,6 +696,7 @@
 				INFOPLIST_FILE = Fitbird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
 			};
 			name = Debug;
@@ -696,6 +705,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -704,6 +715,7 @@
 				INFOPLIST_FILE = Fitbird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
 			};
 			name = Release;
