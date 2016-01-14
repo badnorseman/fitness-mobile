@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 export default class Habits extends Component {
-  static propTypes = {}
+  static propTypes = {};
 
   constructor(props) {
     super(props);

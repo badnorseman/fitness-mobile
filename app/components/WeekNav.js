@@ -47,7 +47,7 @@ export default class WeekNav extends Component {
     state: React.PropTypes.object,
     prevWeek: React.PropTypes.func,
     nextWeek: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);

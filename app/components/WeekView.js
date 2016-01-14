@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 export default class WeekView extends Component {
   static propTypes = {
     state: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

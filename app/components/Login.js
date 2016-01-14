@@ -59,7 +59,7 @@ export default class Login extends Component {
   static propTypes = {
     state: React.PropTypes.object,
     login: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);

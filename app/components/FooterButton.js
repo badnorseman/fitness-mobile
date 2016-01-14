@@ -4,7 +4,7 @@ import React, {
   View,
   Text,
   TouchableOpacity,
-  AlertIOS
+  Alert
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -32,7 +32,7 @@ export default class FooterButton extends Component {
     workout: React.PropTypes.object,
     workoutNum: React.PropTypes.number,
     startWorkout: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -51,15 +51,15 @@ export default class FooterButton extends Component {
   }
 
   startWorkout() {
-    const { startWorkout, navigator, state } = this.props;
+    const { navigator, state } = this.props;
     const nextWorkoutId = state.plan.data.nextWorkoutId;
 
-    AlertIOS.alert(
+    Alert.alert(
       '',
       'Are you ready to start?',
       [
         { text: 'Yes', onPress: () => {
-          startWorkout(nextWorkoutId);
+          this.props.startWorkout(nextWorkoutId);
           navigator.popToTop();
         } },
         { text: 'Not yet', onPress: () => {}, style: 'cancel' }

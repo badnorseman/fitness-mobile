@@ -21,12 +21,11 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		303A2B301C3D5D8000827EAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 303A2B2F1C3D5D8000827EAC /* Default-568h@2x.png */; };
-		30CCF4D91C105385009DCFEF /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF4D61C105385009DCFEF /* VideoPlayerView.m */; };
-		30CCF4DA1C105385009DCFEF /* VideoPlayerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF4D81C105385009DCFEF /* VideoPlayerViewManager.m */; };
-		30CCF4DE1C105391009DCFEF /* RNCookieManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF4DD1C105391009DCFEF /* RNCookieManagerIOS.m */; };
-		30CCF4E51C1053D5009DCFEF /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CCF4E41C1053BF009DCFEF /* libReactNativeIcons.a */; };
-		30CCF4E71C10540A009DCFEF /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30CCF4E61C10540A009DCFEF /* ionicons.ttf */; };
+		302698C01C47B5D50064787E /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 302698BD1C47B5D50064787E /* VideoPlayerView.m */; };
+		302698C11C47B5D50064787E /* VideoPlayerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 302698BF1C47B5D50064787E /* VideoPlayerViewManager.m */; };
+		302698CF1C47B5E90064787E /* RNCookieManagerIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 302698CE1C47B5E90064787E /* RNCookieManagerIOS.m */; };
+		302698D71C47B6160064787E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 302698D61C47B6160064787E /* ionicons.ttf */; };
+		30A2E5F71C47D9000066DB25 /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A2E5F61C47D8A90066DB25 /* libReactNativeIcons.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -94,9 +93,9 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
-		30CCF4E31C1053BF009DCFEF /* PBXContainerItemProxy */ = {
+		30A2E5F51C47D8A90066DB25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */;
+			containerPortal = 30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2F5A3EB81ACDBF8000439386;
 			remoteInfo = ReactNativeIcons;
@@ -137,15 +136,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Fitbird/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Fitbird/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		303A2B2F1C3D5D8000827EAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		30CCF4D51C105385009DCFEF /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
-		30CCF4D61C105385009DCFEF /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
-		30CCF4D71C105385009DCFEF /* VideoPlayerViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewManager.h; sourceTree = "<group>"; };
-		30CCF4D81C105385009DCFEF /* VideoPlayerViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewManager.m; sourceTree = "<group>"; };
-		30CCF4DC1C105391009DCFEF /* RNCookieManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCookieManagerIOS.h; sourceTree = "<group>"; };
-		30CCF4DD1C105391009DCFEF /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
-		30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
-		30CCF4E61C10540A009DCFEF /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		302698BC1C47B5D50064787E /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
+		302698BD1C47B5D50064787E /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
+		302698BE1C47B5D50064787E /* VideoPlayerViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewManager.h; sourceTree = "<group>"; };
+		302698BF1C47B5D50064787E /* VideoPlayerViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewManager.m; sourceTree = "<group>"; };
+		302698CD1C47B5E90064787E /* RNCookieManagerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCookieManagerIOS.h; sourceTree = "<group>"; };
+		302698CE1C47B5E90064787E /* RNCookieManagerIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCookieManagerIOS.m; sourceTree = "<group>"; };
+		302698D61C47B6160064787E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30CCF4E51C1053D5009DCFEF /* libReactNativeIcons.a in Frameworks */,
+				30A2E5F71C47D9000066DB25 /* libReactNativeIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -274,30 +272,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30CCF4D41C105385009DCFEF /* RCTVideoPlayer */ = {
+		302698BB1C47B5D50064787E /* RCTVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				30CCF4D51C105385009DCFEF /* VideoPlayerView.h */,
-				30CCF4D61C105385009DCFEF /* VideoPlayerView.m */,
-				30CCF4D71C105385009DCFEF /* VideoPlayerViewManager.h */,
-				30CCF4D81C105385009DCFEF /* VideoPlayerViewManager.m */,
+				302698BC1C47B5D50064787E /* VideoPlayerView.h */,
+				302698BD1C47B5D50064787E /* VideoPlayerView.m */,
+				302698BE1C47B5D50064787E /* VideoPlayerViewManager.h */,
+				302698BF1C47B5D50064787E /* VideoPlayerViewManager.m */,
 			);
 			path = RCTVideoPlayer;
 			sourceTree = "<group>";
 		};
-		30CCF4DB1C105391009DCFEF /* RNCookieManagerIOS */ = {
+		302698CC1C47B5E90064787E /* RNCookieManagerIOS */ = {
 			isa = PBXGroup;
 			children = (
-				30CCF4DC1C105391009DCFEF /* RNCookieManagerIOS.h */,
-				30CCF4DD1C105391009DCFEF /* RNCookieManagerIOS.m */,
+				302698CD1C47B5E90064787E /* RNCookieManagerIOS.h */,
+				302698CE1C47B5E90064787E /* RNCookieManagerIOS.m */,
 			);
 			path = RNCookieManagerIOS;
 			sourceTree = "<group>";
 		};
-		30CCF4E01C1053BF009DCFEF /* Products */ = {
+		30A2E5F21C47D8A90066DB25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30CCF4E41C1053BF009DCFEF /* libReactNativeIcons.a */,
+				30A2E5F61C47D8A90066DB25 /* libReactNativeIcons.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,11 +336,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				303A2B2F1C3D5D8000827EAC /* Default-568h@2x.png */,
-				30CCF4E61C10540A009DCFEF /* ionicons.ttf */,
-				30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */,
-				30CCF4DB1C105391009DCFEF /* RNCookieManagerIOS */,
-				30CCF4D41C105385009DCFEF /* RCTVideoPlayer */,
+				30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */,
+				302698D61C47B6160064787E /* ionicons.ttf */,
+				302698CC1C47B5E90064787E /* RNCookieManagerIOS */,
+				302698BB1C47B5D50064787E /* RCTVideoPlayer */,
 				13B07FAE1A68108700A75B9A /* Fitbird */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FitbirdTests */,
@@ -413,9 +410,6 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
-					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = D7MTB9WD2K;
-					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Fitbird" */;
@@ -471,8 +465,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 30CCF4E01C1053BF009DCFEF /* Products */;
-					ProjectRef = 30CCF4DF1C1053BF009DCFEF /* ReactNativeIcons.xcodeproj */;
+					ProductGroup = 30A2E5F21C47D8A90066DB25 /* Products */;
+					ProjectRef = 30A2E5F11C47D8A90066DB25 /* ReactNativeIcons.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -540,11 +534,11 @@
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		30CCF4E41C1053BF009DCFEF /* libReactNativeIcons.a */ = {
+		30A2E5F61C47D8A90066DB25 /* libReactNativeIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libReactNativeIcons.a;
-			remoteRef = 30CCF4E31C1053BF009DCFEF /* PBXContainerItemProxy */;
+			remoteRef = 30A2E5F51C47D8A90066DB25 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
@@ -575,8 +569,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30CCF4E71C10540A009DCFEF /* ionicons.ttf in Resources */,
-				303A2B301C3D5D8000827EAC /* Default-568h@2x.png in Resources */,
+				302698D71C47B6160064787E /* ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -614,11 +607,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30CCF4DE1C105391009DCFEF /* RNCookieManagerIOS.m in Sources */,
+				302698CF1C47B5E90064787E /* RNCookieManagerIOS.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				30CCF4DA1C105385009DCFEF /* VideoPlayerViewManager.m in Sources */,
+				302698C11C47B5D50064787E /* VideoPlayerViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				30CCF4D91C105385009DCFEF /* VideoPlayerView.m in Sources */,
+				302698C01C47B5D50064787E /* VideoPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,8 +679,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -697,9 +688,7 @@
 				INFOPLIST_FILE = Fitbird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
-				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -707,9 +696,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -718,9 +704,7 @@
 				INFOPLIST_FILE = Fitbird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

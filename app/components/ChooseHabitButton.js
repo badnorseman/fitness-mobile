@@ -4,7 +4,7 @@ import React, {
   View,
   Text,
   TouchableOpacity,
-  AlertIOS
+  Alert
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -32,7 +32,7 @@ export default class FooterButton extends Component {
     state: React.PropTypes.object,
     habit: React.PropTypes.object,
     habitsStart: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -41,7 +41,7 @@ export default class FooterButton extends Component {
   handlePress() {
     const { navigator, habit, habitsStart } = this.props;
 
-    AlertIOS.alert(
+    Alert.alert(
       '',
       'Are you ready to start this habit?',
       [

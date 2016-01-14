@@ -86,7 +86,7 @@ export default class EditFeedback extends Component {
     workoutNum: React.PropTypes.number,
     currentWeekNo: React.PropTypes.number,
     workout: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -126,14 +126,14 @@ export default class EditFeedback extends Component {
   }
 
   persistFeedback() {
-    const { navigator, persistFeedback, workoutNum, currentWeekNo } = this.props;
-    persistFeedback(currentWeekNo, workoutNum - 1, this.state);
+    const { navigator, workoutNum, currentWeekNo } = this.props;
+    this.props.persistFeedback(currentWeekNo, workoutNum - 1, this.state);
     navigator.pop();
   }
 
   endWorkout() {
-    const { navigator, endWorkout, workoutNum } = this.props;
-    endWorkout(workoutNum - 1, this.state);
+    const { navigator, workoutNum } = this.props;
+    this.props.endWorkout(workoutNum - 1, this.state);
     navigator.popToTop();
   }
 

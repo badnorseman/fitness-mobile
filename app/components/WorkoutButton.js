@@ -52,7 +52,7 @@ export default class WorkoutButton extends Component {
     workoutNum: React.PropTypes.number,
     currentWeekNo: React.PropTypes.number,
     navigator: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

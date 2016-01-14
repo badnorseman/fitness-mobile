@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 export default class EditWorkout extends Component {
   static propTypes = {
     exerciseGroup: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

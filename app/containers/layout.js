@@ -20,13 +20,13 @@ import * as planActions from '../actions/plan_actions';
 import * as habitsActions from '../actions/habits_actions';
 import * as dashboardActions from '../actions/dashboard_actions';
 import * as appActions from '../actions/app_actions';
-import { connect } from 'react-redux/native';
+import { connect } from 'react-redux';
 
 class Layout extends Component {
   static propTypes = {
     dispatch: React.PropTypes.func,
     state: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -108,8 +108,6 @@ class Layout extends Component {
   }
 
   render() {
-    StatusBarIOS.setStyle('light-content');
-
     return (
       <Navigator
         ref="navigator"

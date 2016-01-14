@@ -55,7 +55,7 @@ export default class ExerciseTitle extends Component {
     overview: React.PropTypes.object,
     exerciseGroup: React.PropTypes.object,
     exercise: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

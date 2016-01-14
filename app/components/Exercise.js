@@ -24,7 +24,7 @@ export default class Exercise extends Component {
     workout: React.PropTypes.object,
     exerciseGroup: React.PropTypes.object,
     overview: React.PropTypes.array
-  }
+  };
 
   constructor(props) {
     super(props);

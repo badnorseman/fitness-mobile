@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 export default class Feedback extends Component {
   static propTypes = {
     workout: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

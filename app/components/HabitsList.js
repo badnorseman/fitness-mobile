@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 export default class HabitsList extends Component {
   static propTypes = {
     state: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

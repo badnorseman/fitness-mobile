@@ -28,7 +28,7 @@ export default class HabitsRow extends Component {
   static propTypes = {
     navigator: React.PropTypes.object,
     habit: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

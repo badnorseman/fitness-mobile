@@ -51,7 +51,7 @@ export default class ExerciseNav extends Component {
     workout: React.PropTypes.object,
     exerciseGroup: React.PropTypes.object,
     exerciseGroupId: React.PropTypes.number
-  }
+  };
 
   constructor(props) {
     super(props);

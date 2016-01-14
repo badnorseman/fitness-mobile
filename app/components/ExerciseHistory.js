@@ -57,7 +57,7 @@ export default class ExerciseHistory extends Component {
   static propTypes = {
     state: React.PropTypes.object,
     exercise: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

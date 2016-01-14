@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export default class Dashboard extends Component {
   static propTypes = {
     state: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

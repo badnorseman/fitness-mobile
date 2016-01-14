@@ -3,8 +3,7 @@ import React, {
   Component,
   View,
   Text,
-  TouchableOpacity,
-  AlertIOS
+  TouchableOpacity
 } from 'react-native';
 
 import days from '../utils/days';
@@ -56,7 +55,7 @@ export default class HabitButton extends Component {
     occurences: React.PropTypes.object,
     occurence: React.PropTypes.object,
     habitsCheck: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);

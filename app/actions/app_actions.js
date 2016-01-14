@@ -1,4 +1,4 @@
-import { AlertIOS } from 'react-native';
+import { Alert } from 'react-native';
 import * as types from './action_types';
 
 export function appError(error) {
@@ -30,6 +30,6 @@ export function alert(title, message) {
   return (dispatch) => {
     dispatch({ type: types.ALERT });
 
-    AlertIOS.alert(title, message);
+    Alert.alert(title, message);
   };
 }

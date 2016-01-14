@@ -84,7 +84,7 @@ export default class Repetition extends Component {
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
     currentWeekNo: React.PropTypes.number
-  }
+  };
 
   constructor(props) {
     super(props);

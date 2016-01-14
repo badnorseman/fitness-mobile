@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export default class BreakTimer extends Component {
   static propTypes = {
     set: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

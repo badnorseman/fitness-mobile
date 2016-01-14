@@ -78,7 +78,7 @@ export default class EditRepetition extends Component {
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
     updateWorkout: React.PropTypes.func
-  }
+  };
 
   constructor(props) {
     super(props);

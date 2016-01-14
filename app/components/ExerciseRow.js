@@ -83,7 +83,7 @@ export default class ExerciseRow extends Component {
     exercise: React.PropTypes.object,
     exerciseGroup: React.PropTypes.object,
     overview: React.PropTypes.object
-  }
+  };
 
   constructor(props) {
     super(props);

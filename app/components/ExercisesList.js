@@ -73,7 +73,7 @@ export default class ExercisesList extends Component {
     exerciseGroups: React.PropTypes.array,
     workout: React.PropTypes.object,
     workoutNum: React.PropTypes.number
-  }
+  };
 
   constructor(props) {
     super(props);
