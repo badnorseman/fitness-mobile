@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    resizeMode: 'cover'
+    // resizeMode: 'cover'
   },
   button: {
     width: 100,

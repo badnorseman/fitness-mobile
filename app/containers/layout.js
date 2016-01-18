@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, Navigator, StatusBarIOS } from 'react-native';
+import React, { Component, Navigator } from 'react-native';
 import { bindActionCreators } from 'redux';
 
 import NavigationBarRouteMapper from '../components/NavBar';

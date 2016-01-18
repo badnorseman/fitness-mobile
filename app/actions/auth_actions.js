@@ -4,7 +4,8 @@ import { request } from './network_actions';
 import CookieManager from 'react-native-cookies';
 import { AsyncStorage } from 'react-native';
 import { check, loginEmail } from '../api/auth';
-const STORAGE_KEY = '@Fitbird:authCookie';
+import { API } from '../constants/api_routes';
+const STORAGE_KEY = '@Fitbird:authCookieHeader';
 
 function send() {
   return {
@@ -27,16 +28,9 @@ export function authByCookie() {
   return (dispatch) => {
     dispatch({ type: types.AUTH_BY_COOKIE });
 
-    AsyncStorage.getItem(STORAGE_KEY, (err, res) => {
-      if (res) {
-        const cookie = JSON.parse(res);
-
-        CookieManager.set({
-          origin: '',
-          version: '1',
-          expiration: '3015-05-30T12:30:00.00-05:00', // Some ridiculous time in future
-          ...cookie
-        }, () => {
+    AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
+      if (cookie) {
+        CookieManager.setFromHeader(API, cookie, () => {
           dispatch(checkCookie());
         });
       } else {
@@ -50,14 +44,14 @@ export function storeCookie() {
   return (dispatch) => {
     dispatch({ type: types.AUTH_STORE_COOKIE });
 
-    CookieManager.getAll((cookie) => {
-      if (!cookie || !cookie.SS) {
+    CookieManager.getCookieHeader(API, (cookie) => {
+      if (!cookie) {
         dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
         return;
       }
 
       try {
-        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cookie.SS), () => {
+        AsyncStorage.setItem(STORAGE_KEY, cookie, () => {
           dispatch({ type: types.AUTH_STORE_COOKIE_SUCCESS });
         });
       } catch (error) {
