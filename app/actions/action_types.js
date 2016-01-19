@@ -5,6 +5,7 @@ export const AUTH_SEND = 'AUTH_SEND';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_CLEAR = 'AUTH_CLEAR';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_CLEAR_SUCCESS = 'AUTH_CLEAR_SUCCESS';
 export const AUTH_STORE_COOKIE = 'AUTH_STORE_COOKIE';
 export const AUTH_STORE_COOKIE_SUCCESS = 'AUTH_STORE_COOKIE_SUCCESS';
