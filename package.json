@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "react": "0.14.6",
-    "react-native": "0.18.0-rc",
+    "react-native": "0.18.0",
     "react-native-cookies": "git+https://github.com/Psykar/react-native-cookies.git",
     "react-native-icons": "0.7.0",
     "react-native-videoplayer": "1.2.0",
