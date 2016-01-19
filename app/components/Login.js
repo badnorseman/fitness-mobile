@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     backgroundColor: '#3a4d99',
-    color: '#ffffff',
     height: 40,
-    fontWeight: 'bold',
-    lineHeight: 28,
-    textAlign: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  toucable: {
-    marginTop: 20
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });
 
@@ -110,7 +110,7 @@ export default class Login extends Component {
             secureTextEntry
           />
           <TouchableOpacity style={styles.touchable} onPress={this.onPressLogin.bind(this)}>
-            <Text style={styles.button}>Login</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>Login</Text></View>
           </TouchableOpacity>
         </Image>
       </View>

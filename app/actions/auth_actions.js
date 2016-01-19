@@ -30,7 +30,7 @@ export function authByCookie() {
 
     AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
       if (cookie) {
-        CookieManager.setFromHeader(API, cookie, () => {
+        CookieManager.setFromHeader(`${API}/`, cookie, () => {
           dispatch(checkCookie());
         });
       } else {
@@ -44,7 +44,7 @@ export function storeCookie() {
   return (dispatch) => {
     dispatch({ type: types.AUTH_STORE_COOKIE });
 
-    CookieManager.getCookieHeader(API, (cookie) => {
+    CookieManager.getCookieHeader(`${API}/`, (cookie) => {
       if (!cookie) {
         dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
         return;

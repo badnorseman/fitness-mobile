@@ -20,15 +20,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold'
   },
-  arrow: {
+  arrowButton: {
     height: 60,
     width: 60,
+    backgroundColor: 'rgba(36, 39, 46, 1)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  arrow: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-    backgroundColor: 'rgba(36, 39, 46, 1)',
-    textAlign: 'center',
-    lineHeight: 39
+    textAlign: 'center'
   },
   leftArrow: {
     position: 'absolute',
@@ -97,13 +100,13 @@ export default class ExerciseNav extends Component {
     let right;
 
     if (parseInt(exerciseGroupId, 10) > 0) {
-      left = <TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>;
+      left = <TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><View style={styles.arrowButton}><Text style={styles.arrow}>&lt;</Text></View></TouchableOpacity>;
     }
 
     if (parseInt(exerciseGroupId, 10) + 1 < workout.exerciseGroups.length) {
-      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>;
+      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><View style={styles.arrowButton}><Text style={styles.arrow}>&gt;</Text></View></TouchableOpacity>;
     } else if (parseInt(exerciseGroupId, 10) + 1 === workout.exerciseGroups.length) {
-      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNextFinal.bind(this)}><Text style={[styles.arrow, styles.rightArrowFinal]}>&gt;</Text></TouchableOpacity>;
+      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNextFinal.bind(this)}><View style={styles.arrowButton}><Text style={[styles.arrow, styles.rightArrowFinal]}>&gt;</Text></View></TouchableOpacity>;
     }
 
     return (
