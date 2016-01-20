@@ -5,9 +5,9 @@
  */
 
 function setMinMaxHelper(exData, field, col, sets, exId) {
-  for (var i = 0; i < sets.length; i++) {
+  for (let i = 0; i < sets.length; i++) {
     if (sets[i].exerciseId === exId && !sets[i].warmup) {
-      var fieldVal = sets[i][field];
+      const fieldVal = sets[i][field];
 
       // Skip empty fields
       if (!fieldVal) {

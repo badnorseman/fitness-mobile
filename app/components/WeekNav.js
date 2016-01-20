@@ -20,15 +20,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold'
   },
-  arrow: {
+  arrowButton: {
     height: 60,
     width: 60,
+    backgroundColor: 'rgba(36, 39, 46, 1)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  arrow: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-    backgroundColor: 'rgba(36, 39, 46, 1)',
-    textAlign: 'center',
-    lineHeight: 39
+    textAlign: 'center'
   },
   leftArrow: {
     position: 'absolute',
@@ -78,11 +81,11 @@ export default class WeekNav extends Component {
     }
 
     if (currentWeekNo > 0) {
-      prevWeekButton = (<TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><Text style={styles.arrow}>&lt;</Text></TouchableOpacity>);
+      prevWeekButton = (<TouchableOpacity style={styles.leftArrow} onPress={this.onPressPrev.bind(this)}><View style={styles.arrowButton}><Text style={styles.arrow}>&lt;</Text></View></TouchableOpacity>);
     }
 
     if (currentWeekNo <= totalWeeks - 2) {
-      nextWeekButton = (<TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><Text style={styles.arrow}>&gt;</Text></TouchableOpacity>);
+      nextWeekButton = (<TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><View style={styles.arrowButton}><Text style={styles.arrow}>&gt;</Text></View></TouchableOpacity>);
     }
 
     return (

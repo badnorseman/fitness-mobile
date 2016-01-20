@@ -10,7 +10,7 @@ export default function habits(state = initialState, action = {}) {
   let habit;
   let occurence;
 
-  if (action.occurence && action.id){
+  if (action.occurence && action.id) {
     habit = state.started.data.find((h) => { return h.id === action.id; });
     occurence = habit.occurences.find((o) => { return o.day === action.occurence.day && o.week === action.occurence.week; });
   }

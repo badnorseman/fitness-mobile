@@ -12,7 +12,7 @@ function mergeColMinMaxHelper(exData, col, ending) {
     return;
   }
 
-  var hasDifferendMinMaxValues = exData[col + 'Min'] !== exData[col + 'Max'];
+  const hasDifferendMinMaxValues = exData[col + 'Min'] !== exData[col + 'Max'];
 
   // No ending = seconds
   if (!ending) {

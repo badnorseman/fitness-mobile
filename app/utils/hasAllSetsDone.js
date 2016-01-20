@@ -5,8 +5,8 @@
  */
 
 function hasAllSetsDoneHelper(sets, exId) {
-  for (var i = 0; i < sets.length; i++) {
-    var set = sets[i];
+  for (let i = 0; i < sets.length; i++) {
+    const set = sets[i];
     if (!set.warmup && set.exerciseId === exId && !set.dateDT) {
       return false;
     }
@@ -15,7 +15,7 @@ function hasAllSetsDoneHelper(sets, exId) {
 }
 
 export default function hasAllSetsDone(eg) {
-  for (var i = 0; i < eg.exercises.length; i++) {
+  for (let i = 0; i < eg.exercises.length; i++) {
     if (!hasAllSetsDoneHelper(eg.sets, eg.exercises[i].id)) {
       return false;
     }

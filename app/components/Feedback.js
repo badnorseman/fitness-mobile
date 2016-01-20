@@ -57,13 +57,13 @@ export default class Feedback extends Component {
     let feedbackImgText;
 
     if (workout.feedback && workout.feedback.type === 'EASY') {
-      feedbackImg = require('image!smiley_too-easy');
+      feedbackImg = require('../images/smiley_too-easy.png');
       feedbackImgText = 'Too easy';
     } else if (workout.feedback && workout.feedback.type === 'OK') {
-      feedbackImg = require('image!smiley_just-right');
+      feedbackImg = require('../images/smiley_just-right.png');
       feedbackImgText = 'Just right';
     } else if (workout.feedback && workout.feedback.type === 'HARD') {
-      feedbackImg = require('image!smiley_too-hard');
+      feedbackImg = require('../images/smiley_too-hard.png');
       feedbackImgText = 'Too hard';
     }
 

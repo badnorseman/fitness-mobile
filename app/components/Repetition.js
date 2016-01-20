@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'rgba(128, 128, 128, 1)',
-    fontWeight: 'bold',
-    lineHeight: 25
+    fontWeight: 'bold'
   },
   left: {
-    flex: 2
+    flex: 1.3,
+    justifyContent: 'center'
   },
   middle: {
     flex: 1,
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     color: 'rgba(169, 169, 169, 1)'
   },
   c1: {
-    lineHeight: 27,
     fontSize: 18,
     color: 'rgb(255, 255, 255)'
   },
@@ -56,15 +55,19 @@ const styles = StyleSheet.create({
     color: 'rgb(128, 128, 128)'
   },
   c2: {
-    lineHeight: 27,
     fontSize: 18,
     color: 'rgb(255, 255, 255)'
   },
   c2t: {
     color: 'rgb(128, 128, 128)'
   },
-  missingFieldInputContainer: {
-    flexDirection: 'row'
+  bigNumber: {
+    position: 'relative',
+    top: -1
+  },
+  fieldContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   checkIcon: {
     width: 35,
@@ -129,15 +132,15 @@ export default class Repetition extends Component {
     };
 
     if (set.c1) {
-      middle = <Text style={styles.text}><Text style={styles.c1}>{set.c1}</Text><Text>{' '}</Text><Text style={styles.c1t}>{set.c1t}</Text></Text>;
+      middle = <View style={styles.fieldContainer}><Text style={[styles.text, styles.bigNumber]}><Text style={styles.c1}>{set.c1}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c1t}>{set.c1t}</Text></Text></View>;
     } else if (set.missingField && set.c1Missing) {
-      middle = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
+      middle = <View style={styles.fieldContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
     }
 
     if (set.c2) {
-      right = <Text style={styles.text}><Text style={styles.c2}>{set.c2}</Text><Text>{' '}</Text><Text style={styles.c2t}>{set.c2t}</Text></Text>;
+      right = <View style={styles.fieldContainer}><Text style={[styles.text, styles.bigNumber]}><Text style={styles.c2}>{set.c2}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c2t}>{set.c2t}</Text></Text></View>;
     } else if (set.missingField && set.c2Missing) {
-      right = <View style={styles.missingFieldInputContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
+      right = <View style={styles.fieldContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
     }
 
     if (!set.missingField && !inputDisabled) {

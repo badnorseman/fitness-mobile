@@ -6,26 +6,31 @@ import React, {
 } from 'react-native';
 
 import ChooseHabitButton from './ChooseHabitButton';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    paddingTop: 64,
+    paddingTop: NAVBAR_PADDING,
     backgroundColor: 'rgba(46, 49, 58, 1)'
   },
-  title: {
-    color: '#ffffff',
-    fontSize: 18,
+  titleContainer: {
     paddingHorizontal: 10,
     paddingTop: 10,
     paddingBottom: 5
   },
-  paragraph: {
-    flex: 1,
+  title: {
     color: '#ffffff',
+    fontSize: 18
+  },
+  paragraphContainer: {
     paddingHorizontal: 10,
     paddingTop: 5,
-    paddingBottom: 10
+    paddingBottom: 10,
+    flex: 1
+  },
+  paragraph: {
+    color: '#ffffff'
   }
 });
 
@@ -40,8 +45,8 @@ export default class Habit extends Component {
     const { habit } = this.props;
     return (
       <View style={styles.main}>
-        <Text style={styles.title}>{habit.name}</Text>
-        <Text style={styles.paragraph}>{habit.description}</Text>
+        <View style={styles.titleContainer}><Text style={styles.title}>{habit.name}</Text></View>
+        <View style={styles.paragraphContainer}><Text style={styles.paragraph}>{habit.description}</Text></View>
         <ChooseHabitButton {...this.props}/>
       </View>
     );

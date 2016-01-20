@@ -6,12 +6,13 @@ import React, {
 
 import EditRepetition from './EditRepetition';
 import BreakTimer from './BreakTimer';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'rgba(46, 49, 59, 1)',
-    paddingTop: 64
+    paddingTop: NAVBAR_PADDING
   }
 });
 

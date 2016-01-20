@@ -5,7 +5,7 @@
  */
 
 export default function timeToSeconds(time) {
-  var seconds = parseInt(time.substring(3));
-  seconds += parseInt(time.substring(0, 2)) * 60;
+  let seconds = parseInt(time.substring(3), 10);
+  seconds += parseInt(time.substring(0, 2), 10) * 60;
   return seconds;
 }

@@ -7,9 +7,11 @@
  * named function.
  */
 
+import _ from 'lodash';
 import prettifySeconds from './prettifySeconds';
 
-export default function prepareColumns(exSet) {
+export default function prepareColumns(_exSet) {
+  const exSet = _.cloneDeep(_exSet);
   const c1 = 'c1';
   const c1t = 'c1t';
   const c1Missing = 'c1Missing';
@@ -73,6 +75,8 @@ export default function prepareColumns(exSet) {
       exSet[c2t] = 'kg';
       exSet[c2FieldName] = 'load';
       break;
+    default:
+      break;
   }
 
   // There can be no exercise set if called from ExerciseHistoryController
@@ -117,6 +121,8 @@ export default function prepareColumns(exSet) {
           exSet[c1Missing] = false;
           exSet[c2Missing] = true;
         }
+        break;
+      default:
         break;
     }
   }

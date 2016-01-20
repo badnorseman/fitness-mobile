@@ -2,41 +2,52 @@ import React, {
   StyleSheet,
   Component,
   View,
+  ScrollView,
   Text
 } from 'react-native';
 
 import CenteredText from './CenteredText';
 import getDayName from '../utils/getDayName';
 import getMonthName from '../utils/getMonthName';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'rgba(41, 44, 53, 0.95)',
-    paddingTop: 64
+    paddingTop: NAVBAR_PADDING
+  },
+  dayHeaderContainer: {
+    backgroundColor: 'rgba(58, 153, 89, 1)',
+    padding: 10,
+    marginBottom: 1,
+    justifyContent: 'center'
   },
   dayHeader: {
-    backgroundColor: 'rgba(58, 153, 89, 1)',
     fontWeight: 'bold',
-    color: 'white',
-    padding: 10,
-    marginBottom: 1
+    color: 'white'
   },
   set: {
     backgroundColor: 'rgba(51, 56, 72, 1)',
     padding: 10,
     marginBottom: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   third: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   setNo: {
-    lineHeight: 18,
     color: 'grey'
   },
+  text: {
+    fontWeight: 'bold'
+  },
   c1: {
-    lineHeight: 18,
+    position: 'relative',
+    top: -1,
     fontSize: 18,
     color: 'rgb(255, 255, 255)'
   },
@@ -44,7 +55,8 @@ const styles = StyleSheet.create({
     color: 'rgb(128, 128, 128)'
   },
   c2: {
-    lineHeight: 18,
+    position: 'relative',
+    top: -1,
     fontSize: 18,
     color: 'rgb(255, 255, 255)'
   },
@@ -95,13 +107,13 @@ export default class ExerciseHistory extends Component {
         return (
           <View style={styles.set} key={i}>
             <View style={styles.third}>
-              <Text style={styles.setNo}>Set {i + 1}</Text>
+              <Text style={[styles.text, styles.setNo]}>Set {i + 1}</Text>
             </View>
             <View style={styles.third}>
-              <Text><Text style={styles.c1}>{set.c1}</Text><Text>{' '}</Text><Text style={styles.c1t}>{set.c1t}</Text></Text>
+              <Text style={styles.text}><Text style={styles.c1}>{set.c1}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c1t}>{set.c1t}</Text></Text>
             </View>
             <View style={styles.third}>
-              <Text><Text style={styles.c2}>{set.c2}</Text><Text>{' '}</Text><Text style={styles.c2t}>{set.c2t}</Text></Text>
+              <Text style={styles.text}><Text style={styles.c2}>{set.c2}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c2t}>{set.c2t}</Text></Text>
             </View>
           </View>
         );
@@ -109,16 +121,16 @@ export default class ExerciseHistory extends Component {
 
       days.push(
         <View key={date}>
-          <Text style={styles.dayHeader}>{date}</Text>
+          <View style={styles.dayHeaderContainer}><Text style={styles.dayHeader}>{date}</Text></View>
           {rows}
         </View>
       );
     });
 
     return (
-      <View style={styles.main}>
+      <ScrollView style={styles.main} showsHorizontalScrollIndicator>
         {days}
-      </View>
+      </ScrollView>
     );
   }
 }

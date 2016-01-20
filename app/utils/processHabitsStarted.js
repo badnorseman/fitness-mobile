@@ -7,6 +7,7 @@
  * Modified to use getWeek as a module rather than a modified prototype method
  */
 
+import _ from 'lodash';
 import getWeek from './getWeek';
 
 function getOrCreateYearInHabitsStarted(habitsStarted, year) {
@@ -76,7 +77,8 @@ function processHabitStarted(habitsStarted, uh) {
   * @param {List.UserHabit} data
   * @returns nothing
   */
-export default function processHabitsStarted(json) {
+export default function processHabitsStarted(_json) {
+  const json = _.cloneDeep(_json);
   const habitsStarted = {};
 
   for (let i = 0; i < json.data.length; i++) {

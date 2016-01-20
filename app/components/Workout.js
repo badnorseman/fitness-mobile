@@ -7,11 +7,12 @@ import React, {
 import ExercisesList from './ExercisesList';
 import FooterButton from './FooterButton';
 import Feedback from './Feedback';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    paddingTop: 64,
+    paddingTop: NAVBAR_PADDING,
     backgroundColor: 'rgba(46, 49, 58, 1)'
   }
 });

@@ -9,18 +9,21 @@ import React, {
 } from 'react-native';
 
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    paddingTop: 64,
+    paddingTop: NAVBAR_PADDING,
     backgroundColor: 'rgba(46, 49, 58, 1)'
+  },
+  titleContainer: {
+    paddingVertical: 15,
+    paddingHorizontal: 15
   },
   title: {
     color: 'white',
-    fontSize: 21,
-    paddingVertical: 15,
-    paddingHorizontal: 15
+    fontSize: 21
   },
   smilies: {
     flexDirection: 'row',
@@ -152,14 +155,14 @@ export default class EditFeedback extends Component {
 
     return (
       <View style={styles.main} onStartShouldSetResponder={dismissKeyboard}>
-        <Text style={styles.title}>How was your workout?</Text>
+        <View style={styles.titleContainer}><Text style={styles.title}>How was your workout?</Text></View>
         <View style={styles.smilies}>
           <TouchableOpacity style={[styles.touchable, styles.touchableSmiley]} onPress={this.onFeedbackPress.bind(this, 'EASY')}>
             <View style={[styles.smileyContainer, { backgroundColor: this.getSmileyBackground('EASY') }]}>
               <Image
                 style={styles.smiley}
                 resizeMode="contain"
-                source={require('image!smiley_too-easy')}
+                source={require('../images/smiley_too-easy.png')}
               />
               <Text style={styles.feedback}>Too easy</Text>
             </View>
@@ -169,7 +172,7 @@ export default class EditFeedback extends Component {
               <Image
                 style={styles.smiley}
                 resizeMode="contain"
-                source={require('image!smiley_just-right')}
+                source={require('../images/smiley_just-right.png')}
               />
               <Text style={styles.feedback}>Just right</Text>
             </View>
@@ -179,13 +182,13 @@ export default class EditFeedback extends Component {
               <Image
                 style={styles.smiley}
                 resizeMode="contain"
-                source={require('image!smiley_too-hard')}
+                source={require('../images/smiley_too-hard.png')}
               />
               <Text style={styles.feedback}>Too hard</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}>Any comments?</Text>
+        <View style={styles.titleContainer}><Text style={styles.title}>Any comments?</Text></View>
         <TextInput
           multiline
           style={styles.commentsInput}

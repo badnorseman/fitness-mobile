@@ -7,11 +7,12 @@
 export default function prettifySeconds(seconds) {
   if (!seconds) {
     return '';
-  } else {
-    var min = Math.floor(seconds / 60);
-    min = min < 10 ? '0' + min : min;
-    var sec = seconds % 60;
-    var sec = sec < 10 ? '0' + sec : sec;
-    return min + ':' + sec;
   }
+
+  let min = Math.floor(seconds / 60);
+  min = min < 10 ? '0' + min : min;
+  let sec = seconds % 60;
+  sec = sec < 10 ? '0' + sec : sec;
+  return min + ':' + sec;
 }
+

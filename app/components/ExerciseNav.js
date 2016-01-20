@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0
   },
-  rightArrowFinal: {
+  rightArrowButtonFinal: {
     backgroundColor: 'rgba(58, 77, 153, 1)'
   }
 });
@@ -106,7 +106,7 @@ export default class ExerciseNav extends Component {
     if (parseInt(exerciseGroupId, 10) + 1 < workout.exerciseGroups.length) {
       right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNext.bind(this)}><View style={styles.arrowButton}><Text style={styles.arrow}>&gt;</Text></View></TouchableOpacity>;
     } else if (parseInt(exerciseGroupId, 10) + 1 === workout.exerciseGroups.length) {
-      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNextFinal.bind(this)}><View style={styles.arrowButton}><Text style={[styles.arrow, styles.rightArrowFinal]}>&gt;</Text></View></TouchableOpacity>;
+      right = <TouchableOpacity style={styles.rightArrow} onPress={this.onPressNextFinal.bind(this)}><View style={[styles.arrowButton, styles.rightArrowButtonFinal]}><Text style={styles.arrow}>&gt;</Text></View></TouchableOpacity>;
     }
 
     return (

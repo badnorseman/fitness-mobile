@@ -7,7 +7,7 @@ export default function plan(state = initialState, action = {}) {
   let set;
   let missingField;
 
-  if (action.currentWeekNo && action.workoutKey && action.exerciseGroupKey && action.setKey) { 
+  if (typeof action.currentWeekNo === 'number' && typeof action.workoutKey === 'number' && typeof action.exerciseGroupKey === 'number' && typeof action.setKey === 'number') {
     set = state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].exerciseGroups[action.exerciseGroupKey].sets[action.setKey];
     if (set.c1Missing) {
       missingField = set.c1FieldName;
@@ -33,31 +33,44 @@ export default function plan(state = initialState, action = {}) {
       };
     case types.PLAN_PERSIST_FEEDBACK_SUCCESS:
       state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].feedback = action.feedback;
-      return state;
+      return {
+        ...state
+      };
     case types.PLAN_CHECK_SET:
     case types.PLAN_CHECK_SET_SUCCESS:
       set.dateDT = Date.now();
-      return state;
+      return {
+        ...state
+      };
     case types.PLAN_CHECK_SET_WITH_VALUE:
       set.missingField = false;
       set.dateDT = Date.now();
-      return state;
+      return {
+        ...state
+      };
     case types.PLAN_CHECK_SET_WITH_VALUE_SUCCESS:
       set.missingField = false;
       set.dateDT = Date.now();
       set[missingField] = action.value;
       prepareColumns(set);
-      return state;
+      return {
+        ...state
+      };
     case types.PLAN_CHECK_SET_FAIL:
     case types.PLAN_CHECK_SET_WITH_VALUE_FAIL:
       set.dateDT = null;
-      if (missingField) { 
+      if (missingField) {
         set.missingField = missingField;
       }
-      return state;
+      return {
+        ...state
+      };
     case types.PLAN_PERSIST_FEEDBACK:
     case types.PLAN_START_WORKOUT:
     case types.PLAN_END_WORKOUT:
+      return {
+        ...state
+      };
     default:
       return state;
   }

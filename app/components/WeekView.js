@@ -2,6 +2,7 @@ import React, {
   StyleSheet,
   Component,
   View,
+  ScrollView,
   Text
 } from 'react-native';
 
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#ffffff',
     fontSize: 18
+  },
+  scrollView: {
+    alignSelf: 'stretch'
   }
 });
 
@@ -95,13 +99,13 @@ export default class WeekView extends Component {
         <View style={styles.leftHalf}>
           <Text style={styles.halfHeader}>Workouts</Text>
           <Text style={[styles.halfHeader, { marginBottom: 20 }]}>{this.getWorkoutCompliance()}%</Text>
-          {workouts}
+          <ScrollView style={styles.scrollView} alwaysBounceVertical={false}>{workouts}</ScrollView>
         </View>
         <View style={styles.separator}/>
         <View style={styles.rightHalf}>
           <Text style={styles.halfHeader}>Habits</Text>
           <Text style={[styles.halfHeader, { marginBottom: 20 }]}>{this.getHabitsCompliance(occurences)}%</Text>
-          {habits}
+          <ScrollView style={styles.scrollView} alwaysBounceVertical={false}>{habits}</ScrollView>
         </View>
       </View>
     );

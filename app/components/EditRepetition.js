@@ -20,15 +20,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'rgba(128, 128, 128, 1)',
-    fontWeight: 'bold',
-    lineHeight: 25
+    fontWeight: 'bold'
   },
   input: {
     color: 'white',
     fontWeight: 'bold'
   },
   left: {
-    flex: 2
+    flex: 1.25,
+    justifyContent: 'center'
   },
   middle: {
     flex: 1,
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     color: 'rgb(128, 128, 128)'
   },
   missingFieldInputContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 

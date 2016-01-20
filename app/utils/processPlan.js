@@ -6,6 +6,8 @@
  * Changed to not mess with Date.prototype, and not declare a nested
  * named function.
  */
+
+import _ from 'lodash';
 import getWeek from './getWeek';
 import processExerciseGroup from './processExerciseGroup';
 import prepareWorkoutOverview from './prepareWorkoutOverview';
@@ -22,7 +24,8 @@ function hasSets(sets, exId) {
   return false;
 }
 
-export default function processPlan(plan) {
+export default function processPlan(_plan) {
+  const plan = _.cloneDeep(_plan);
   let i;
   let j;
   let k;
@@ -123,7 +126,7 @@ export default function processPlan(plan) {
   }
 
   Object.keys(plan.history).forEach((exerciseId) => {
-    let exerciseHistory = plan.history[exerciseId];
+    const exerciseHistory = plan.history[exerciseId];
 
     for (j = 0; j < exerciseHistory.length; j++) {
       exerciseHistory[j] = prepareColumns(exerciseHistory[j]);

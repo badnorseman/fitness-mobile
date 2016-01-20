@@ -7,5 +7,6 @@
 import days from './days';
 
 export default function getDayName(date) {
-	return days[date.getDay()];
-};
+  return days[date.getDay()];
+}
+

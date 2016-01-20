@@ -1,20 +1,22 @@
 import React, {
   StyleSheet,
   Component,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 import ExerciseTitle from './ExerciseTitle';
 import Repetition from './Repetition';
 import BreakTimer from './BreakTimer';
 import ExerciseNav from './ExerciseNav';
+import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
   main: {
     // fontFamily: 'PT Sans',
     flex: 1,
     backgroundColor: 'rgba(46, 49, 59, 1)',
-    paddingTop: 64
+    paddingTop: NAVBAR_PADDING
   }
 });
 
@@ -52,10 +54,10 @@ export default class Exercise extends Component {
 
     return (
       <View style={styles.main}>
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }} alwaysBounceVertical={false} showsVerticalScrollIndicator>
           {titles}
           {repetitions}
-        </View>
+        </ScrollView>
         <ExerciseNav {...this.props}/>
       </View>
     );
