@@ -5,6 +5,8 @@ import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
 import { load } from '../api/plan';
 import { end, updateFeedback, start, check, checkWithValue } from '../api/workout';
+import { startCounter } from './counters_actions.js';
+import { COUNT_DOWN } from '../constants/counter_directions';
 
 function fail(error) {
   return appError(error);
@@ -64,6 +66,8 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
       ...props
     });
 
+    dispatch(startCounter(set.id, 0, COUNT_DOWN, set.rest));
+
     return request(check(set.id))(dispatch)
       .then(response => response.json())
       .then(json => dispatch(appReceive(
@@ -92,6 +96,8 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
       type: types.PLAN_CHECK_SET_WITH_VALUE,
       ...props
     });
+
+    dispatch(startCounter(set.id, 0, COUNT_DOWN, set.rest));
 
     return request(checkWithValue(set.id, value))(dispatch)
       .then(response => response.json())

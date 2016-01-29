@@ -20,6 +20,7 @@ import * as planActions from '../actions/plan_actions';
 import * as habitsActions from '../actions/habits_actions';
 import * as dashboardActions from '../actions/dashboard_actions';
 import * as appActions from '../actions/app_actions';
+import * as countersActions from '../actions/counters_actions';
 import { connect } from 'react-redux';
 
 class Layout extends Component {
@@ -96,7 +97,7 @@ class Layout extends Component {
       case 'feedback':
         return <EditFeedback {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'exercise':
-        return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+        return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions, ...countersActions }, this.props.dispatch)} />;
       case 'video':
         return <Video {...sharedProps} />;
       case 'history':
