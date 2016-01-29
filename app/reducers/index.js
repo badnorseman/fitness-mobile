@@ -4,6 +4,7 @@ import plan from './plan';
 import habits from './habits';
 import dashboard from './dashboard';
 import network from './network';
+import counters from './counters';
 
 export {
   app,
@@ -11,5 +12,6 @@ export {
   plan,
   habits,
   dashboard,
-  network
+  network,
+  counters
 };
