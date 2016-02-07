@@ -31,11 +31,11 @@ apply plugin: "com.android.application"
  *   jsBundleDirRelease: "$buildDir/intermediates/assets/release",
  *
  *   // where to put drawable resources / React Native assets, e.g. the ones you use via
- *   // require('./image.png')), in debug mode
+ *   // require("./image.png")), in debug mode
  *   resourcesDirDebug: "$buildDir/intermediates/res/merged/debug",
  *
  *   // where to put drawable resources / React Native assets, e.g. the ones you use via
- *   // require('./image.png')), in release mode
+ *   // require("./image.png")), in release mode
  *   resourcesDirRelease: "$buildDir/intermediates/res/merged/release",
  *
  *   // by default the gradle tasks are skipped if none of the JS files or assets change; this means
@@ -52,28 +52,37 @@ apply from: "react.gradle"
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
+    useLibrary "org.apache.http.legacy"
     defaultConfig {
         applicationId "com.fitbird"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false  // Set this to true to enable Proguard
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
-    compile project(':react-native-icons')
-    compile project(':react-native-cookies')
+    compile project(":react-native-icons")
+    compile project(":react-native-cookies")
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:0.18.+"
