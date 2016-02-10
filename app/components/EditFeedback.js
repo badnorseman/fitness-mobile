@@ -194,6 +194,8 @@ export default class EditFeedback extends Component {
           style={styles.commentsInput}
           onChangeText={this.onChangeComments.bind(this)}
           value={this.state.comments}
+          keyboardAppearance="dark"
+          returnKeyType="done"
         />
         <TouchableOpacity style={styles.touchable} onPress={onPressAction}>
           <View style={styles.button}>

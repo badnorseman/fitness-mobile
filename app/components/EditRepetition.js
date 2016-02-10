@@ -117,11 +117,12 @@ export default class EditRepetition extends Component {
     const { set } = this.props;
 
     const inputProps = {
-      keyboardType: 'number-pad',
+      keyboardType: 'numeric',
       keyboardAppearance: 'dark',
       style: styles.reps,
       onBlur: dismissKeyboard,
-      editable: !!set.dateDT
+      editable: !!set.dateDT,
+      returnKeyType: 'done'
     };
 
     return (
@@ -131,13 +132,13 @@ export default class EditRepetition extends Component {
         </View>
         <View style={styles.middle}>
           <View style={styles.missingFieldInputContainer}>
-            <TextInput {...inputProps} value={this.state.c1} onChangeText={this.onC1Change.bind(this)} onBlur={this.onC1Blur.bind(this)} />
+            <TextInput {...inputProps} value={this.state.c1} onChangeText={this.onC1Change.bind(this)} onBlur={this.onC1Blur.bind(this)} onSubmitEditing={this.onC1Blur.bind(this)} />
             <Text style={styles.input} style={[styles.text, styles.c1t]}>{set.c1t}</Text>
           </View>
         </View>
         <View style={styles.right}>
           <View style={styles.missingFieldInputContainer}>
-            <TextInput style={styles.input} {...inputProps} value={this.state.c2} onChangeText={this.onC2Change.bind(this)} onBlur={this.onC2Blur.bind(this)} />
+            <TextInput style={styles.input} {...inputProps} value={this.state.c2} onChangeText={this.onC2Change.bind(this)} onBlur={this.onC2Blur.bind(this)} onSubmitEditing={this.onC2Blur.bind(this)} />
             <Text style={[styles.text, styles.c2t]}>{set.c2t}</Text>
           </View>
         </View>
