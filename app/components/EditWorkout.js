@@ -1,7 +1,8 @@
 import React, {
   StyleSheet,
   Component,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 import EditRepetition from './EditRepetition';
@@ -38,11 +39,11 @@ export default class EditWorkout extends Component {
     });
 
     return (
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         <View style={{ flex: 1 }}>
           {repetitions}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
