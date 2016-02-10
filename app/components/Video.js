@@ -3,7 +3,7 @@ import React, {
   Component
 } from 'react-native';
 
-import VideoPlayer from 'react-native-videoplayer';
+import WebViewVideo from './WebViewVideo';
 
 const styles = StyleSheet.create({
   main: {
@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
   },
   video: {
     position: 'absolute',
-    top: 64, left: 0, right: 0, bottom: 0,
+    top: 64, 
+    left: 0, 
+    right: 0, 
+    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent'
@@ -27,7 +30,7 @@ export default class Video extends Component {
 
   render() {
     return (
-      <VideoPlayer style={styles.video} url="http://stream.flowplayer.org/functional.mp4"/>
+      <WebViewVideo style={styles.video} url={this.props.exercise.videoLink}/>
     );
   }
 }
