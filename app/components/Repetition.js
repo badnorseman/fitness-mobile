@@ -128,7 +128,10 @@ export default class Repetition extends Component {
       style: styles.reps,
       onBlur: this.handleInputBlur.bind(this),
       onChangeText: this.handleInputChange.bind(this),
-      value: this.state.missingValue
+      value: this.state.missingValue,
+      keyboardAppearance: 'dark', 
+      returnKeyType: 'done', 
+      onSubmitEditing: this.handleInputBlur.bind(this)
     };
 
     if (set.c1) {

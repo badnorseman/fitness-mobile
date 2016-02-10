@@ -98,8 +98,15 @@ export default class Login extends Component {
             keyboardType="email-address"
             placeholder="Email..."
             placeholderTextColor="#a9a9a9"
+            keyboardAppearance="dark"
+            returnKeyType="next"
+            enablesReturnKeyAutomatically
+            onSubmitEditing={(event) => { 
+              this.refs.passwordInput.focus(); 
+            }}
           />
           <TextInput
+            ref="passwordInput"
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
             style={styles.passwordInput}
@@ -108,6 +115,10 @@ export default class Login extends Component {
             placeholder="Password..."
             placeholderTextColor="#a9a9a9"
             secureTextEntry
+            keyboardAppearance="dark"
+            returnKeyType="go"
+            enablesReturnKeyAutomatically
+            onSubmitEditing={this.onPressLogin.bind(this)}
           />
           <TouchableOpacity style={styles.touchable} onPress={this.onPressLogin.bind(this)}>
             <View style={styles.button}><Text style={styles.buttonText}>Login</Text></View>
