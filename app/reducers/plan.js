@@ -103,6 +103,10 @@ export default function plan(state = initialState, action = {}) {
       return {
         ...state
       };
+    case types.AUTH_CLEAR: 
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

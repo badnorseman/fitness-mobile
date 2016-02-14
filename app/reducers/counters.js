@@ -42,6 +42,10 @@ export default function counters(state = initialState, action = {}) {
       return {
         ...state
       };
+    case types.AUTH_CLEAR: 
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

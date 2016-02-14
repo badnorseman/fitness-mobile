@@ -9,6 +9,10 @@ export default function dashboard(state = initialState, action = {}) {
         ...state,
         week: action.week
       };
+    case types.AUTH_CLEAR: 
+      return {
+        ...initialState
+      };
     case types.DASHBOARD_INIT_WEEK:
     case types.DASHBOARD_PREV_WEEK:
     case types.DASHBOARD_NEXT_WEEK:
