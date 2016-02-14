@@ -78,7 +78,8 @@ export default class EditRepetition extends Component {
     workoutNum: React.PropTypes.number,
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
-    updateWorkout: React.PropTypes.func
+    updateSet: React.PropTypes.func,
+    currentWeekNo: React.PropTypes.number
   };
 
   constructor(props) {
@@ -102,20 +103,28 @@ export default class EditRepetition extends Component {
   }
 
   onC1Blur() {
-    const { workoutNum, exerciseGroupId, setId, set } = this.props;
+    const { workoutNum, exerciseGroupId, setId, set, currentWeekNo } = this.props;
     const workoutId = workoutNum - 1;
-    this.props.updateWorkout(workoutId, exerciseGroupId, setId, set.c1t, this.state.c1);
+    this.props.updateSet(currentWeekNo, workoutId, exerciseGroupId, setId, set.c1FieldName, this.state.c1);
   }
 
   onC2Blur() {
-    const { workoutNum, exerciseGroupId, setId, set } = this.props;
+    const { workoutNum, exerciseGroupId, setId, set, currentWeekNo } = this.props;
     const workoutId = workoutNum - 1;
-    this.props.updateWorkout(workoutId, exerciseGroupId, setId, set.c2t, this.state.c2);
+    this.props.updateSet(currentWeekNo, workoutId, exerciseGroupId, setId, set.c2FieldName, this.state.c2);
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { set } = newProps;
+    this.setState({
+      c1: String(set.c1),
+      c2: String(set.c2)
+    });
   }
 
   render() {
     const { set } = this.props;
-
+ 
     const inputProps = {
       keyboardType: 'numeric',
       keyboardAppearance: 'dark',

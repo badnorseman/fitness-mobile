@@ -1,5 +1,6 @@
 import * as types from '../actions/action_types';
 import prepareColumns from '../utils/prepareColumns';
+import _ from 'lodash';
 
 const initialState = {};
 
@@ -65,6 +66,37 @@ export default function plan(state = initialState, action = {}) {
       return {
         ...state
       };
+      
+    case types.PLAN_UPDATE_SET:
+      set.dateDT = Date.now();
+      set[`_${action.field}`] = set[action.field];
+      
+      if (set.c1FieldName === action.field) {
+        set._c1 = set.c1;
+        set.c1 = action.value;
+      } else if(set.c2FieldName === action.field) {
+        set._c2 = set.c2;
+        set.c2 = action.value;
+      }
+ 
+      set[action.field] = action.value;
+      
+      return {
+        ...state
+      };
+    case types.PLAN_UPDATE_SET_FAIL:
+      set[action.field] = set[`_${action.field}`];
+
+      if (set.c1FieldName === action.field) {
+        set.c1 = set._c1;
+      } else if(set.c2FieldName === action.field) {
+        set.c2 = set._c2;
+      }
+
+      return {
+        ...state
+      };
+    case types.PLAN_UPDATE_SET_SUCCESS:
     case types.PLAN_PERSIST_FEEDBACK:
     case types.PLAN_START_WORKOUT:
     case types.PLAN_END_WORKOUT:

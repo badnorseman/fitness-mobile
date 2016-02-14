@@ -4,7 +4,7 @@ import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
 import { load } from '../api/plan';
-import { end, updateFeedback, start, check, checkWithValue } from '../api/workout';
+import { end, updateFeedback, start, check, checkWithValue, update } from '../api/workout';
 import { startCounter } from './counters_actions.js';
 import { COUNT_DOWN } from '../constants/counter_directions';
 
@@ -39,14 +39,33 @@ export function startWorkout(nextWorkoutId) {
   };
 }
 
-export function updateWorkout(workoutKey, exerciseGroupKey, setKey, field, value) {
-  return {
-    type: types.PLAN_UPDATE_WORKOUT,
-    workoutKey: workoutKey,
-    exerciseGroupKey: exerciseGroupKey,
-    setKey: setKey,
-    field: field,
-    value: value
+export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, field, value) {
+  return (dispatch, getState) => {
+    const props = {
+      currentWeekNo: currentWeekNo,
+      workoutKey: workoutKey,
+      exerciseGroupKey: exerciseGroupKey,
+      setKey: setKey,
+      field: field,
+      value: value  
+    };
+
+    const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
+
+    dispatch({
+      type: types.PLAN_UPDATE_SET,
+      ...props
+    });
+    
+    return request(update(set.id, field, value))(dispatch)
+      .then(response => response.json())
+      .then(json => dispatch(appReceive(
+        processPlanJson(json),
+        types.PLAN_UPDATE_SET_SUCCESS,
+        types.PLAN_UPDATE_SET_FAIL,
+        props
+      )))
+      .catch(error => fail(error));
   };
 }
 
