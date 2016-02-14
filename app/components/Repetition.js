@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'rgba(128, 128, 128, 1)',
+    fontSize: 13,
     fontWeight: 'bold'
   },
   left: {
-    flex: 1.3,
+    flex: 0.9,
     justifyContent: 'center'
   },
   middle: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   check: {
-    flex: 0.5,
+    flex: 0.35,
     flexDirection: 'row'
   },
   reps: {
@@ -67,13 +68,17 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'visible'
   },
   checkIcon: {
     width: 35,
     height: 35,
     opacity: 1,
     backgroundColor: 'transparent'
+  },
+  hidden: {
+    opacity: 0
   }
 });
 
@@ -181,7 +186,7 @@ export default class Repetition extends Component {
         <View style={styles.right}>
           {right}
         </View>
-        <View style={styles.check}>
+        <View style={check ? styles.check : [styles.check, styles.hidden]}>
           {check}
         </View>
       </View>

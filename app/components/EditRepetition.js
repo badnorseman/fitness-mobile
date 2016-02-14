@@ -20,14 +20,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'rgba(128, 128, 128, 1)',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 13
   },
   input: {
     color: 'white',
     fontWeight: 'bold'
   },
   left: {
-    flex: 1.25,
+    flex: 1,
     justifyContent: 'center'
   },
   middle: {
@@ -117,14 +118,14 @@ export default class EditRepetition extends Component {
   componentWillReceiveProps(newProps) {
     const { set } = newProps;
     this.setState({
-      c1: String(set.c1),
-      c2: String(set.c2)
+      c1: set.c1 ? String(set.c1) : '',
+      c2: set.c2 ? String(set.c2) : ''
     });
   }
 
   render() {
     const { set } = this.props;
- 
+
     const inputProps = {
       keyboardType: 'numeric',
       keyboardAppearance: 'dark',
@@ -140,16 +141,16 @@ export default class EditRepetition extends Component {
           <Text style={styles.text}>{set.ex.shortName}</Text>
         </View>
         <View style={styles.middle}>
-          <View style={styles.missingFieldInputContainer}>
+          {set.c1FieldName ? <View style={styles.missingFieldInputContainer}>
             <TextInput {...inputProps} value={this.state.c1} onChangeText={this.onC1Change.bind(this)} onBlur={this.onC1Blur.bind(this)} onSubmitEditing={this.onC1Blur.bind(this)} />
             <Text style={styles.input} style={[styles.text, styles.c1t]}>{set.c1t}</Text>
-          </View>
+          </View> : null}
         </View>
         <View style={styles.right}>
-          <View style={styles.missingFieldInputContainer}>
+          {set.c2FieldName ? <View style={styles.missingFieldInputContainer}>
             <TextInput style={styles.input} {...inputProps} value={this.state.c2} onChangeText={this.onC2Change.bind(this)} onBlur={this.onC2Blur.bind(this)} onSubmitEditing={this.onC2Blur.bind(this)} />
             <Text style={[styles.text, styles.c2t]}>{set.c2t}</Text>
-          </View>
+          </View> : null}
         </View>
       </View>
     );

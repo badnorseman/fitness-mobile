@@ -53,7 +53,15 @@ export default function plan(state = initialState, action = {}) {
       set.missingField = false;
       set.dateDT = Date.now();
       set[missingField] = action.value;
+
+      if (set.c1Missing) {
+        set.c1 = action.value;
+      } else if (set.c2Missing) {
+        set.c2 = action.value;
+      }
+
       prepareColumns(set);
+
       return {
         ...state
       };
@@ -80,6 +88,8 @@ export default function plan(state = initialState, action = {}) {
       }
  
       set[action.field] = action.value;
+      
+      prepareColumns(set);
       
       return {
         ...state
