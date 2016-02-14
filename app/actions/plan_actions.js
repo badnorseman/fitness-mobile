@@ -56,7 +56,7 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
       type: types.PLAN_UPDATE_SET,
       ...props
     });
-    
+
     return request(update(set.id, field, value))(dispatch)
       .then(response => response.json())
       .then(json => dispatch(appReceive(

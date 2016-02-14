@@ -64,7 +64,12 @@ const NavigationBarRouteMapper = {
       </TouchableOpacity>);
     }
 
-    if (route.id === 'exercise') {
+    if (
+      route.id === 'exercise' &&
+      route.props.workout &&
+      route.props.workout.startDT &&
+      !route.props.workout.endDT
+    ) {
       return (<TouchableOpacity
         onPress={() => navigator.push({
           id: 'edit',
