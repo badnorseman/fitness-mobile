@@ -47,3 +47,14 @@ export function checkWithValue(id, value) {
     })
   });
 }
+
+export function update(id, field, value) {
+  return fetch(`${API}/workout/set/${id}/update`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({
+      fieldName: field,
+      fieldValue: value
+    })
+  });
+}
