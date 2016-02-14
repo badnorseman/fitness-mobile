@@ -10,7 +10,7 @@
     "lodash": "^4.0.0",
     "react": "0.14.6",
     "react-native": "0.18.0",
-    "react-native-cookies": "git+https://github.com/Psykar/react-native-cookies.git",
+    "react-native-cookies": "git+https://github.com/joeferraro/react-native-cookies.git",
     "react-native-icons": "0.7.0",
     "react-native-keyboard-spacer": "^0.1.3",
     "react-redux": "4.0.6",

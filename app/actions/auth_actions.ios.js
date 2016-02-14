@@ -6,9 +6,11 @@ import { AsyncStorage } from 'react-native';
 import { check, loginEmail } from '../api/auth';
 const STORAGE_KEY = '@Fitbird:authCookie';
 
-function send() {
+function send(email, password) {
   return {
-    type: types.AUTH_SEND
+    type: types.AUTH_SEND,
+    email,
+    password
   };
 }
 
@@ -48,45 +50,50 @@ export function authByCookie() {
 
 export function storeCookie() {
   return (dispatch) => {
-    dispatch({ type: types.AUTH_STORE_COOKIE });
+    dispatch({ type: types.AUTH_STORE_COOKIE, key: STORAGE_KEY });
 
     CookieManager.getAll((cookie) => {
       if (!cookie || !cookie.SS) {
-        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
+        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL, key: STORAGE_KEY });
         return;
       }
 
       try {
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cookie.SS), () => {
-          dispatch({ type: types.AUTH_STORE_COOKIE_SUCCESS });
+          dispatch({ type: types.AUTH_STORE_COOKIE_SUCCESS, key: STORAGE_KEY, cookie: JSON.stringify(cookie.SS) });
         });
       } catch (error) {
-        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
+        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL, error: error });
       }
     });
   };
 }
 
 export function clear() {
-  AsyncStorage.removeItem(STORAGE_KEY)
-    .then(() => {
-      CookieManager.clearAll(() => {});
-    });
-
-  return {
-    type: types.AUTH_CLEAR
+  return (dispatch) => {
+    AsyncStorage.removeItem(STORAGE_KEY)
+      .then(() => {
+        CookieManager.clearAll((err, res) => {
+          dispatch({
+            err: err,
+            res: res,
+            type: types.AUTH_CLEAR
+          });
+        });
+      });
   };
 }
 
 export function logout() {
-  return {
-    type: types.AUTH_LOGOUT
-  };
+  return (dispatch) => {
+    dispatch({ type: types.AUTH_LOGOUT });
+    dispatch(clear());
+  }
 }
 
 export function login(email, password) {
   return (dispatch) => {
-    dispatch(send());
+    dispatch(send(email, password));
 
     return request(loginEmail(email, password))(dispatch)
       .then(response => response.json())
