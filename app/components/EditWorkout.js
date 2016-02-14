@@ -5,6 +5,7 @@ import React, {
   ScrollView
 } from 'react-native';
 
+import KeyboardHandler from './KeyboardHandler';
 import EditRepetition from './EditRepetition';
 import BreakTimer from './BreakTimer';
 import NAVBAR_PADDING from '../constants/navbar_padding';
@@ -26,24 +27,30 @@ export default class EditWorkout extends Component {
     super(props);
   }
 
+  scrollToInput(_this, refKey) {
+    this.refs.keyboardHandler.inputFocused(_this, refKey);
+  }
+
   render() {
     const { exerciseGroup } = this.props;
 
     const repetitions = exerciseGroup.sets.map((set, i) => {
       return set.warmup ? null : (
         <View key={i}>
-          <EditRepetition {...this.props} set={set} setId={i} />
+          <EditRepetition {...this.props} set={set} setId={i} scrollToInput={this.scrollToInput.bind(this)} />
           {set.rest && i !== exerciseGroup.sets.length - 1 ? <BreakTimer {...this.props} set={set} setId={i} /> : null}
         </View>
       );
     });
 
     return (
-      <ScrollView style={styles.main}>
-        <View style={{ flex: 1 }}>
-          {repetitions}
+      <KeyboardHandler ref='keyboardHandler' offset={75}>
+        <View style={styles.main}>
+          <View style={{ flex: 1 }}>
+            {repetitions}
+          </View>
         </View>
-      </ScrollView>
+      </KeyboardHandler>
     );
   }
 }

@@ -91,7 +91,8 @@ export default class Repetition extends Component {
     workoutNum: React.PropTypes.number,
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
-    currentWeekNo: React.PropTypes.number
+    currentWeekNo: React.PropTypes.number,
+    scrollToInput: React.PropTypes.func
   };
 
   constructor(props) {
@@ -118,6 +119,10 @@ export default class Repetition extends Component {
     this.setState({ missingValue: newValue });
   }
 
+  handleFocus(refKey) {
+    this.props.scrollToInput(this, refKey);    
+  }
+
   render() {
     const { workout, set } = this.props;
     const inputDisabled = !workout.startDT || workout.endDT;
@@ -142,13 +147,13 @@ export default class Repetition extends Component {
     if (set.c1) {
       middle = <View style={styles.fieldContainer}><Text style={[styles.text, styles.bigNumber]}><Text style={styles.c1}>{set.c1}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c1t}>{set.c1t}</Text></Text></View>;
     } else if (set.missingField && set.c1Missing) {
-      middle = <View style={styles.fieldContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
+      middle = <View style={styles.fieldContainer}><TextInput {...inputProps} ref="c1" onFocus={this.handleFocus.bind(this, 'c1')}/><Text style={[styles.text, styles.c1t]}>{set.c1t}</Text></View>;
     }
 
     if (set.c2) {
       right = <View style={styles.fieldContainer}><Text style={[styles.text, styles.bigNumber]}><Text style={styles.c2}>{set.c2}</Text></Text><Text>{' '}</Text><Text style={styles.text}><Text style={styles.c2t}>{set.c2t}</Text></Text></View>;
     } else if (set.missingField && set.c2Missing) {
-      right = <View style={styles.fieldContainer}><TextInput {...inputProps}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
+      right = <View style={styles.fieldContainer}><TextInput {...inputProps} ref="c2" onFocus={this.handleFocus.bind(this, 'c2')}/><Text style={[styles.text, styles.c2t]}>{set.c2t}</Text></View>;
     }
 
     if (!set.missingField && !inputDisabled) {
