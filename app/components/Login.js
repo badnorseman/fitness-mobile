@@ -8,6 +8,8 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
+import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import CenteredText from './CenteredText';
 
 const styles = StyleSheet.create({
@@ -85,7 +87,7 @@ export default class Login extends Component {
     }
 
     return (
-      <View style={styles.main}>
+      <View style={styles.main} onStartShouldSetResponder={dismissKeyboard}>
         <Image
           style={styles.background}
           source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
@@ -123,6 +125,7 @@ export default class Login extends Component {
           <TouchableOpacity style={styles.touchable} onPress={this.onPressLogin.bind(this)}>
             <View style={styles.button}><Text style={styles.buttonText}>Login</Text></View>
           </TouchableOpacity>
+          <KeyboardSpacer/>
         </Image>
       </View>
     );
