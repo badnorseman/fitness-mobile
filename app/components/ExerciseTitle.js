@@ -11,7 +11,7 @@ import hasAllSetsDone from '../utils/hasAllSetsDone';
 
 const styles = StyleSheet.create({
   main: {
-    height: 65,
+    height: 75,
     padding: 10,
     alignSelf: 'stretch',
     marginBottom: 1
@@ -130,7 +130,7 @@ export default class ExerciseTitle extends Component {
         <Text style={[styles.name, this.nameColor()]}>{exercise.name}</Text>
         <Text style={[styles.details, this.detailsColor()]}>
           <Text>{tempoDetail}</Text>
-          <Text>{' '}</Text>
+          {tempoDetail ? <Text>{' '}</Text> : null}
           <Text>{setsDetail}</Text>
         </Text>
         <TouchableOpacity style={styles.playButton} onPress={() => navigator.push({ id: 'video', title: exercise.shortName, props: { ...this.props } })}>
