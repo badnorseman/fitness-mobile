@@ -80,7 +80,8 @@ export default class EditRepetition extends Component {
     exerciseGroupId: React.PropTypes.number,
     setId: React.PropTypes.number,
     updateSet: React.PropTypes.func,
-    currentWeekNo: React.PropTypes.number
+    currentWeekNo: React.PropTypes.number,
+    scrollToInput: React.PropTypes.func
   };
 
   constructor(props) {
@@ -90,6 +91,14 @@ export default class EditRepetition extends Component {
     this.state.c1 = set.c1 ? set.c1.toString() : '';
     this.state.c2 = set.c2 ? set.c2.toString() : '';
   }
+
+  componentWillReceiveProps(newProps) {
+    const { set } = newProps;
+    this.setState({
+      c1: set.c1 ? String(set.c1) : '',
+      c2: set.c2 ? String(set.c2) : ''
+    });
+  }  
 
   onC1Change(c1) {
     this.setState(React.addons.update(this.state, {
@@ -114,13 +123,9 @@ export default class EditRepetition extends Component {
     const workoutId = workoutNum - 1;
     this.props.updateSet(currentWeekNo, workoutId, exerciseGroupId, setId, set.c2FieldName, this.state.c2);
   }
-
-  componentWillReceiveProps(newProps) {
-    const { set } = newProps;
-    this.setState({
-      c1: set.c1 ? String(set.c1) : '',
-      c2: set.c2 ? String(set.c2) : ''
-    });
+ 
+  handleFocus(refKey) {
+    this.props.scrollToInput(this, refKey);    
   }
 
   render() {
@@ -142,13 +147,13 @@ export default class EditRepetition extends Component {
         </View>
         <View style={styles.middle}>
           {set.c1FieldName ? <View style={styles.missingFieldInputContainer}>
-            <TextInput {...inputProps} value={this.state.c1} onChangeText={this.onC1Change.bind(this)} onBlur={this.onC1Blur.bind(this)} onSubmitEditing={this.onC1Blur.bind(this)} />
+            <TextInput {...inputProps} value={this.state.c1} onChangeText={this.onC1Change.bind(this)} onBlur={this.onC1Blur.bind(this)} onSubmitEditing={this.onC1Blur.bind(this)} ref="c1" onFocus={this.handleFocus.bind(this, 'c1')} />
             <Text style={styles.input} style={[styles.text, styles.c1t]}>{set.c1t}</Text>
           </View> : null}
         </View>
         <View style={styles.right}>
           {set.c2FieldName ? <View style={styles.missingFieldInputContainer}>
-            <TextInput style={styles.input} {...inputProps} value={this.state.c2} onChangeText={this.onC2Change.bind(this)} onBlur={this.onC2Blur.bind(this)} onSubmitEditing={this.onC2Blur.bind(this)} />
+            <TextInput style={styles.input} {...inputProps} value={this.state.c2} onChangeText={this.onC2Change.bind(this)} onBlur={this.onC2Blur.bind(this)} onSubmitEditing={this.onC2Blur.bind(this)} ref="c2" onFocus={this.handleFocus.bind(this, 'c2')} />
             <Text style={[styles.text, styles.c2t]}>{set.c2t}</Text>
           </View> : null}
         </View>

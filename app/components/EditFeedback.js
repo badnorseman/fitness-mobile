@@ -5,7 +5,9 @@ import React, {
   Text,
   TextInput,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  LayoutAnimation,
+  DeviceEventEmitter
 } from 'react-native';
 
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
   },
   smiley: {
     alignItems: 'center',
-    height: 100
+    height: 90
   },
   commentsInput: {
     flex: 1,
@@ -103,6 +105,24 @@ export default class EditFeedback extends Component {
       this.state.comments = '';
     }
   }
+  
+  componentDidMount() {
+    DeviceEventEmitter.addListener('keyboardDidShow',(frames) => {
+      if (!frames.endCoordinates) return;
+      LayoutAnimation.easeInEaseOut();
+      this.setState({ keyboardSpace: frames.endCoordinates.height });
+    });
+    
+    DeviceEventEmitter.addListener('keyboardWillHide', (frames) => {
+      LayoutAnimation.easeInEaseOut();
+      this.setState({ keyboardSpace:0 });
+    });
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.removeAllListeners('keyboardDidShow');
+    DeviceEventEmitter.removeAllListeners('keyboardWillHide');
+  }
 
   onFeedbackPress(type) {
     this.setState(React.addons.update(this.state, {
@@ -155,8 +175,8 @@ export default class EditFeedback extends Component {
 
     return (
       <View style={styles.main} onStartShouldSetResponder={dismissKeyboard}>
-        <View style={styles.titleContainer}><Text style={styles.title}>How was your workout?</Text></View>
-        <View style={styles.smilies}>
+        { !this.state.keyboardSpace ? <View style={styles.titleContainer}><Text style={styles.title}>How was your workout?</Text></View> : null }
+        { !this.state.keyboardSpace ? <View style={styles.smilies}>
           <TouchableOpacity style={[styles.touchable, styles.touchableSmiley]} onPress={this.onFeedbackPress.bind(this, 'EASY')}>
             <View style={[styles.smileyContainer, { backgroundColor: this.getSmileyBackground('EASY') }]}>
               <Image
@@ -187,7 +207,7 @@ export default class EditFeedback extends Component {
               <Text style={styles.feedback}>Too hard</Text>
             </View>
           </TouchableOpacity>
-        </View>
+        </View> : null }
         <View style={styles.titleContainer}><Text style={styles.title}>Any comments?</Text></View>
         <TextInput
           multiline
@@ -196,6 +216,8 @@ export default class EditFeedback extends Component {
           value={this.state.comments}
           keyboardAppearance="dark"
           returnKeyType="done"
+          onSubmitEditing={dismissKeyboard}
+          blurOnSubmit={true}
         />
         <TouchableOpacity style={styles.touchable} onPress={onPressAction}>
           <View style={styles.button}>
