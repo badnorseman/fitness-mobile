@@ -735,11 +735,13 @@
 					"$(SRCROOT)/../node_modules/react-native-icons/ios/ReactNativeIcons/**",
 				);
 				INFOPLIST_FILE = Fitbird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -757,11 +759,13 @@
 					"$(SRCROOT)/../node_modules/react-native-icons/ios/ReactNativeIcons/**",
 				);
 				INFOPLIST_FILE = Fitbird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fitbird.fitbird;
 				PRODUCT_NAME = Fitbird;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
