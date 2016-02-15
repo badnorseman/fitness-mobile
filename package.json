@@ -1,7 +1,7 @@
 {
-  "name": "Fitbird",
-  "version": "0.0.1",
-  "bundleId": "org.reactjs.native.example.Fitbird",
+  "name": "FitBird",
+  "version": "0.5.3",
+  "bundleId": "com.fitbird.fitbird",
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh"
