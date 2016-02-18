@@ -2,7 +2,6 @@
 
 import React, { Component, Navigator } from 'react-native';
 import { bindActionCreators } from 'redux';
-
 import NavigationBarRouteMapper from '../components/NavBar';
 import Login from '../components/Login';
 import Dashboard from '../components/Dashboard';
@@ -23,7 +22,7 @@ import * as appActions from '../actions/app_actions';
 import * as countersActions from '../actions/counters_actions';
 import { connect } from 'react-redux';
 
-class Layout extends Component {
+class Main extends Component {
   static propTypes = {
     dispatch: React.PropTypes.func,
     state: React.PropTypes.object
@@ -132,4 +131,4 @@ class Layout extends Component {
   }
 }
 
-export default connect(state => ({ state: state }))(Layout);
+export default connect(state => ({ state: state }))(Main);

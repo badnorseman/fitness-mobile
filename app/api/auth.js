@@ -1,15 +1,15 @@
 import HEADERS from '../constants/headers';
-import { LOGIN_CHECK, LOGIN_EMAIL } from '../constants/api_routes';
+import { SERVER } from '../constants/server';
 
 export function check() {
-  return fetch(LOGIN_CHECK, {
+  return fetch(`${SERVER}/login/check`, {
     method: 'GET',
     headers: HEADERS
   });
 }
 
 export function loginEmail(email, password){
-  return fetch(LOGIN_EMAIL, {
+  return fetch(`${SERVER}/login/email`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({

@@ -1,4 +1,4 @@
-import * as types from './action_types';
+import * as actionTypes from './action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import { loadAll, loadStarted, check, start } from '../api/habits';
@@ -7,15 +7,15 @@ import processHabitsStarted from '../utils/processHabitsStarted';
 
 export function habitsLoadAll() {
   return (dispatch) => {
-    dispatch({ type: types.HABITS_LOAD_ALL });
+    dispatch({ type: actionTypes.HABITS_LOAD_ALL });
 
     return request(loadAll())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           json,
-          types.HABITS_LOAD_ALL_SUCCESS,
-          types.HABITS_LOAD_ALL_FAIL
+          actionTypes.HABITS_LOAD_ALL_SUCCESS,
+          actionTypes.HABITS_LOAD_ALL_FAIL
         ));
       })
       .catch(error => appError(error));
@@ -24,15 +24,15 @@ export function habitsLoadAll() {
 
 export function habitsLoadStarted() {
   return (dispatch) => {
-    dispatch({ type: types.HABITS_LOAD_STARTED });
+    dispatch({ type: actionTypes.HABITS_LOAD_STARTED });
 
     return request(loadStarted())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           processHabitsStarted(json),
-          types.HABITS_LOAD_STARTED_SUCCESS,
-          types.HABITS_LOAD_STARTED_FAIL
+          actionTypes.HABITS_LOAD_STARTED_SUCCESS,
+          actionTypes.HABITS_LOAD_STARTED_FAIL
         ));
       })
       .catch(error => appError(error));
@@ -47,7 +47,7 @@ export function habitsCheck(id, occurence) {
     };
 
     dispatch({
-      type: types.HABITS_CHECK,
+      type: actionTypes.HABITS_CHECK,
       ...props
     });
 
@@ -55,8 +55,8 @@ export function habitsCheck(id, occurence) {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         json,
-        types.HABITS_CHECK_SUCCESS,
-        types.HABITS_CHECK_FAIL,
+        actionTypes.HABITS_CHECK_SUCCESS,
+        actionTypes.HABITS_CHECK_FAIL,
         props
       )))
       .catch(error => appError(error));
@@ -66,7 +66,7 @@ export function habitsCheck(id, occurence) {
 export function habitsStart(id) {
   return (dispatch) => {
     dispatch({
-      type: types.HABITS_START,
+      type: actionTypes.HABITS_START,
       id: id
     });
 
@@ -75,8 +75,8 @@ export function habitsStart(id) {
       .then(json => {
         dispatch(appReceive(
           processHabitsStarted(json),
-          types.HABITS_START_SUCCESS,
-          types.HABITS_START_FAIL
+          actionTypes.HABITS_START_SUCCESS,
+          actionTypes.HABITS_START_FAIL
         ));
       })
       .catch(error => appError(error));

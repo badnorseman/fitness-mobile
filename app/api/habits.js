@@ -1,29 +1,29 @@
 import HEADERS from '../constants/headers';
-import { API, HABITS_ALL, HABITS_STARTED } from '../constants/api_routes';
+import { SERVER } from '../constants/server';
 
 export function loadAll() {
-  return fetch(HABITS_ALL, {
+  return fetch(`${SERVER}/habit/all`, {
     method: 'GET',
     headers: HEADERS
   });
 }
 
 export function loadStarted() {
-  return fetch(HABITS_STARTED, {
+  return fetch(`${SERVER}/habit/started`, {
     method: 'GET',
     headers: HEADERS
   });
 }
 
 export function check(id, occurence) {
-  return fetch(`${API}/habit/${id}/${occurence.week}/${occurence.day}/check`, {
+  return fetch(`${SERVER}/habit/${id}/${occurence.week}/${occurence.day}/check`, {
     method: 'POST',
     headers: HEADERS
   });
 }
 
 export function start(id) {
-  return fetch(`${API}/habit/${id}/start`, {
+  return fetch(`${SERVER}/habit/${id}/start`, {
     method: 'POST',
     headers: HEADERS
   });

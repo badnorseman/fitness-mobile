@@ -6,7 +6,7 @@ import createLogger from 'redux-logger'
 const logger = createLogger();
 
 import * as reducers from '../reducers';
-import Layout from './Layout';
+import Main from './Main';
 let createStoreWithMiddleware;
 
 if (__DEV__) {
@@ -22,7 +22,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Layout />
+        <Main />
       </Provider>
     );
   }

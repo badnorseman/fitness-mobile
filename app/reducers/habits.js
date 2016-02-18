@@ -1,4 +1,4 @@
-import * as types from '../actions/action_types';
+import * as actionTypes from '../actions/action_types';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
 const initialState = {
@@ -16,8 +16,8 @@ export default function habits(state = initialState, action = {}) {
   }
 
   switch (action.type) {
-    case types.HABITS_LOAD_ALL_FAIL:
-    case types.HABITS_LOAD_ALL_SUCCESS:
+    case actionTypes.HABITS_LOAD_ALL_FAIL:
+    case actionTypes.HABITS_LOAD_ALL_SUCCESS:
       return {
         ...state,
         all: {
@@ -26,10 +26,10 @@ export default function habits(state = initialState, action = {}) {
           loaded: true
         }
       };
-    case types.HABITS_LOAD_STARTED_FAIL:
-    case types.HABITS_LOAD_STARTED_SUCCESS:
-    case types.HABITS_START_SUCCESS:
-    case types.HABITS_START_FAIL:
+    case actionTypes.HABITS_LOAD_STARTED_FAIL:
+    case actionTypes.HABITS_LOAD_STARTED_SUCCESS:
+    case actionTypes.HABITS_START_SUCCESS:
+    case actionTypes.HABITS_START_FAIL:
       return {
         ...state,
         started: {
@@ -38,21 +38,21 @@ export default function habits(state = initialState, action = {}) {
           loaded: true
         }
       };
-    case types.HABITS_LOAD_ALL:
+    case actionTypes.HABITS_LOAD_ALL:
       return {
         ...state,
         all: {
           loading: true
         }
       };
-    case types.HABITS_LOAD_STARTED:
+    case actionTypes.HABITS_LOAD_STARTED:
       return {
         ...state,
         started: {
           loading: true
         }
       };
-    case types.HABITS_CHECK:
+    case actionTypes.HABITS_CHECK:
       occurence._dateDT = occurence.dateDT;
 
       if (occurence.dateDT) {
@@ -64,18 +64,18 @@ export default function habits(state = initialState, action = {}) {
       return {
         ...state
       };
-    case types.HABITS_CHECK_SUCCESS:
+    case actionTypes.HABITS_CHECK_SUCCESS:
       state.started = processHabitsStarted(state.started);
       return {
         ...state
       };
-    case types.HABITS_CHECK_FAIL:
+    case actionTypes.HABITS_CHECK_FAIL:
       occurence.dateDT = occurence._dateDT;
 
       return {
         ...state
       };
-    case types.AUTH_CLEAR: 
+    case actionTypes.AUTH_CLEAR: 
       return {
         ...initialState
       };

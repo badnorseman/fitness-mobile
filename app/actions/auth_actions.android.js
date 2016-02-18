@@ -1,4 +1,4 @@
-import * as types from './action_types';
+import * as actionTypes from './action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import CookieManager from 'react-native-cookies';
@@ -9,7 +9,7 @@ const STORAGE_KEY = '@Fitbird:authCookieHeader';
 
 function send() {
   return {
-    type: types.AUTH_SEND
+    type: actionTypes.AUTH_SEND
   };
 }
 
@@ -18,7 +18,7 @@ export function checkCookie() {
     return request(check())(dispatch)
       .then(response => response.json())
       .then(json => {
-        dispatch(appReceive(json, types.AUTH_BY_COOKIE_SUCCESS, types.AUTH_BY_COOKIE_FAIL));
+        dispatch(appReceive(json, actionTypes.AUTH_BY_COOKIE_SUCCESS, actionTypes.AUTH_BY_COOKIE_FAIL));
       })
       .catch(error => appError(error));
   };
@@ -26,7 +26,7 @@ export function checkCookie() {
 
 export function authByCookie() {
   return (dispatch) => {
-    dispatch({ type: types.AUTH_BY_COOKIE });
+    dispatch({ type: actionTypes.AUTH_BY_COOKIE });
 
     AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
       if (cookie) {
@@ -34,7 +34,7 @@ export function authByCookie() {
           dispatch(checkCookie());
         });
       } else {
-        dispatch({ type: types.AUTH_BY_COOKIE_FAIL });
+        dispatch({ type: actionTypes.AUTH_BY_COOKIE_FAIL });
       }
     });
   };
@@ -42,20 +42,20 @@ export function authByCookie() {
 
 export function storeCookie() {
   return (dispatch) => {
-    dispatch({ type: types.AUTH_STORE_COOKIE });
+    dispatch({ type: actionTypes.AUTH_STORE_COOKIE });
 
     CookieManager.getCookieHeader(`${API}/`, (cookie) => {
       if (!cookie) {
-        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
+        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL });
         return;
       }
 
       try {
         AsyncStorage.setItem(STORAGE_KEY, cookie, () => {
-          dispatch({ type: types.AUTH_STORE_COOKIE_SUCCESS });
+          dispatch({ type: actionTypes.AUTH_STORE_COOKIE_SUCCESS });
         });
       } catch (error) {
-        dispatch({ type: types.AUTH_STORE_COOKIE_FAIL });
+        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL });
       }
     });
   };
@@ -68,13 +68,13 @@ export function clear() {
     });
 
   return {
-    type: types.AUTH_CLEAR
+    type: actionTypes.AUTH_CLEAR
   };
 }
 
 export function logout() {
   return {
-    type: types.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT
   };
 }
 
@@ -88,8 +88,8 @@ export function login(email, password) {
         dispatch(storeCookie());
         dispatch(appReceive(
           json,
-          types.AUTH_SUCCESS,
-          types.AUTH_FAIL
+          actionTypes.AUTH_SUCCESS,
+          actionTypes.AUTH_FAIL
         ));
       })
       .catch(error => appError(error));
