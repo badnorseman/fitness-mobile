@@ -81,7 +81,7 @@ export default class Login extends Component {
     if (state.auth.loggingIn) {
       return (
         <View style={styles.main}>
-          <CenteredText text="Logging in..."/>
+          <CenteredText text="Logging in."/>
         </View>
       );
     }
@@ -98,13 +98,13 @@ export default class Login extends Component {
             style={styles.emailInput}
             autoCapitalize="none"
             keyboardType="email-address"
-            placeholder="Email..."
+            placeholder="Email"
             placeholderTextColor="#a9a9a9"
             keyboardAppearance="dark"
             returnKeyType="next"
             enablesReturnKeyAutomatically
-            onSubmitEditing={(event) => { 
-              this.refs.passwordInput.focus(); 
+            onSubmitEditing={(event) => {
+              this.refs.passwordInput.focus();
             }}
           />
           <TextInput
@@ -114,7 +114,7 @@ export default class Login extends Component {
             style={styles.passwordInput}
             autoCapitalize="none"
             keyboardType="default"
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#a9a9a9"
             secureTextEntry
             keyboardAppearance="dark"

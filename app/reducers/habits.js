@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/action_types';
+import * as actionTypes from '../constants/action_types';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
 const initialState = {
@@ -75,7 +75,7 @@ export default function habits(state = initialState, action = {}) {
       return {
         ...state
       };
-    case actionTypes.AUTH_CLEAR: 
+    case actionTypes.AUTH_CLEAR:
       return {
         ...initialState
       };

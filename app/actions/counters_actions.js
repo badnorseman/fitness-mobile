@@ -1,4 +1,4 @@
-import * as actionTypes from './action_types';
+import * as actionTypes from '../constants/action_types';
 import { COUNT_UP, COUNT_DOWN } from '../constants/counter_directions';
 
 export function stopCounter(counterKey) {

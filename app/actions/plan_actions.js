@@ -1,9 +1,9 @@
-import * as actionTypes from './action_types';
+import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
-import { load } from '../api/plan';
+import { loadAll } from '../api/workout';
 import { end, updateFeedback, start, check, checkWithValue, update } from '../api/workout';
 import { startCounter } from './counters_actions.js';
 import { COUNT_DOWN } from '../constants/counter_directions';
@@ -185,7 +185,7 @@ export function planLoad() {
   return (dispatch) => {
     dispatch({ type: actionTypes.PLAN_LOAD });
 
-    return request(load())(dispatch)
+    return request(loadAll())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(

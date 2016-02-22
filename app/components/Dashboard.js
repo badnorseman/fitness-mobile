@@ -61,11 +61,11 @@ export default class Dashboard extends Component {
     }
 
     if (state.habits.started.loading) {
-      loadingText = 'Loading your habits...';
+      loadingText = 'Loading your habits.';
     } else if (state.habits.all.loading) {
-      loadingText = 'Loading list of available habits...';
+      loadingText = 'Loading available habits.';
     } else if (state.plan.loading) {
-      loadingText = 'Loading your plan...';
+      loadingText = 'Loading your workout plan.';
     }
 
     return (

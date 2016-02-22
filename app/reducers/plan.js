@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/action_types';
+import * as actionTypes from '../constants/action_types';
 import prepareColumns from '../utils/prepareColumns';
 import _ from 'lodash';
 

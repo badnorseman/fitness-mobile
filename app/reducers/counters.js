@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/action_types';
+import * as actionTypes from '../constants/action_types';
 import { COUNT_UP, COUNT_DOWN } from '../constants/counter_directions';
 
 const initialState = {};
@@ -42,7 +42,7 @@ export default function counters(state = initialState, action = {}) {
       return {
         ...state
       };
-    case actionTypes.AUTH_CLEAR: 
+    case actionTypes.AUTH_CLEAR:
       return {
         ...initialState
       };
