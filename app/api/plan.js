@@ -1,8 +1,8 @@
 import HEADERS from '../constants/headers';
-import { PLAN } from '../constants/api_routes';
+import { SERVER } from '../constants/server';
 
 export function load() {
-  return fetch(PLAN, {
+  return fetch(`${SERVER}/plan`, {
     method: 'GET',
     headers: HEADERS
   });

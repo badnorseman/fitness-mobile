@@ -1,9 +1,9 @@
-import * as types from './action_types';
+import * as actionTypes from './action_types';
 import { COUNT_UP, COUNT_DOWN } from '../constants/counter_directions';
 
 export function stopCounter(counterKey) {
   return {
-    type: types.COUNTERS_STOP,
+    type: actionTypes.COUNTERS_STOP,
     counterKey: counterKey
   };
 }
@@ -32,7 +32,7 @@ function tick(counterKey, attempt = 1) {
 
     if (shouldCounterTick) {
       dispatch({
-        type: types.COUNTERS_TICK,
+        type: actionTypes.COUNTERS_TICK,
         counterKey: counterKey
       });
 
@@ -48,7 +48,7 @@ function tick(counterKey, attempt = 1) {
 export function startCounter(counterKey, limit = 0, direction = COUNT_DOWN, startFrom = 180) {
   return (dispatch) => {
     dispatch({
-      type: types.COUNTERS_START,
+      type: actionTypes.COUNTERS_START,
       counterKey: counterKey,
       limit: limit,
       direction: direction,
@@ -62,14 +62,14 @@ export function startCounter(counterKey, limit = 0, direction = COUNT_DOWN, star
 
 export function resumeCounter(counterKey) {
   return {
-    type: types.COUNTERS_RESUME,
+    type: actionTypes.COUNTERS_RESUME,
     counterKey: counterKey
   };
 }
 
 export function resetCounter(counterKey) {
   return {
-    type: types.COUNTERS_RESET,
+    type: actionTypes.COUNTERS_RESET,
     counterKey: counterKey
   };
 }

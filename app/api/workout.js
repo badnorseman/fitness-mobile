@@ -1,8 +1,8 @@
 import HEADERS from '../constants/headers';
-import { API, WORKOUT_END } from '../constants/api_routes';
+import { SERVER } from '../constants/server';
 
 export function end(type, comments) {
-  return fetch(WORKOUT_END, {
+  return fetch(`${SERVER}/workout/end`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
@@ -14,7 +14,7 @@ export function end(type, comments) {
 
 export function updateFeedback(id, type, comments) {
   // TODO: Have this taken care of by a utility
-  return fetch(`${API}/workout/${id}/feedback`, {
+  return fetch(`${SERVER}/workout/${id}/feedback`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
@@ -25,21 +25,21 @@ export function updateFeedback(id, type, comments) {
 }
 
 export function start(id) {
-  return fetch(`${API}/workout/${id}/start`, {
+  return fetch(`${SERVER}/workout/${id}/start`, {
     method: 'POST',
     headers: HEADERS
   });
 }
 
 export function check(id) {
-  return fetch(`${API}/workout/set/${id}/check`, {
+  return fetch(`${SERVER}/workout/set/${id}/check`, {
     method: 'POST',
     headers: HEADERS
   });
 }
 
 export function checkWithValue(id, value) {
-  return fetch(`${API}/workout/set/${id}/check-with-value`, {
+  return fetch(`${SERVER}/workout/set/${id}/check-with-value`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
@@ -49,7 +49,7 @@ export function checkWithValue(id, value) {
 }
 
 export function update(id, field, value) {
-  return fetch(`${API}/workout/set/${id}/update`, {
+  return fetch(`${SERVER}/workout/set/${id}/update`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({

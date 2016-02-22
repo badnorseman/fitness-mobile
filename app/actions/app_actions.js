@@ -1,9 +1,9 @@
 import { Alert } from 'react-native';
-import * as types from './action_types';
+import * as actionTypes from './action_types';
 
 export function appError(error) {
   return {
-    type: types.APP_ERROR,
+    type: actionTypes.APP_ERROR,
     error: error
   };
 }
@@ -28,7 +28,7 @@ export function appReceive(json, successAction, failAction, params) {
 
 export function alert(title, message) {
   return (dispatch) => {
-    dispatch({ type: types.ALERT });
+    dispatch({ type: actionTypes.ALERT });
 
     Alert.alert(title, message);
   };

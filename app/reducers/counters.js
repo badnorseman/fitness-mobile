@@ -1,11 +1,11 @@
-import * as types from '../actions/action_types';
+import * as actionTypes from '../actions/action_types';
 import { COUNT_UP, COUNT_DOWN } from '../constants/counter_directions';
 
 const initialState = {};
 
 export default function counters(state = initialState, action = {}) {
   switch (action.type) {
-    case types.COUNTERS_START:
+    case actionTypes.COUNTERS_START:
       state[action.counterKey] = {
         limit: action.limit,
         direction: action.direction,
@@ -17,22 +17,22 @@ export default function counters(state = initialState, action = {}) {
       return {
         ...state
       };
-    case types.COUNTERS_STOP:
+    case actionTypes.COUNTERS_STOP:
       state[action.counterKey].active = false;
       return {
         ...state
       };
-    case types.COUNTERS_RESUME:
+    case actionTypes.COUNTERS_RESUME:
       state[action.counterKey].active = true;
       return {
         ...state
       };
-    case types.COUNTERS_RESET:
+    case actionTypes.COUNTERS_RESET:
       state[action.counterKey].count = state[action.counterKey].startFrom;
       return {
         ...state
       };
-    case types.COUNTERS_TICK:
+    case actionTypes.COUNTERS_TICK:
       if (state[action.counterKey].direction === COUNT_UP) {
         state[action.counterKey].count = state[action.counterKey].count + 1;
       } else if (state[action.counterKey].direction === COUNT_DOWN) {
@@ -42,7 +42,7 @@ export default function counters(state = initialState, action = {}) {
       return {
         ...state
       };
-    case types.AUTH_CLEAR: 
+    case actionTypes.AUTH_CLEAR: 
       return {
         ...initialState
       };

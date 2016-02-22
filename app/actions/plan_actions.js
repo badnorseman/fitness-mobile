@@ -1,4 +1,4 @@
-import * as types from './action_types';
+import * as actionTypes from './action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import processPlan from '../utils/processPlan';
@@ -23,7 +23,7 @@ function processPlanJson(json) {
 export function startWorkout(nextWorkoutId) {
   return (dispatch) => {
     dispatch({
-      type: types.PLAN_START_WORKOUT,
+      type: actionTypes.PLAN_START_WORKOUT,
       nextWorkoutId: nextWorkoutId
     });
 
@@ -31,8 +31,8 @@ export function startWorkout(nextWorkoutId) {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_START_WORKOUT_SUCCESS,
-        types.PLAN_START_WORKOUT_FAIL,
+        actionTypes.PLAN_START_WORKOUT_SUCCESS,
+        actionTypes.PLAN_START_WORKOUT_FAIL,
         { nextWorkoutId: nextWorkoutId }
       )))
       .catch(error => fail(error));
@@ -47,13 +47,13 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
       exerciseGroupKey: exerciseGroupKey,
       setKey: setKey,
       field: field,
-      value: value  
+      value: value
     };
 
     const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
 
     dispatch({
-      type: types.PLAN_UPDATE_SET,
+      type: actionTypes.PLAN_UPDATE_SET,
       ...props
     });
 
@@ -61,8 +61,8 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_UPDATE_SET_SUCCESS,
-        types.PLAN_UPDATE_SET_FAIL,
+        actionTypes.PLAN_UPDATE_SET_SUCCESS,
+        actionTypes.PLAN_UPDATE_SET_FAIL,
         props
       )))
       .catch(error => fail(error));
@@ -81,7 +81,7 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
     const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
 
     dispatch({
-      type: types.PLAN_CHECK_SET,
+      type: actionTypes.PLAN_CHECK_SET,
       ...props
     });
 
@@ -91,8 +91,8 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_CHECK_SET_SUCCESS,
-        types.PLAN_CHECK_SET_FAIL,
+        actionTypes.PLAN_CHECK_SET_SUCCESS,
+        actionTypes.PLAN_CHECK_SET_FAIL,
         props
       )))
       .catch(error => fail(error));
@@ -112,7 +112,7 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
     const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
 
     dispatch({
-      type: types.PLAN_CHECK_SET_WITH_VALUE,
+      type: actionTypes.PLAN_CHECK_SET_WITH_VALUE,
       ...props
     });
 
@@ -122,8 +122,8 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_CHECK_SET_WITH_VALUE_SUCCESS,
-        types.PLAN_CHECK_SET_WITH_VALUE_FAIL,
+        actionTypes.PLAN_CHECK_SET_WITH_VALUE_SUCCESS,
+        actionTypes.PLAN_CHECK_SET_WITH_VALUE_FAIL,
         props
       )))
       .catch(error => fail(error));
@@ -138,7 +138,7 @@ export function endWorkout(workoutKey, feedback) {
     };
 
     dispatch({
-      type: types.PLAN_END_WORKOUT,
+      type: actionTypes.PLAN_END_WORKOUT,
       ...params
     });
 
@@ -146,8 +146,8 @@ export function endWorkout(workoutKey, feedback) {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_END_WORKOUT_SUCCESS,
-        types.PLAN_END_WORKOUT_FAIL,
+        actionTypes.PLAN_END_WORKOUT_SUCCESS,
+        actionTypes.PLAN_END_WORKOUT_FAIL,
         params
       )))
       .catch(error => fail(error));
@@ -165,7 +165,7 @@ export function persistFeedback(currentWeekNo, workoutKey, feedback) {
     const workoutId = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].id;
 
     dispatch({
-      type: types.PLAN_PERSIST_FEEDBACK,
+      type: actionTypes.PLAN_PERSIST_FEEDBACK,
       ...params
     });
 
@@ -173,8 +173,8 @@ export function persistFeedback(currentWeekNo, workoutKey, feedback) {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         processPlanJson(json),
-        types.PLAN_PERSIST_FEEDBACK_SUCCESS,
-        types.PLAN_PERSIST_FEEDBACK_FAIL,
+        actionTypes.PLAN_PERSIST_FEEDBACK_SUCCESS,
+        actionTypes.PLAN_PERSIST_FEEDBACK_FAIL,
         params
       )))
       .catch(error => fail(error));
@@ -183,15 +183,15 @@ export function persistFeedback(currentWeekNo, workoutKey, feedback) {
 
 export function planLoad() {
   return (dispatch) => {
-    dispatch({ type: types.PLAN_LOAD });
+    dispatch({ type: actionTypes.PLAN_LOAD });
 
     return request(load())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           processPlanJson(json),
-          types.PLAN_LOAD_SUCCESS,
-          types.PLAN_LOAD_FAIL
+          actionTypes.PLAN_LOAD_SUCCESS,
+          actionTypes.PLAN_LOAD_FAIL
         ));
         dispatch(initWeek());
       })
