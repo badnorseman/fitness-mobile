@@ -4,9 +4,8 @@
  * Commit: 5135bf5
  */
 
-import days from './days';
+import days from '../constants/days';
 
 export default function getDayName(date) {
   return days[date.getDay()];
 }
-

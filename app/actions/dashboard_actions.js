@@ -1,4 +1,4 @@
-import * as actionTypes from './action_types';
+import * as actionTypes from '../constants/action_types';
 
 export function setWeek(week) {
   return {

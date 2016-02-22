@@ -1,4 +1,4 @@
-import * as actionTypes from './action_types';
+import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import { loadAll, loadStarted, check, start } from '../api/habits';

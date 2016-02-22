@@ -1,10 +1,10 @@
-import * as actionTypes from './action_types';
+import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
 import CookieManager from 'react-native-cookies';
 import { AsyncStorage } from 'react-native';
 import { check, loginEmail } from '../api/auth';
-import { API } from '../constants/api_routes';
+import { SERVER } from '../constants/server';
 const STORAGE_KEY = '@Fitbird:authCookieHeader';
 
 function send() {
@@ -30,7 +30,7 @@ export function authByCookie() {
 
     AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
       if (cookie) {
-        CookieManager.setFromHeader(`${API}/`, cookie, () => {
+        CookieManager.setFromHeader(`${SERVER}/`, cookie, () => {
           dispatch(checkCookie());
         });
       } else {
@@ -44,7 +44,7 @@ export function storeCookie() {
   return (dispatch) => {
     dispatch({ type: actionTypes.AUTH_STORE_COOKIE });
 
-    CookieManager.getCookieHeader(`${API}/`, (cookie) => {
+    CookieManager.getCookieHeader(`${SERVER}/`, (cookie) => {
       if (!cookie) {
         dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL });
         return;

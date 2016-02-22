@@ -4,7 +4,7 @@
  * Commit: 5135bf5
  */
 
-import months from './months';
+import months from '../constants/months';
 
 export default function getMonthName(date) {
   return months[date.getMonth()];

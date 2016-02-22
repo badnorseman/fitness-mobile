@@ -6,7 +6,7 @@ import React, {
   TouchableOpacity
 } from 'react-native';
 
-import days from '../utils/days';
+import days from '../constants/days';
 
 const styles = StyleSheet.create({
   main: {

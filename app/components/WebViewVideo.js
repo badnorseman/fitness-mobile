@@ -54,14 +54,14 @@ const ViewVideo = React.createClass({
     renderLoading: function () {
         return (
             <View style={[styles.container, styles.centerText]}>
-                <Text style={styles.noResultsText}>Loading video...</Text>
+                <Text style={styles.noResultsText}>Loading video.</Text>
             </View>
         );
     },
     renderError: function () {
         return (
             <View style={[styles.container, styles.centerText]}>
-                <Text style={styles.noResultsText}>Video not found - 404, {this.props.url}</Text>
+                <Text style={styles.noResultsText}>Video could not be found, {this.props.url}</Text>
             </View>
         );
     }
