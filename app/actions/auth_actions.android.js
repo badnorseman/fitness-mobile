@@ -30,7 +30,7 @@ export function authByCookie() {
 
     AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
       if (cookie) {
-        CookieManager.setFromHeader(`${SERVER}/`, cookie, () => {
+        CookieManager.setFromResponse(`${SERVER}/`, cookie, () => {
           dispatch(checkCookie());
         });
       } else {
@@ -44,7 +44,7 @@ export function storeCookie() {
   return (dispatch) => {
     dispatch({ type: actionTypes.AUTH_STORE_COOKIE });
 
-    CookieManager.getCookieHeader(`${SERVER}/`, (cookie) => {
+    CookieManager.get(`${SERVER}/`, (cookie) => {
       if (!cookie) {
         dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL });
         return;
@@ -62,20 +62,25 @@ export function storeCookie() {
 }
 
 export function clear() {
-  AsyncStorage.removeItem(STORAGE_KEY)
-    .then(() => {
-      CookieManager.clearAll(() => {});
-    });
-
-  return {
-    type: actionTypes.AUTH_CLEAR
+  return (dispatch) => {
+    AsyncStorage.removeItem(STORAGE_KEY)
+      .then(() => {
+        CookieManager.clearAll((err, res) => {
+          dispatch({
+            err: err,
+            res: res,
+            type: actionTypes.AUTH_CLEAR
+          });
+        });
+      });
   };
 }
 
 export function logout() {
-  return {
-    type: actionTypes.AUTH_LOGOUT
-  };
+  return (dispatch) => {
+    dispatch({ type: actionTypes.AUTH_LOGOUT });
+    dispatch(clear());
+  }
 }
 
 export function login(email, password) {

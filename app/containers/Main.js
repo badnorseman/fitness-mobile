@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, Navigator } from 'react-native';
+import React, { Component, Navigator, View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import NavigationBarRouteMapper from '../components/NavBar';
 import Login from '../components/Login';
@@ -13,6 +13,7 @@ import EditFeedback from '../components/EditFeedback';
 import ExerciseHistory from '../components/ExerciseHistory';
 import Habits from '../components/Habits';
 import Habit from '../components/Habit';
+import FitbirdStatusBar from '../components/FitbirdStatusBar';
 
 import * as authActions from '../actions/auth_actions';
 import * as planActions from '../actions/plan_actions';
@@ -21,6 +22,13 @@ import * as dashboardActions from '../actions/dashboard_actions';
 import * as appActions from '../actions/app_actions';
 import * as countersActions from '../actions/counters_actions';
 import { connect } from 'react-redux';
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    alignSelf: 'stretch'
+  }
+});
 
 class Main extends Component {
   static propTypes = {
@@ -109,24 +117,27 @@ class Main extends Component {
 
   render() {
     return (
-      <Navigator
-        ref="navigator"
-        style={{
-          flex: 1,
-          backgroundColor: 'rgba(46, 49, 58, 1)'
-        }}
-        initialRoute={{ id: 'login', title: 'Fitbird' }}
-        renderScene={this.renderScene.bind(this)}
-        navigationBar={
-          <Navigator.NavigationBar
-            routeMapper={NavigationBarRouteMapper}
-            style={{
-              backgroundColor: 'rgba(41, 44, 52, 0.98)'
-            }}
-          />
-        }
-        logout={() => this.props.dispatch(authActions.logout())}
-      />
+      <View style={styles.main}>
+        <FitbirdStatusBar />
+        <Navigator
+          ref="navigator"
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(46, 49, 58, 1)'
+          }}
+          initialRoute={{ id: 'login', title: 'Fitbird' }}
+          renderScene={this.renderScene.bind(this)}
+          navigationBar={
+            <Navigator.NavigationBar
+              routeMapper={NavigationBarRouteMapper}
+              style={{
+                backgroundColor: 'rgba(41, 44, 52, 0.98)'
+              }}
+            />
+          }
+          logout={() => this.props.dispatch(authActions.logout())}
+        />
+      </View>
     );
   }
 }
