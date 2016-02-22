@@ -1,18 +1,19 @@
-# Fitbird Application
+# FitBird
 
 ## Getting Started
 
-Requirements:
-* You need to have Xcode 7.1+ installed
-* node.js v4+ 
-* `react-native-cli` should be installed globally, you can do so by running `npm -g install react-native-cli`
+### Requirements
+1. Xcode 7.1 or higher is required.
+2. Install Node.js 4.0 or newer.
+3. react-native-cli is recommended to be installed globally by running `npm -g install react-native-cli`.
 
-First you need to clone the repository, and install dependencies:
-```bash
-git clone https://github.com/fitbird/app.git Fitbird
-cd Fitbird
-npm install
-```
+### Installation
+*  git clone https://github.com/fitbird/app.git Fitbird
+*  cd Fitbird
+*  run `npm install`
 
-Then, to run the iOS app in a simulator or on a device, open the Xcode project. You can do this by browsing to `iOS/` and opening a file called `Fitbird.xcodeproj`, or by entering the following in the terminal:
-`open iOS/Fitbird.xcodeproj`
+## iOS
+
+### To run the iOS app
+* cd Fitbird
+* Open `iOS/Fitbird.xcodeproj` and hit run in Xcode.
