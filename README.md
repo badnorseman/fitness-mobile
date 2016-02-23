@@ -8,12 +8,10 @@
 3. react-native-cli is recommended to be installed globally by running `npm -g install react-native-cli`.
 
 ### Installation
-*  git clone https://github.com/fitbird/app.git Fitbird
-*  cd Fitbird
+*  git clone https://github.com/fitbird/app.git
+*  cd app
 *  run `npm install`
 
-## iOS
-
 ### To run the iOS app
-* cd Fitbird
+* cd app
 * Open `iOS/Fitbird.xcodeproj` and hit run in Xcode.
