@@ -14,4 +14,4 @@
 
 ### To run the iOS app
 * cd app
-* Open `iOS/Fitbird.xcodeproj` and hit run in Xcode.
+* Open `iOS/Fitbird.xcodeproj` and hit run in Xcode
