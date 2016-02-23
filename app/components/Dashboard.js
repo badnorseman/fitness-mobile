@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
     const { state } = this.props;
     let loadingText;
 
-    if (state && state.plan && state.plan.ok && state.habits.all.ok && state.habits.started.ok) {
+    if (state && state.plan && state.plan.ok && state.habit.all.ok && state.habit.started.ok) {
       return (
         <View style={styles.main}>
           <Image
@@ -60,9 +60,9 @@ export default class Dashboard extends Component {
       );
     }
 
-    if (state.habits.started.loading) {
+    if (state.habit.started.loading) {
       loadingText = 'Loading your habits.';
-    } else if (state.habits.all.loading) {
+    } else if (state.habit.all.loading) {
       loadingText = 'Loading available habits.';
     } else if (state.plan.loading) {
       loadingText = 'Loading your workout plan.';
