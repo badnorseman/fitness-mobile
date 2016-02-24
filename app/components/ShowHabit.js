@@ -1,15 +1,38 @@
+'use strict';
 import React, {
-  StyleSheet,
   Component,
-  View,
-  Text
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
 
 import ChooseHabitButton from './ChooseHabitButton';
 import NAVBAR_PADDING from '../constants/navbar_padding';
 
+class ShowHabit extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { habit } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{habit.name}</Text>
+        </View>
+        <View style={styles.paragraphContainer}>
+          <Text style={styles.paragraph}>{habit.description}</Text>
+        </View>
+        <ChooseHabitButton {...this.props}/>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
-  main: {
+  container: {
     flex: 1,
     paddingTop: NAVBAR_PADDING,
     backgroundColor: 'rgba(46, 49, 58, 1)'
@@ -34,21 +57,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Habit extends Component {
-  static propTypes = {};
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { habit } = this.props;
-    return (
-      <View style={styles.main}>
-        <View style={styles.titleContainer}><Text style={styles.title}>{habit.name}</Text></View>
-        <View style={styles.paragraphContainer}><Text style={styles.paragraph}>{habit.description}</Text></View>
-        <ChooseHabitButton {...this.props}/>
-      </View>
-    );
-  }
-}
+export default ShowHabit

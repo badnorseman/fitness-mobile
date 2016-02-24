@@ -1,14 +1,54 @@
+'use strict';
 import React, {
-  StyleSheet,
+  Alert,
   Component,
-  View,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  Alert
+  View
 } from 'react-native';
 
+class ChooseHabitButton extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handlePress() {
+    const { navigator, habit, habitsStart } = this.props;
+
+    Alert.alert(
+      '',
+      'Are you ready to start this habit?',
+      [
+        { text: 'Yes', onPress: () => {
+          habitsStart(habit.id);
+          navigator.popToTop();
+        } },
+        { text: 'No', onPress: () => {}, style: 'cancel' }
+      ]
+    );
+  }
+
+  render() {
+    return (
+      <TouchableOpacity style={styles.touchable} onPress={this.handlePress.bind(this)}>
+        <View style={styles.container}>
+          <Text style={styles.text}>Choose this habit</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
+
+ChooseHabitButton.propTypes = {
+  navigator: React.PropTypes.object,
+  state: React.PropTypes.object,
+  habit: React.PropTypes.object,
+  habitsStart: React.PropTypes.func
+};
+
 const styles = StyleSheet.create({
-  main: {
+  container: {
     backgroundColor: 'rgba(58, 77, 153, 1)',
     height: 60,
     alignItems: 'center',
@@ -26,41 +66,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class FooterButton extends Component {
-  static propTypes = {
-    navigator: React.PropTypes.object,
-    state: React.PropTypes.object,
-    habit: React.PropTypes.object,
-    habitsStart: React.PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
-  handlePress() {
-    const { navigator, habit, habitsStart } = this.props;
-
-    Alert.alert(
-      '',
-      'Are you ready to start this habit?',
-      [
-        { text: 'Yes', onPress: () => {
-          habitsStart(habit.id);
-          navigator.popToTop();
-        } },
-        { text: 'Not yet', onPress: () => {}, style: 'cancel' }
-      ]
-    );
-  }
-
-  render() {
-    return (
-      <TouchableOpacity style={styles.touchable} onPress={this.handlePress.bind(this)}>
-        <View style={styles.main}>
-          <Text style={styles.text}>Choose this habit</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
+export default ChooseHabitButton

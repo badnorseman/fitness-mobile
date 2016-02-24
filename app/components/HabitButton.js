@@ -1,62 +1,15 @@
+'use strict';
 import React, {
-  StyleSheet,
   Component,
-  View,
+  StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 import days from '../constants/days';
 
-const styles = StyleSheet.create({
-  main: {
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    marginBottom: 1
-  },
-  touchable: {
-    alignSelf: 'stretch'
-  },
-  inProgress: {
-    backgroundColor: 'rgba(115, 170, 133, 1)'
-  },
-  completed: {
-    backgroundColor: 'rgba(58, 153, 89, 1)'
-  },
-  next: {
-    backgroundColor: 'rgba(58, 77, 153, 1)'
-  },
-  firstLine: {
-    color: 'rgba(192, 192, 195, 1)',
-    fontWeight: 'bold'
-  },
-  firstLineInProgress: {
-    color: 'white'
-  },
-  firstLineCompleted: {
-    color: 'white'
-  },
-  secondLine: {
-    color: 'white'
-  }
-});
-
-export default class HabitButton extends Component {
-  static propTypes = {
-    state: React.PropTypes.object,
-    workout: React.PropTypes.object,
-    week: React.PropTypes.object,
-    workoutNum: React.PropTypes.number,
-    currentWeekNo: React.PropTypes.number,
-    navigator: React.PropTypes.object,
-    habitsStarted: React.PropTypes.object,
-    occurences: React.PropTypes.object,
-    occurence: React.PropTypes.object,
-    habitsCheck: React.PropTypes.func
-  };
-
+class HabitButton extends Component {
   constructor(props) {
     super(props);
   }
@@ -94,14 +47,67 @@ export default class HabitButton extends Component {
 
   render() {
     const { occurences, occurence } = this.props;
-    const buttonStyles = [styles.main, this.getMainStyling(occurence)];
+    const buttonStyles = [styles.container, this.getMainStyling(occurence)];
 
     return (
-      <TouchableOpacity style={styles.touchable} onPress={this.handlePress.bind(this, occurences, occurence)}>
+      <TouchableOpacity style={styles.touchable}
+        onPress={this.handlePress.bind(this, occurences, occurence)}>
         <View style={buttonStyles}>
-          <Text style={[styles.firstLine, styles.firstLineCompleted]}>{this.getHabitName()}</Text>
+          <Text style={[styles.firstLine, styles.firstLineCompleted]}>
+            {this.getHabitName()}
+          </Text>
         </View>
       </TouchableOpacity>
     );
   }
 }
+
+HabitButton.propTypes = {
+  state: React.PropTypes.object,
+  workout: React.PropTypes.object,
+  week: React.PropTypes.object,
+  workoutNum: React.PropTypes.number,
+  currentWeekNo: React.PropTypes.number,
+  navigator: React.PropTypes.object,
+  habitsStarted: React.PropTypes.object,
+  occurences: React.PropTypes.object,
+  occurence: React.PropTypes.object,
+  habitsCheck: React.PropTypes.func
+};
+
+const styles = StyleSheet.create({
+  container: {
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    marginBottom: 1
+  },
+  touchable: {
+    alignSelf: 'stretch'
+  },
+  inProgress: {
+    backgroundColor: 'rgba(115, 170, 133, 1)'
+  },
+  completed: {
+    backgroundColor: 'rgba(58, 153, 89, 1)'
+  },
+  next: {
+    backgroundColor: 'rgba(58, 77, 153, 1)'
+  },
+  firstLine: {
+    color: 'rgba(192, 192, 195, 1)',
+    fontWeight: 'bold'
+  },
+  firstLineInProgress: {
+    color: 'white'
+  },
+  firstLineCompleted: {
+    color: 'white'
+  },
+  secondLine: {
+    color: 'white'
+  }
+});
+
+export default HabitButton
