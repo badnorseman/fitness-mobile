@@ -19,8 +19,8 @@ const habit = (state = initialState, action = {}) => {
   }
 
   switch (action.type) {
-    case actionTypes.HABIT_LOAD_ALL_FAIL:
-    case actionTypes.HABIT_LOAD_ALL_SUCCESS:
+    case actionTypes.HABIT_FETCH_ALL_FAIL:
+    case actionTypes.HABIT_FETCH_ALL_SUCCESS:
       return {
         ...state,
         all: {
@@ -29,8 +29,8 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABIT_LOAD_STARTED_FAIL:
-    case actionTypes.HABIT_LOAD_STARTED_SUCCESS:
+    case actionTypes.HABIT_FETCH_STARTED_FAIL:
+    case actionTypes.HABIT_FETCH_STARTED_SUCCESS:
     case actionTypes.HABIT_START_SUCCESS:
     case actionTypes.HABIT_START_FAIL:
       return {
@@ -41,14 +41,14 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABIT_LOAD_ALL:
+    case actionTypes.HABIT_FETCH_ALL:
       return {
         ...state,
         all: {
           loading: true
         }
       };
-    case actionTypes.HABIT_LOAD_STARTED:
+    case actionTypes.HABIT_FETCH_STARTED:
       return {
         ...state,
         started: {

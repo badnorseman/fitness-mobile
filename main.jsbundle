@@ -56857,12 +56857,12 @@ var PLAN_CHECK_SET_WITH_VALUE='PLAN_CHECK_SET_WITH_VALUE';exports.PLAN_CHECK_SET
 var PLAN_CHECK_SET_WITH_VALUE_SUCCESS='PLAN_CHECK_SET_WITH_VALUE_SUCCESS';exports.PLAN_CHECK_SET_WITH_VALUE_SUCCESS = PLAN_CHECK_SET_WITH_VALUE_SUCCESS;
 var PLAN_CHECK_SET_WITH_VALUE_FAIL='PLAN_CHECK_SET_WITH_VALUE_FAIL';exports.PLAN_CHECK_SET_WITH_VALUE_FAIL = PLAN_CHECK_SET_WITH_VALUE_FAIL;
 
-var HABIT_LOAD_ALL='HABIT_LOAD_ALL';exports.HABIT_LOAD_ALL = HABIT_LOAD_ALL;
-var HABIT_LOAD_ALL_SUCCESS='HABIT_LOAD_ALL_SUCCESS';exports.HABIT_LOAD_ALL_SUCCESS = HABIT_LOAD_ALL_SUCCESS;
-var HABIT_LOAD_ALL_FAIL='HABIT_LOAD_ALL_FAIL';exports.HABIT_LOAD_ALL_FAIL = HABIT_LOAD_ALL_FAIL;
-var HABIT_LOAD_STARTED='HABIT_LOAD_STARTED';exports.HABIT_LOAD_STARTED = HABIT_LOAD_STARTED;
-var HABIT_LOAD_STARTED_SUCCESS='HABIT_LOAD_STARTED_SUCCESS';exports.HABIT_LOAD_STARTED_SUCCESS = HABIT_LOAD_STARTED_SUCCESS;
-var HABIT_LOAD_STARTED_FAIL='HABIT_LOAD_STARTED_FAIL';exports.HABIT_LOAD_STARTED_FAIL = HABIT_LOAD_STARTED_FAIL;
+var HABIT_FETCH_ALL='HABIT_FETCH_ALL';exports.HABIT_FETCH_ALL = HABIT_FETCH_ALL;
+var HABIT_FETCH_ALL_SUCCESS='HABIT_FETCH_ALL_SUCCESS';exports.HABIT_FETCH_ALL_SUCCESS = HABIT_FETCH_ALL_SUCCESS;
+var HABIT_FETCH_ALL_FAIL='HABIT_FETCH_ALL_FAIL';exports.HABIT_FETCH_ALL_FAIL = HABIT_FETCH_ALL_FAIL;
+var HABIT_FETCH_STARTED='HABIT_FETCH_STARTED';exports.HABIT_FETCH_STARTED = HABIT_FETCH_STARTED;
+var HABIT_FETCH_STARTED_SUCCESS='HABIT_FETCH_STARTED_SUCCESS';exports.HABIT_FETCH_STARTED_SUCCESS = HABIT_FETCH_STARTED_SUCCESS;
+var HABIT_FETCH_STARTED_FAIL='HABIT_FETCH_STARTED_FAIL';exports.HABIT_FETCH_STARTED_FAIL = HABIT_FETCH_STARTED_FAIL;
 var HABIT_CHECK='HABIT_CHECK';exports.HABIT_CHECK = HABIT_CHECK;
 var HABIT_CHECK_SUCCESS='HABIT_CHECK_SUCCESS';exports.HABIT_CHECK_SUCCESS = HABIT_CHECK_SUCCESS;
 var HABIT_CHECK_FAIL='HABIT_CHECK_FAIL';exports.HABIT_CHECK_FAIL = HABIT_CHECK_FAIL;
@@ -57132,8 +57132,8 @@ occurence = habit.occurences.find(function(o){return o.day === action.occurence.
 
 
 switch(action.type){
-case types.HABIT_LOAD_ALL_FAIL:
-case types.HABIT_LOAD_ALL_SUCCESS:
+case types.HABIT_FETCH_ALL_FAIL:
+case types.HABIT_FETCH_ALL_SUCCESS:
 return _extends({},
 state,{
 all:_extends({},
@@ -57142,8 +57142,8 @@ loading:false,
 loaded:true})});
 
 
-case types.HABIT_LOAD_STARTED_FAIL:
-case types.HABIT_LOAD_STARTED_SUCCESS:
+case types.HABIT_FETCH_STARTED_FAIL:
+case types.HABIT_FETCH_STARTED_SUCCESS:
 case types.HABIT_START_SUCCESS:
 case types.HABIT_START_FAIL:
 return _extends({},
@@ -57154,14 +57154,14 @@ loading:false,
 loaded:true})});
 
 
-case types.HABIT_LOAD_ALL:
+case types.HABIT_FETCH_ALL:
 return _extends({},
 state,{
 all:{
 loading:true}});
 
 
-case types.HABIT_LOAD_STARTED:
+case types.HABIT_FETCH_STARTED:
 return _extends({},
 state,{
 started:{
@@ -61290,15 +61290,15 @@ __d('Fitbird/app/actions/habits_actions.js',function(global, require, module, ex
 
 function habitsLoadAll(){
 return function(dispatch){
-dispatch({type:types.HABIT_LOAD_ALL});
+dispatch({type:types.HABIT_FETCH_ALL});
 
 return (0,_network_actions.request)((0,_apiHabits.loadAll)())(dispatch).
 then(function(response){return response.json();}).
 then(function(json){
 dispatch((0,_app_actions.appReceive)(
 json,
-types.HABIT_LOAD_ALL_SUCCESS,
-types.HABIT_LOAD_ALL_FAIL));}).
+types.HABIT_FETCH_ALL_SUCCESS,
+types.HABIT_FETCH_ALL_FAIL));}).
 
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
@@ -61307,15 +61307,15 @@ catch(function(error){return (0,_app_actions.appError)(error);});};}
 
 function habitsLoadStarted(){
 return function(dispatch){
-dispatch({type:types.HABIT_LOAD_STARTED});
+dispatch({type:types.HABIT_FETCH_STARTED});
 
 return (0,_network_actions.request)((0,_apiHabits.loadStarted)())(dispatch).
 then(function(response){return response.json();}).
 then(function(json){
 dispatch((0,_app_actions.appReceive)(
 (0,_utilsProcessHabitsStarted2.default)(json),
-types.HABIT_LOAD_STARTED_SUCCESS,
-types.HABIT_LOAD_STARTED_FAIL));}).
+types.HABIT_FETCH_STARTED_SUCCESS,
+types.HABIT_FETCH_STARTED_FAIL));}).
 
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
