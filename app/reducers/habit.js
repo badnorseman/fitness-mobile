@@ -13,7 +13,9 @@ const habit = (state = initialState, action = {}) => {
 
   if (action.occurence && action.id) {
     habit = state.started.data.find((h) => { return h.id === action.id; });
-    occurence = habit.occurences.find((o) => { return o.day === action.occurence.day && o.week === action.occurence.week; });
+    occurence = habit.occurences.find((o) => {
+      return o.day === action.occurence.day && o.week === action.occurence.week;
+    });
   }
 
   switch (action.type) {

@@ -5,7 +5,7 @@ import { request } from './network_actions';
 import { loadAll, loadStarted, check, start } from '../api/habit_api';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
-const habitsCheck = (id, occurence) => {
+const checkHabit = (id, occurence) => {
   return (dispatch) => {
     const props = {
       id: id,
@@ -29,7 +29,7 @@ const habitsCheck = (id, occurence) => {
   };
 };
 
-const habitsLoadAll = () => {
+const loadAllHabit = () => {
   return (dispatch) => {
     dispatch({ type: actionTypes.HABIT_LOAD_ALL });
 
@@ -46,7 +46,7 @@ const habitsLoadAll = () => {
   };
 };
 
-const habitsLoadStarted = () => {
+const loadStartedHabit = () => {
   return (dispatch) => {
     dispatch({ type: actionTypes.HABIT_LOAD_STARTED });
 
@@ -63,7 +63,7 @@ const habitsLoadStarted = () => {
   };
 };
 
-const habitsStart = (id) => {
+const startHabit = (id) => {
   return (dispatch) => {
     dispatch({
       type: actionTypes.HABIT_START,
@@ -83,4 +83,4 @@ const habitsStart = (id) => {
   };
 };
 
-export { habitsCheck, habitsLoadAll, habitsLoadStarted, habitsStart };
+export { checkHabit, loadAllHabit, loadStartedHabit, startHabit };

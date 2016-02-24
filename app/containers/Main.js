@@ -38,11 +38,11 @@ class Main extends Component {
     }
 
     if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.all).length && !nextProps.state.habit.all.loading && !nextProps.state.habit.all.loaded) {
-      nextProps.dispatch(habitActions.habitsLoadAll());
+      nextProps.dispatch(habitActions.loadAllHabit());
     }
 
     if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.started).length && !nextProps.state.habit.started.loading && !nextProps.state.habit.started.loaded) {
-      nextProps.dispatch(habitActions.habitsLoadStarted());
+      nextProps.dispatch(habitActions.loadStartedHabit());
     }
 
     if (currentRoute.id !== 'login' && nextProps.state.auth.logout) {
