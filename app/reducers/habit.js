@@ -17,8 +17,8 @@ const habit = (state = initialState, action = {}) => {
   }
 
   switch (action.type) {
-    case actionTypes.HABITS_LOAD_ALL_FAIL:
-    case actionTypes.HABITS_LOAD_ALL_SUCCESS:
+    case actionTypes.HABIT_LOAD_ALL_FAIL:
+    case actionTypes.HABIT_LOAD_ALL_SUCCESS:
       return {
         ...state,
         all: {
@@ -27,10 +27,10 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABITS_LOAD_STARTED_FAIL:
-    case actionTypes.HABITS_LOAD_STARTED_SUCCESS:
-    case actionTypes.HABITS_START_SUCCESS:
-    case actionTypes.HABITS_START_FAIL:
+    case actionTypes.HABIT_LOAD_STARTED_FAIL:
+    case actionTypes.HABIT_LOAD_STARTED_SUCCESS:
+    case actionTypes.HABIT_START_SUCCESS:
+    case actionTypes.HABIT_START_FAIL:
       return {
         ...state,
         started: {
@@ -39,21 +39,21 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABITS_LOAD_ALL:
+    case actionTypes.HABIT_LOAD_ALL:
       return {
         ...state,
         all: {
           loading: true
         }
       };
-    case actionTypes.HABITS_LOAD_STARTED:
+    case actionTypes.HABIT_LOAD_STARTED:
       return {
         ...state,
         started: {
           loading: true
         }
       };
-    case actionTypes.HABITS_CHECK:
+    case actionTypes.HABIT_CHECK:
       occurence._dateDT = occurence.dateDT;
 
       if (occurence.dateDT) {
@@ -65,12 +65,12 @@ const habit = (state = initialState, action = {}) => {
       return {
         ...state
       };
-    case actionTypes.HABITS_CHECK_SUCCESS:
+    case actionTypes.HABIT_CHECK_SUCCESS:
       state.started = processHabitsStarted(state.started);
       return {
         ...state
       };
-    case actionTypes.HABITS_CHECK_FAIL:
+    case actionTypes.HABIT_CHECK_FAIL:
       occurence.dateDT = occurence._dateDT;
 
       return {
