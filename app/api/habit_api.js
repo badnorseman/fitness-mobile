@@ -9,14 +9,14 @@ const check = (id, occurence) => {
   });
 };
 
-const loadAll = () => {
+const fetchAll = () => {
   return fetch(`${SERVER}/habit/all`, {
     method: 'GET',
     headers: HEADERS
   });
 };
 
-const loadStarted = () => {
+const fetchStarted = () => {
   return fetch(`${SERVER}/habit/started`, {
     method: 'GET',
     headers: HEADERS
@@ -30,4 +30,4 @@ const start = (id) => {
   });
 };
 
-export { check, loadAll, loadStarted, start };
+export { check, fetchAll, fetchStarted, start };

@@ -1,4 +1,5 @@
 'use strict';
+import { combineReducers } from 'redux';
 import app from './app';
 import auth from './auth';
 import plan from './plan';
@@ -7,7 +8,7 @@ import dashboard from './dashboard';
 import network from './network';
 import counters from './counters';
 
-export {
+const reducers = combineReducers({
   app,
   auth,
   plan,
@@ -15,4 +16,6 @@ export {
   dashboard,
   network,
   counters
-};
+});
+
+export default reducers

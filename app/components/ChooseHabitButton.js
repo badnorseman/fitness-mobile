@@ -14,14 +14,14 @@ class ChooseHabitButton extends Component {
   }
 
   handlePress() {
-    const { navigator, habit, habitsStart } = this.props;
+    const { navigator, habit, startHabit } = this.props;
 
     Alert.alert(
       '',
       'Are you ready to start this habit?',
       [
         { text: 'Yes', onPress: () => {
-          habitsStart(habit.id);
+          startHabit(habit.id);
           navigator.popToTop();
         } },
         { text: 'No', onPress: () => {}, style: 'cancel' }
@@ -44,7 +44,7 @@ ChooseHabitButton.propTypes = {
   navigator: React.PropTypes.object,
   state: React.PropTypes.object,
   habit: React.PropTypes.object,
-  habitsStart: React.PropTypes.func
+  startHabit: React.PropTypes.func
 };
 
 const styles = StyleSheet.create({

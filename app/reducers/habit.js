@@ -13,12 +13,14 @@ const habit = (state = initialState, action = {}) => {
 
   if (action.occurence && action.id) {
     habit = state.started.data.find((h) => { return h.id === action.id; });
-    occurence = habit.occurences.find((o) => { return o.day === action.occurence.day && o.week === action.occurence.week; });
+    occurence = habit.occurences.find((o) => {
+      return o.day === action.occurence.day && o.week === action.occurence.week;
+    });
   }
 
   switch (action.type) {
-    case actionTypes.HABIT_LOAD_ALL_FAIL:
-    case actionTypes.HABIT_LOAD_ALL_SUCCESS:
+    case actionTypes.HABIT_FETCH_ALL_FAIL:
+    case actionTypes.HABIT_FETCH_ALL_SUCCESS:
       return {
         ...state,
         all: {
@@ -27,8 +29,8 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABIT_LOAD_STARTED_FAIL:
-    case actionTypes.HABIT_LOAD_STARTED_SUCCESS:
+    case actionTypes.HABIT_FETCH_STARTED_FAIL:
+    case actionTypes.HABIT_FETCH_STARTED_SUCCESS:
     case actionTypes.HABIT_START_SUCCESS:
     case actionTypes.HABIT_START_FAIL:
       return {
@@ -39,14 +41,14 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABIT_LOAD_ALL:
+    case actionTypes.HABIT_FETCH_ALL:
       return {
         ...state,
         all: {
           loading: true
         }
       };
-    case actionTypes.HABIT_LOAD_STARTED:
+    case actionTypes.HABIT_FETCH_STARTED:
       return {
         ...state,
         started: {

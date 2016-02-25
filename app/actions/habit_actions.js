@@ -2,10 +2,10 @@
 import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
-import { loadAll, loadStarted, check, start } from '../api/habit_api';
+import { check, fetchAll, fetchStarted, start } from '../api/habit_api';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
-const habitsCheck = (id, occurence) => {
+const checkHabit = (id, occurence) => {
   return (dispatch) => {
     const props = {
       id: id,
@@ -29,41 +29,41 @@ const habitsCheck = (id, occurence) => {
   };
 };
 
-const habitsLoadAll = () => {
+const getHabits = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABIT_LOAD_ALL });
+    dispatch({ type: actionTypes.HABIT_FETCH_ALL });
 
-    return request(loadAll())(dispatch)
+    return request(fetchAll())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           json,
-          actionTypes.HABIT_LOAD_ALL_SUCCESS,
-          actionTypes.HABIT_LOAD_ALL_FAIL
+          actionTypes.HABIT_FETCH_ALL_SUCCESS,
+          actionTypes.HABIT_FETCH_ALL_FAIL
         ));
       })
       .catch(error => appError(error));
   };
 };
 
-const habitsLoadStarted = () => {
+const getStartedHabits = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABIT_LOAD_STARTED });
+    dispatch({ type: actionTypes.HABIT_FETCH_STARTED });
 
-    return request(loadStarted())(dispatch)
+    return request(fetchStarted())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           processHabitsStarted(json),
-          actionTypes.HABIT_LOAD_STARTED_SUCCESS,
-          actionTypes.HABIT_LOAD_STARTED_FAIL
+          actionTypes.HABIT_FETCH_STARTED_SUCCESS,
+          actionTypes.HABIT_FETCH_STARTED_FAIL
         ));
       })
       .catch(error => appError(error));
   };
 };
 
-const habitsStart = (id) => {
+const startHabit = (id) => {
   return (dispatch) => {
     dispatch({
       type: actionTypes.HABIT_START,
@@ -83,4 +83,4 @@ const habitsStart = (id) => {
   };
 };
 
-export { habitsCheck, habitsLoadAll, habitsLoadStarted, habitsStart };
+export { checkHabit, getHabits, getStartedHabits, startHabit };

@@ -37,11 +37,11 @@ class HabitButton extends Component {
   }
 
   handlePress(occurences, occurence) {
-    const { navigator, habitsCheck } = this.props;
+    const { navigator, checkHabit } = this.props;
     if (occurence.pick) {
       navigator.push({ id: 'habits', title: 'Habits' });
     } else {
-      habitsCheck(occurences.userHabit.id, occurence);
+      checkHabit(occurences.userHabit.id, occurence);
     }
   }
 
@@ -72,7 +72,7 @@ HabitButton.propTypes = {
   habitsStarted: React.PropTypes.object,
   occurences: React.PropTypes.object,
   occurence: React.PropTypes.object,
-  habitsCheck: React.PropTypes.func
+  checkHabit: React.PropTypes.func
 };
 
 const styles = StyleSheet.create({
