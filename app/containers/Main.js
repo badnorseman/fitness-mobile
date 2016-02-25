@@ -1,41 +1,27 @@
 'use strict';
-
 import React, { Component, Navigator, View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
-import NavigationBarRouteMapper from '../components/NavBar';
-import Login from '../components/Login';
+import { connect } from 'react-redux';
 import Dashboard from '../components/Dashboard';
-import Workout from '../components/Workout';
+import EditFeedback from '../components/EditFeedback';
 import EditWorkout from '../components/EditWorkout';
 import Exercise from '../components/Exercise';
-import Video from '../components/Video';
-import EditFeedback from '../components/EditFeedback';
 import ExerciseHistory from '../components/ExerciseHistory';
+import FitbirdStatusBar from '../components/FitbirdStatusBar';
 import Habits from '../components/Habits';
 import Habit from '../components/Habit';
-import FitbirdStatusBar from '../components/FitbirdStatusBar';
-
-import * as authActions from '../actions/auth_actions';
-import * as planActions from '../actions/plan_actions';
-import * as habitsActions from '../actions/habits_actions';
-import * as dashboardActions from '../actions/dashboard_actions';
+import Login from '../components/Login';
+import NavigationBarRouteMapper from '../components/NavBar';
+import Video from '../components/Video';
+import Workout from '../components/Workout';
 import * as appActions from '../actions/app_actions';
+import * as authActions from '../actions/auth_actions';
 import * as countersActions from '../actions/counters_actions';
-import { connect } from 'react-redux';
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    alignSelf: 'stretch'
-  }
-});
+import * as dashboardActions from '../actions/dashboard_actions';
+import * as habitActions from '../actions/habit_actions';
+import * as planActions from '../actions/plan_actions';
 
 class Main extends Component {
-  static propTypes = {
-    dispatch: React.PropTypes.func,
-    state: React.PropTypes.object
-  };
-
   constructor(props) {
     super(props);
   }
@@ -52,11 +38,11 @@ class Main extends Component {
     }
 
     if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.all).length && !nextProps.state.habits.all.loading && !nextProps.state.habits.all.loaded) {
-      nextProps.dispatch(habitsActions.habitsLoadAll());
+      nextProps.dispatch(habitActions.habitsLoadAll());
     }
 
     if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.started).length && !nextProps.state.habits.started.loading && !nextProps.state.habits.started.loaded) {
-      nextProps.dispatch(habitsActions.habitsLoadStarted());
+      nextProps.dispatch(habitActions.habitsLoadStarted());
     }
 
     if (currentRoute.id !== 'login' && nextProps.state.auth.logout) {
@@ -92,23 +78,23 @@ class Main extends Component {
 
     switch (route.id) {
       case 'dashboard':
-        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions, ...habitsActions }, this.props.dispatch)}/>;
-      case 'workout':
-        return <Workout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
-      case 'habits':
-        return <Habits {...sharedProps} {...bindActionCreators({ ...habitsActions }, this.props.dispatch)} />;
-      case 'habit':
-        return <Habit {...sharedProps} {...bindActionCreators({ ...habitsActions }, this.props.dispatch)} />;
-      case 'edit':
-        return <EditWorkout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions, ...habitActions }, this.props.dispatch)}/>;
       case 'feedback':
         return <EditFeedback {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+      case 'edit':
+        return <EditWorkout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'exercise':
         return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions, ...countersActions }, this.props.dispatch)} />;
-      case 'video':
-        return <Video {...sharedProps} />;
       case 'history':
         return <ExerciseHistory {...sharedProps} />;
+      case 'habits':
+        return <Habits {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
+      case 'habit':
+        return <Habit {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
+      case 'video':
+        return <Video {...sharedProps} />;
+      case 'workout':
+        return <Workout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
       case 'login':
       default:
         return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;
@@ -117,7 +103,7 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={styles.main}>
+      <View style={styles.container}>
         <FitbirdStatusBar />
         <Navigator
           ref="navigator"
@@ -141,5 +127,17 @@ class Main extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: 'stretch'
+  }
+});
+
+Main.propTypes = {
+  dispatch: React.PropTypes.func,
+  state: React.PropTypes.object
+};
 
 export default connect(state => ({ state: state }))(Main);

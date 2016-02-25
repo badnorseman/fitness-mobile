@@ -1,3 +1,4 @@
+'use strict';
 import * as actionTypes from '../constants/action_types';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
@@ -6,7 +7,7 @@ const initialState = {
   started: {}
 };
 
-export default function habits(state = initialState, action = {}) {
+const habit = (state = initialState, action = {}) => {
   let habit;
   let occurence;
 
@@ -82,4 +83,6 @@ export default function habits(state = initialState, action = {}) {
     default:
       return state;
   }
-}
+};
+
+export default habit
