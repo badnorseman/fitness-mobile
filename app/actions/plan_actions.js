@@ -1,11 +1,10 @@
 import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
-import { request } from './network_actions';
-import processPlan from '../utils/processPlan';
 import { initWeek } from './dashboard_actions';
-import { loadAll } from '../api/workout';
-import { end, updateFeedback, start, check, checkWithValue, update } from '../api/workout';
+import { request } from './network_actions';
 import { startCounter } from './counters_actions.js';
+import { check, checkWithValue, end, loadAll, update, updateFeedback, start } from '../api/workout';
+import processPlan from '../utils/processPlan';
 import { COUNT_DOWN } from '../constants/counter_directions';
 
 function fail(error) {
