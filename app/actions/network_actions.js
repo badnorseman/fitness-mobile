@@ -1,18 +1,21 @@
 import * as actionTypes from '../constants/action_types';
 
-// Change `request to networkRequest`
-const request = (apiCall) => (dispatch) => {
-  dispatch({ type: actionTypes.NETWORK_REQUEST });
-
-  return apiCall
-    .then((response) => {
-      dispatch({
-        type: actionTypes.NETWORK_REQUEST_COMPLETED,
-        response
-      });
-
-      return response;
+// Change `request` to `networkRequest`
+// and `apiRequest` to `request`
+export function request(apiRequest) {
+  return (dispatch) => {
+    dispatch({
+      type: actionTypes.NETWORK_REQUEST
     });
-};
 
-export { request };
+    return apiRequest
+      .then((response) => {
+        dispatch({
+          type: actionTypes.NETWORK_REQUEST_COMPLETED,
+          response
+        });
+
+        return response;
+      });
+  };
+}
