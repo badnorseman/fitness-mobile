@@ -1,56 +1,47 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 
-const initWeek = (week = 0) => {
-  return (dispatch, getState) => {
-    const state = getState();
-    let currentWeek = week;
+const setWeek = (week) => ({
+  type: actionTypes.DASHBOARD_SET_WEEK,
+  week
+});
 
-    dispatch({ type: actionTypes.DASHBOARD_INIT_WEEK });
+const initWeek = (week = 0) => (dispatch, getState) => {
+  const state = getState();
+  let currentWeek = week;
 
-    if (state && state.plan && state.plan.data && state.plan.data.currentWeek) {
-      currentWeek = state.plan.data.currentWeek;
-    }
+  dispatch({ type: actionTypes.DASHBOARD_INIT_WEEK });
 
-    dispatch(setWeek(currentWeek));
-  };
+  if (state && state.plan && state.plan.data && state.plan.data.currentWeek) {
+    currentWeek = state.plan.data.currentWeek;
+  }
+
+  dispatch(setWeek(currentWeek));
 };
 
-const nextWeek = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    let week = state.dashboard.week;
+const nextWeek = () => (dispatch, getState) => {
+  const state = getState();
+  let week = state.dashboard.week;
 
-    dispatch({ type: actionTypes.DASHBOARD_NEXT_WEEK });
+  dispatch({ type: actionTypes.DASHBOARD_NEXT_WEEK });
 
-    if (state.dashboard.week < state.plan.data.weeks.length - 1) {
-      week++;
-    }
+  if (state.dashboard.week < state.plan.data.weeks.length - 1) {
+    week++;
+  }
 
-    dispatch(setWeek(week));
-  };
+  dispatch(setWeek(week));
 };
 
-const prevWeek = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    let week = state.dashboard.week;
+const prevWeek = () => (dispatch, getState) => {
+  const state = getState();
+  let week = state.dashboard.week;
 
-    dispatch({ type: actionTypes.DASHBOARD_PREV_WEEK });
+  dispatch({ type: actionTypes.DASHBOARD_PREV_WEEK });
 
-    if (week > 0) {
-      week--;
-    }
+  if (week > 0) {
+    week--;
+  }
 
-    dispatch(setWeek(week));
-  };
-};
-
-const setWeek = (week) => {
-  return {
-    type: actionTypes.DASHBOARD_SET_WEEK,
-    week: week
-  };
+  dispatch(setWeek(week));
 };
 
 export { initWeek, nextWeek, prevWeek, setWeek };

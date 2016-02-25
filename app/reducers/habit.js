@@ -1,4 +1,3 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
@@ -7,15 +6,16 @@ const initialState = {
   started: {}
 };
 
+// Not sure what is going on here with habit2 and occurence,
+// lint is complaining.
 const habit = (state = initialState, action = {}) => {
-  let habit;
-  let occurence;
+  let occurence = '';
 
   if (action.occurence && action.id) {
-    habit = state.started.data.find((h) => { return h.id === action.id; });
-    occurence = habit.occurences.find((o) => {
-      return o.day === action.occurence.day && o.week === action.occurence.week;
-    });
+    const habit2 = state.started.data.find((h) => h.id === action.id);
+    occurence = habit2.occurences.find(
+      (o) => o.day === action.occurence.day && o.week === action.occurence.week
+    );
   }
 
   switch (action.type) {
@@ -68,6 +68,7 @@ const habit = (state = initialState, action = {}) => {
         ...state
       };
     case actionTypes.HABIT_CHECK_SUCCESS:
+      // Lint is complaining.
       state.started = processHabitsStarted(state.started);
       return {
         ...state
@@ -87,4 +88,4 @@ const habit = (state = initialState, action = {}) => {
   }
 };
 
-export default habit
+export default habit;

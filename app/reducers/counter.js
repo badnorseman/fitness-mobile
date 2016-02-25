@@ -4,6 +4,7 @@ import { COUNT_UP, COUNT_DOWN } from '../constants/counter_directions';
 const initialState = {};
 
 export default function counters(state = initialState, action = {}) {
+  // Deconstruct action
   switch (action.type) {
     case actionTypes.COUNTERS_START:
       state[action.counterKey] = {
