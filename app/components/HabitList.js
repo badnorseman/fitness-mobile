@@ -5,7 +5,7 @@ import React, {
   StyleSheet
 } from 'react-native';
 
-import HabitsRow from './HabitsRow';
+import HabitListRow from './HabitListRow';
 
 class HabitList extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class HabitList extends Component {
   }
 
   renderRow(rowData, sectionId, rowId) {
-    return <HabitsRow {...this.props} habit={rowData} key={rowId} />;
+    return <HabitListRow {...this.props} habit={rowData} key={rowId} />;
   }
 
   render() {

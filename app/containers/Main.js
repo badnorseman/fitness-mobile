@@ -9,9 +9,9 @@ import Exercise from '../components/Exercise';
 import ExerciseHistory from '../components/ExerciseHistory';
 import FitbirdStatusBar from '../components/FitbirdStatusBar';
 import Habits from '../components/Habits';
-import Habit from '../components/Habit';
 import Login from '../components/Login';
 import NavigationBarRouteMapper from '../components/NavBar';
+import ShowHabit from '../components/ShowHabit';
 import Video from '../components/Video';
 import Workout from '../components/Workout';
 import * as appActions from '../actions/app_actions';
@@ -90,7 +90,7 @@ class Main extends Component {
       case 'habits':
         return <Habits {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
       case 'habit':
-        return <Habit {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
+        return <ShowHabit {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
       case 'video':
         return <Video {...sharedProps} />;
       case 'workout':
