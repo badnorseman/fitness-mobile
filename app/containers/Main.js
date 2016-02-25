@@ -37,11 +37,11 @@ class Main extends Component {
       nextProps.dispatch(planActions.planLoad());
     }
 
-    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.all).length && !nextProps.state.habits.all.loading && !nextProps.state.habits.all.loaded) {
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.all).length && !nextProps.state.habit.all.loading && !nextProps.state.habit.all.loaded) {
       nextProps.dispatch(habitActions.habitsLoadAll());
     }
 
-    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habits.started).length && !nextProps.state.habits.started.loading && !nextProps.state.habits.started.loaded) {
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.started).length && !nextProps.state.habit.started.loading && !nextProps.state.habit.started.loaded) {
       nextProps.dispatch(habitActions.habitsLoadStarted());
     }
 

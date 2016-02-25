@@ -71,7 +71,7 @@ export default class WeekView extends Component {
   render() {
     const { state } = this.props;
     const currentWeekNo = state.dashboard.week || 0;
-    const habitsStarted = state.habits.started.habitsStarted;
+    const habitsStarted = state.habit.started.habitsStarted;
     const year = (new Date()).getFullYear();
     const week = state.plan.data.weeks[currentWeekNo];
     const occurences = getHabitStartedOccurences(habitsStarted, year, week);

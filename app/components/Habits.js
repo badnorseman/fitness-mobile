@@ -5,7 +5,7 @@ import React, {
   Text
 } from 'react-native';
 
-import HabitsList from './HabitsList';
+import HabitList from './HabitList';
 import NAVBAR_PADDING from '../constants/navbar_padding';
 
 const styles = StyleSheet.create({
@@ -45,7 +45,7 @@ export default class Habits extends Component {
       <View style={styles.main}>
         <View style={styles.titleContainer}><Text style={styles.title}>It’s time to choose a habit</Text></View>
         <View style={styles.paragraphContainer}><Text style={styles.paragraph}>Good habits are the key to long term success regardless what your goal is. Pick one of the habits below to do daily for the next two weeks. Start with something you’re certain you can do and build on it.</Text></View>
-        <HabitsList {...this.props}/>
+        <HabitList {...this.props}/>
       </View>
     );
   }
