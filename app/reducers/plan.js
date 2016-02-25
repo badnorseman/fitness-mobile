@@ -1,6 +1,5 @@
 import * as actionTypes from '../constants/action_types';
 import prepareColumns from '../utils/prepareColumns';
-import _ from 'lodash';
 
 const initialState = {};
 
@@ -8,8 +7,15 @@ export default function plan(state = initialState, action = {}) {
   let set;
   let missingField;
 
-  if (typeof action.currentWeekNo === 'number' && typeof action.workoutKey === 'number' && typeof action.exerciseGroupKey === 'number' && typeof action.setKey === 'number') {
-    set = state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].exerciseGroups[action.exerciseGroupKey].sets[action.setKey];
+  if (typeof action.currentWeekNo === 'number' &&
+    typeof action.workoutKey === 'number' &&
+    typeof action.exerciseGroupKey === 'number' &&
+    typeof action.setKey === 'number') {
+    set = state.data.weeks[action.currentWeekNo].
+    workouts[action.workoutKey].
+    exerciseGroups[action.exerciseGroupKey].
+    sets[action.setKey];
+
     if (set.c1Missing) {
       missingField = set.c1FieldName;
     } else if (set.c2Missing) {
@@ -33,7 +39,9 @@ export default function plan(state = initialState, action = {}) {
         loading: true
       };
     case actionTypes.PLAN_PERSIST_FEEDBACK_SUCCESS:
-      state.data.weeks[action.currentWeekNo].workouts[action.workoutKey].feedback = action.feedback;
+      state.data.weeks[action.currentWeekNo].
+      workouts[action.workoutKey].
+      feedback = action.feedback;
       return {
         ...state
       };
@@ -76,13 +84,14 @@ export default function plan(state = initialState, action = {}) {
       };
 
     case actionTypes.PLAN_UPDATE_SET:
+    // Extract to utils function with comments
       set.dateDT = Date.now();
       set[`_${action.field}`] = set[action.field];
 
       if (set.c1FieldName === action.field) {
         set._c1 = set.c1;
         set.c1 = action.value;
-      } else if(set.c2FieldName === action.field) {
+      } else if (set.c2FieldName === action.field) {
         set._c2 = set.c2;
         set.c2 = action.value;
       }
@@ -99,7 +108,7 @@ export default function plan(state = initialState, action = {}) {
 
       if (set.c1FieldName === action.field) {
         set.c1 = set._c1;
-      } else if(set.c2FieldName === action.field) {
+      } else if (set.c2FieldName === action.field) {
         set.c2 = set._c2;
       }
 

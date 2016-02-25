@@ -13,7 +13,7 @@ export function checkWithValue(id, value) {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
-      value: value
+      value
     })
   });
 }
@@ -23,8 +23,8 @@ export function end(type, comments) {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
-      'type': type,
-      'comments': comments
+      type,
+      comments
     })
   });
 }
@@ -60,8 +60,8 @@ export function updateFeedback(id, type, comments) {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
-      'type': type,
-      'comments': comments
+      type,
+      comments
     })
   });
 }

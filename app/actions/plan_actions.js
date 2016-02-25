@@ -24,7 +24,7 @@ export function startWorkout(nextWorkoutId) {
   return (dispatch) => {
     dispatch({
       type: actionTypes.PLAN_START_WORKOUT,
-      nextWorkoutId: nextWorkoutId
+      nextWorkoutId
     });
 
     return request(start(nextWorkoutId))(dispatch)
@@ -33,7 +33,7 @@ export function startWorkout(nextWorkoutId) {
         processPlanJson(json),
         actionTypes.PLAN_START_WORKOUT_SUCCESS,
         actionTypes.PLAN_START_WORKOUT_FAIL,
-        { nextWorkoutId: nextWorkoutId }
+        { nextWorkoutId }
       )))
       .catch(error => fail(error));
   };
@@ -42,15 +42,19 @@ export function startWorkout(nextWorkoutId) {
 export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, field, value) {
   return (dispatch, getState) => {
     const props = {
-      currentWeekNo: currentWeekNo,
-      workoutKey: workoutKey,
-      exerciseGroupKey: exerciseGroupKey,
-      setKey: setKey,
-      field: field,
-      value: value
+      currentWeekNo,
+      workoutKey,
+      exerciseGroupKey,
+      setKey,
+      field,
+      value
     };
 
-    const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
+    const set = getState().plan.data.
+    weeks[currentWeekNo].
+    workouts[workoutKey].
+    exerciseGroups[exerciseGroupKey].
+    sets[setKey];
 
     dispatch({
       type: actionTypes.PLAN_UPDATE_SET,
@@ -72,13 +76,17 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
 export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
   return (dispatch, getState) => {
     const props = {
-      currentWeekNo: currentWeekNo,
-      workoutKey: workoutKey,
-      exerciseGroupKey: exerciseGroupKey,
-      setKey: setKey
+      currentWeekNo,
+      workoutKey,
+      exerciseGroupKey,
+      setKey
     };
 
-    const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
+    const set = getState().plan.data.
+    weeks[currentWeekNo].
+    workouts[workoutKey].
+    exerciseGroups[exerciseGroupKey].
+    sets[setKey];
 
     dispatch({
       type: actionTypes.PLAN_CHECK_SET,
@@ -102,14 +110,18 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
 export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, setKey, value) {
   return (dispatch, getState) => {
     const props = {
-      currentWeekNo: currentWeekNo,
-      workoutKey: workoutKey,
-      exerciseGroupKey: exerciseGroupKey,
-      setKey: setKey,
-      value: value
+      currentWeekNo,
+      workoutKey,
+      exerciseGroupKey,
+      setKey,
+      value
     };
 
-    const set = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].exerciseGroups[exerciseGroupKey].sets[setKey];
+    const set = getState().plan.data.
+    weeks[currentWeekNo].
+    workouts[workoutKey].
+    exerciseGroups[exerciseGroupKey].
+    sets[setKey];
 
     dispatch({
       type: actionTypes.PLAN_CHECK_SET_WITH_VALUE,
@@ -133,8 +145,8 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
 export function endWorkout(workoutKey, feedback) {
   return (dispatch) => {
     const params = {
-      workoutKey: workoutKey,
-      feedback: feedback
+      workoutKey,
+      feedback
     };
 
     dispatch({
@@ -154,15 +166,17 @@ export function endWorkout(workoutKey, feedback) {
   };
 }
 
-
 export function persistFeedback(currentWeekNo, workoutKey, feedback) {
   return (dispatch, getState) => {
     const params = {
-      currentWeekNo: currentWeekNo,
-      workoutKey: workoutKey,
-      feedback: feedback
+      currentWeekNo,
+      workoutKey,
+      feedback
     };
-    const workoutId = getState().plan.data.weeks[currentWeekNo].workouts[workoutKey].id;
+
+    const workoutId = getState().plan.data.
+    weeks[currentWeekNo].
+    workouts[workoutKey].id;
 
     dispatch({
       type: actionTypes.PLAN_PERSIST_FEEDBACK,
