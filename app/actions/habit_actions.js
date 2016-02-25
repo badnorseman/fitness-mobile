@@ -13,7 +13,7 @@ const habitsCheck = (id, occurence) => {
     };
 
     dispatch({
-      type: actionTypes.HABITS_CHECK,
+      type: actionTypes.HABIT_CHECK,
       ...props
     });
 
@@ -21,8 +21,8 @@ const habitsCheck = (id, occurence) => {
       .then(response => response.json())
       .then(json => dispatch(appReceive(
         json,
-        actionTypes.HABITS_CHECK_SUCCESS,
-        actionTypes.HABITS_CHECK_FAIL,
+        actionTypes.HABIT_CHECK_SUCCESS,
+        actionTypes.HABIT_CHECK_FAIL,
         props
       )))
       .catch(error => appError(error));
@@ -31,15 +31,15 @@ const habitsCheck = (id, occurence) => {
 
 const habitsLoadAll = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABITS_LOAD_ALL });
+    dispatch({ type: actionTypes.HABIT_LOAD_ALL });
 
     return request(loadAll())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           json,
-          actionTypes.HABITS_LOAD_ALL_SUCCESS,
-          actionTypes.HABITS_LOAD_ALL_FAIL
+          actionTypes.HABIT_LOAD_ALL_SUCCESS,
+          actionTypes.HABIT_LOAD_ALL_FAIL
         ));
       })
       .catch(error => appError(error));
@@ -48,15 +48,15 @@ const habitsLoadAll = () => {
 
 const habitsLoadStarted = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABITS_LOAD_STARTED });
+    dispatch({ type: actionTypes.HABIT_LOAD_STARTED });
 
     return request(loadStarted())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           processHabitsStarted(json),
-          actionTypes.HABITS_LOAD_STARTED_SUCCESS,
-          actionTypes.HABITS_LOAD_STARTED_FAIL
+          actionTypes.HABIT_LOAD_STARTED_SUCCESS,
+          actionTypes.HABIT_LOAD_STARTED_FAIL
         ));
       })
       .catch(error => appError(error));
@@ -66,7 +66,7 @@ const habitsLoadStarted = () => {
 const habitsStart = (id) => {
   return (dispatch) => {
     dispatch({
-      type: actionTypes.HABITS_START,
+      type: actionTypes.HABIT_START,
       id: id
     });
 
@@ -75,8 +75,8 @@ const habitsStart = (id) => {
       .then(json => {
         dispatch(appReceive(
           processHabitsStarted(json),
-          actionTypes.HABITS_START_SUCCESS,
-          actionTypes.HABITS_START_FAIL
+          actionTypes.HABIT_START_SUCCESS,
+          actionTypes.HABIT_START_FAIL
         ));
       })
       .catch(error => appError(error));

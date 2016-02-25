@@ -56857,18 +56857,18 @@ var PLAN_CHECK_SET_WITH_VALUE='PLAN_CHECK_SET_WITH_VALUE';exports.PLAN_CHECK_SET
 var PLAN_CHECK_SET_WITH_VALUE_SUCCESS='PLAN_CHECK_SET_WITH_VALUE_SUCCESS';exports.PLAN_CHECK_SET_WITH_VALUE_SUCCESS = PLAN_CHECK_SET_WITH_VALUE_SUCCESS;
 var PLAN_CHECK_SET_WITH_VALUE_FAIL='PLAN_CHECK_SET_WITH_VALUE_FAIL';exports.PLAN_CHECK_SET_WITH_VALUE_FAIL = PLAN_CHECK_SET_WITH_VALUE_FAIL;
 
-var HABITS_LOAD_ALL='HABITS_LOAD_ALL';exports.HABITS_LOAD_ALL = HABITS_LOAD_ALL;
-var HABITS_LOAD_ALL_SUCCESS='HABITS_LOAD_ALL_SUCCESS';exports.HABITS_LOAD_ALL_SUCCESS = HABITS_LOAD_ALL_SUCCESS;
-var HABITS_LOAD_ALL_FAIL='HABITS_LOAD_ALL_FAIL';exports.HABITS_LOAD_ALL_FAIL = HABITS_LOAD_ALL_FAIL;
-var HABITS_LOAD_STARTED='HABITS_LOAD_STARTED';exports.HABITS_LOAD_STARTED = HABITS_LOAD_STARTED;
-var HABITS_LOAD_STARTED_SUCCESS='HABITS_LOAD_STARTED_SUCCESS';exports.HABITS_LOAD_STARTED_SUCCESS = HABITS_LOAD_STARTED_SUCCESS;
-var HABITS_LOAD_STARTED_FAIL='HABITS_LOAD_STARTED_FAIL';exports.HABITS_LOAD_STARTED_FAIL = HABITS_LOAD_STARTED_FAIL;
-var HABITS_CHECK='HABITS_CHECK';exports.HABITS_CHECK = HABITS_CHECK;
-var HABITS_CHECK_SUCCESS='HABITS_CHECK_SUCCESS';exports.HABITS_CHECK_SUCCESS = HABITS_CHECK_SUCCESS;
-var HABITS_CHECK_FAIL='HABITS_CHECK_FAIL';exports.HABITS_CHECK_FAIL = HABITS_CHECK_FAIL;
-var HABITS_START='HABITS_START';exports.HABITS_START = HABITS_START;
-var HABITS_START_SUCCESS='HABITS_START_SUCCESS';exports.HABITS_START_SUCCESS = HABITS_START_SUCCESS;
-var HABITS_START_FAIL='HABITS_START_FAIL';exports.HABITS_START_FAIL = HABITS_START_FAIL;
+var HABIT_LOAD_ALL='HABIT_LOAD_ALL';exports.HABIT_LOAD_ALL = HABIT_LOAD_ALL;
+var HABIT_LOAD_ALL_SUCCESS='HABIT_LOAD_ALL_SUCCESS';exports.HABIT_LOAD_ALL_SUCCESS = HABIT_LOAD_ALL_SUCCESS;
+var HABIT_LOAD_ALL_FAIL='HABIT_LOAD_ALL_FAIL';exports.HABIT_LOAD_ALL_FAIL = HABIT_LOAD_ALL_FAIL;
+var HABIT_LOAD_STARTED='HABIT_LOAD_STARTED';exports.HABIT_LOAD_STARTED = HABIT_LOAD_STARTED;
+var HABIT_LOAD_STARTED_SUCCESS='HABIT_LOAD_STARTED_SUCCESS';exports.HABIT_LOAD_STARTED_SUCCESS = HABIT_LOAD_STARTED_SUCCESS;
+var HABIT_LOAD_STARTED_FAIL='HABIT_LOAD_STARTED_FAIL';exports.HABIT_LOAD_STARTED_FAIL = HABIT_LOAD_STARTED_FAIL;
+var HABIT_CHECK='HABIT_CHECK';exports.HABIT_CHECK = HABIT_CHECK;
+var HABIT_CHECK_SUCCESS='HABIT_CHECK_SUCCESS';exports.HABIT_CHECK_SUCCESS = HABIT_CHECK_SUCCESS;
+var HABIT_CHECK_FAIL='HABIT_CHECK_FAIL';exports.HABIT_CHECK_FAIL = HABIT_CHECK_FAIL;
+var HABIT_START='HABIT_START';exports.HABIT_START = HABIT_START;
+var HABIT_START_SUCCESS='HABIT_START_SUCCESS';exports.HABIT_START_SUCCESS = HABIT_START_SUCCESS;
+var HABIT_START_FAIL='HABIT_START_FAIL';exports.HABIT_START_FAIL = HABIT_START_FAIL;
 
 var DASHBOARD_PREV_WEEK='DASHBOARD_PREV_WEEK';exports.DASHBOARD_PREV_WEEK = DASHBOARD_PREV_WEEK;
 var DASHBOARD_NEXT_WEEK='DASHBOARD_NEXT_WEEK';exports.DASHBOARD_NEXT_WEEK = DASHBOARD_NEXT_WEEK;
@@ -57132,8 +57132,8 @@ occurence = habit.occurences.find(function(o){return o.day === action.occurence.
 
 
 switch(action.type){
-case types.HABITS_LOAD_ALL_FAIL:
-case types.HABITS_LOAD_ALL_SUCCESS:
+case types.HABIT_LOAD_ALL_FAIL:
+case types.HABIT_LOAD_ALL_SUCCESS:
 return _extends({},
 state,{
 all:_extends({},
@@ -57142,10 +57142,10 @@ loading:false,
 loaded:true})});
 
 
-case types.HABITS_LOAD_STARTED_FAIL:
-case types.HABITS_LOAD_STARTED_SUCCESS:
-case types.HABITS_START_SUCCESS:
-case types.HABITS_START_FAIL:
+case types.HABIT_LOAD_STARTED_FAIL:
+case types.HABIT_LOAD_STARTED_SUCCESS:
+case types.HABIT_START_SUCCESS:
+case types.HABIT_START_FAIL:
 return _extends({},
 state,{
 started:_extends({},
@@ -57154,21 +57154,21 @@ loading:false,
 loaded:true})});
 
 
-case types.HABITS_LOAD_ALL:
+case types.HABIT_LOAD_ALL:
 return _extends({},
 state,{
 all:{
 loading:true}});
 
 
-case types.HABITS_LOAD_STARTED:
+case types.HABIT_LOAD_STARTED:
 return _extends({},
 state,{
 started:{
 loading:true}});
 
 
-case types.HABITS_CHECK:
+case types.HABIT_CHECK:
 occurence._dateDT = occurence.dateDT;
 
 if(occurence.dateDT){
@@ -57180,12 +57180,12 @@ occurence.dateDT = Date.now();}
 return _extends({},
 state);
 
-case types.HABITS_CHECK_SUCCESS:
+case types.HABIT_CHECK_SUCCESS:
 state.started = (0,_utilsProcessHabitsStarted2.default)(state.started);
 return _extends({},
 state);
 
-case types.HABITS_CHECK_FAIL:
+case types.HABIT_CHECK_FAIL:
 occurence.dateDT = occurence._dateDT;
 
 return _extends({},
@@ -60682,8 +60682,8 @@ var LOGIN_CHECK=API + '/login/check';exports.LOGIN_CHECK = LOGIN_CHECK;
 var LOGIN_EMAIL=API + '/login/email';exports.LOGIN_EMAIL = LOGIN_EMAIL;
 var PLAN=API + '/plan';exports.PLAN = PLAN;
 var WORKOUT_END=API + '/workout/end';exports.WORKOUT_END = WORKOUT_END;
-var HABITS_ALL=API + '/habit/all';exports.HABITS_ALL = HABITS_ALL;
-var HABITS_STARTED=API + '/habit/started';exports.HABITS_STARTED = HABITS_STARTED;
+var HABIT_ALL=API + '/habit/all';exports.HABIT_ALL = HABIT_ALL;
+var HABIT_STARTED=API + '/habit/started';exports.HABIT_STARTED = HABIT_STARTED;
 });
 __d('Fitbird/app/actions/plan_actions.js',function(global, require, module, exports) {  Object.defineProperty(exports,'__esModule',{value:true});var _extends=Object.assign || function(target){for(var i=1;i < arguments.length;i++) {var source=arguments[i];for(var key in source) {if(Object.prototype.hasOwnProperty.call(source,key)){target[key] = source[key];}}}return target;};exports.startWorkout = startWorkout;exports.updateWorkout = updateWorkout;exports.checkSet = checkSet;exports.checkSetWithValue = checkSetWithValue;exports.endWorkout = endWorkout;exports.persistFeedback = persistFeedback;exports.planLoad = planLoad;function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}function _interopRequireWildcard(obj){if(obj && obj.__esModule){return obj;}else {var newObj={};if(obj != null){for(var key in obj) {if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key] = obj[key];}}newObj['default'] = obj;return newObj;}}var _action_types=require('Fitbird/app/actions/action_types.js');var types=_interopRequireWildcard(_action_types);var _app_actions=require(
 'Fitbird/app/actions/app_actions.js');var _network_actions=require(
@@ -61290,15 +61290,15 @@ __d('Fitbird/app/actions/habits_actions.js',function(global, require, module, ex
 
 function habitsLoadAll(){
 return function(dispatch){
-dispatch({type:types.HABITS_LOAD_ALL});
+dispatch({type:types.HABIT_LOAD_ALL});
 
 return (0,_network_actions.request)((0,_apiHabits.loadAll)())(dispatch).
 then(function(response){return response.json();}).
 then(function(json){
 dispatch((0,_app_actions.appReceive)(
 json,
-types.HABITS_LOAD_ALL_SUCCESS,
-types.HABITS_LOAD_ALL_FAIL));}).
+types.HABIT_LOAD_ALL_SUCCESS,
+types.HABIT_LOAD_ALL_FAIL));}).
 
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
@@ -61307,15 +61307,15 @@ catch(function(error){return (0,_app_actions.appError)(error);});};}
 
 function habitsLoadStarted(){
 return function(dispatch){
-dispatch({type:types.HABITS_LOAD_STARTED});
+dispatch({type:types.HABIT_LOAD_STARTED});
 
 return (0,_network_actions.request)((0,_apiHabits.loadStarted)())(dispatch).
 then(function(response){return response.json();}).
 then(function(json){
 dispatch((0,_app_actions.appReceive)(
 (0,_utilsProcessHabitsStarted2.default)(json),
-types.HABITS_LOAD_STARTED_SUCCESS,
-types.HABITS_LOAD_STARTED_FAIL));}).
+types.HABIT_LOAD_STARTED_SUCCESS,
+types.HABIT_LOAD_STARTED_FAIL));}).
 
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
@@ -61330,7 +61330,7 @@ occurence:occurence};
 
 
 dispatch(_extends({
-type:types.HABITS_CHECK},
+type:types.HABIT_CHECK},
 props));
 
 
@@ -61338,8 +61338,8 @@ return (0,_network_actions.request)((0,_apiHabits.check)(id,occurence))(dispatch
 then(function(response){return response.json();}).
 then(function(json){return dispatch((0,_app_actions.appReceive)(
 json,
-types.HABITS_CHECK_SUCCESS,
-types.HABITS_CHECK_FAIL,
+types.HABIT_CHECK_SUCCESS,
+types.HABIT_CHECK_FAIL,
 props));}).
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
@@ -61349,7 +61349,7 @@ catch(function(error){return (0,_app_actions.appError)(error);});};}
 function habitsStart(id){
 return function(dispatch){
 dispatch({
-type:types.HABITS_START,
+type:types.HABIT_START,
 id:id});
 
 
@@ -61358,8 +61358,8 @@ then(function(response){return response.json();}).
 then(function(json){
 dispatch((0,_app_actions.appReceive)(
 (0,_utilsProcessHabitsStarted2.default)(json),
-types.HABITS_START_SUCCESS,
-types.HABITS_START_FAIL));}).
+types.HABIT_START_SUCCESS,
+types.HABIT_START_FAIL));}).
 
 
 catch(function(error){return (0,_app_actions.appError)(error);});};}
@@ -61368,14 +61368,14 @@ __d('Fitbird/app/api/habits.js',function(global, require, module, exports) {  Ob
 'Fitbird/app/constants/api_routes.js');
 
 function loadAll(){
-return fetch(_constantsApi_routes.HABITS_ALL,{
+return fetch(_constantsApi_routes.HABIT_ALL,{
 method:'GET',
 headers:_constantsHeaders2.default});}
 
 
 
 function loadStarted(){
-return fetch(_constantsApi_routes.HABITS_STARTED,{
+return fetch(_constantsApi_routes.HABIT_STARTED,{
 method:'GET',
 headers:_constantsHeaders2.default});}
 
