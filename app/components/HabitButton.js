@@ -51,20 +51,17 @@ export default class HabitButton extends Component {
     checkHabit: React.PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.handlePress = this.handlePress.bind(this);
-  }
-
-  getHabitName() {
+  // How can we move this method to the render method?
+  getHabitName = () => {
     const { occurence } = this.props;
 
     if (occurence.pick) { return 'Choose a habit'; }
 
     return days[occurence.day % 7];
-  }
+  };
 
-  getMainStyling(occurence) {
+  // How can we move this to styles?
+  getContainerStyling = (occurence) => {
     if (!occurence.timeStatus) {
       return { backgroundColor: 'rgba(58, 77, 153, 0.98)' };
     } else if (occurence.timeStatus !== 'today' && !occurence.dateDT) {
@@ -74,26 +71,27 @@ export default class HabitButton extends Component {
     } else if (occurence.timeStatus === 'today') {
       return { backgroundColor: 'rgba(58, 77, 153, 0.98)' };
     }
-  }
+  };
 
-  handlePress(occurences, occurence) {
+  handlePress = (occurences, occurence) => {
     const { navigator, checkHabit } = this.props;
     if (occurence.pick) {
       navigator.push({ id: 'habits', title: 'Habits' });
     } else {
       checkHabit(occurences.userHabit.id, occurence);
     }
-  }
+  };
 
   render() {
     const { occurences, occurence } = this.props;
-    const buttonStyles = [styles.container, this.getMainStyling(occurence)];
+    const buttonStyles = [styles.container, this.getContainerStyling(occurence)];
+    const habitName = this.getHabitName();
 
     return (
       <TouchableOpacity style={styles.touchable} onPress={this.handlePress(occurences, occurence)}>
         <View style={buttonStyles}>
           <Text style={[styles.firstLine, styles.firstLineCompleted]}>
-            {this.getHabitName()}
+            {habitName}
           </Text>
         </View>
       </TouchableOpacity>
