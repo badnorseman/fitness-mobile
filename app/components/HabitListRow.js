@@ -1,42 +1,4 @@
-'use strict';
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-class HabitListRow extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handlePress() {
-    this.props.navigator.push({
-      id: 'habit', title: 'Details', props: this.props
-    });
-  }
-
-  render() {
-    const { habit } = this.props;
-
-    return (
-      <TouchableOpacity style={styles.touchable}
-        onPress={this.handlePress.bind(this)}>
-        <View style={styles.container}>
-          <Text style={styles.title}>{habit.name}</Text>
-          <Text style={styles.description}>{habit.nameLong}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
-
-HabitListRow.propTypes = {
-  navigator: React.PropTypes.object,
-  habit: React.PropTypes.object
-};
+import React, { Component, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,4 +18,26 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HabitListRow
+export default class HabitListRow extends Component {
+  static propTypes = {
+    navigator: React.PropTypes.object,
+    habit: React.PropTypes.object
+  };
+
+  handlePress() {
+    this.props.navigator.push({ id: 'habit', title: 'Details', props: this.props });
+  }
+
+  render() {
+    const { habit } = this.props;
+
+    return (
+      <TouchableOpacity style={styles.touchable} onPress={this.handlePress}>
+        <View style={styles.container}>
+          <Text style={styles.title}>{habit.name}</Text>
+          <Text style={styles.description}>{habit.nameLong}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}

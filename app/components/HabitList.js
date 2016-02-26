@@ -32,6 +32,11 @@ export default class HabitList extends Component {
     state: React.PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.renderRow = this.renderRow.bind(this);
+  }
+
   renderRow(rowData, sectionId, rowId) {
     return <HabitListRow {...this.props} habit={rowData} key={rowId} />;
   }
