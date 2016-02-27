@@ -1,11 +1,11 @@
-import * as actionTypes from '../constants/action_types';
-import prepareColumns from '../utils/prepareColumns';
+import * as actionTypes from '../constants/action_types'
+import prepareColumns from '../utils/prepareColumns'
 
-const initialState = {};
+const initialState = {}
 
-export default function plan(state = initialState, action = {}) {
-  let set;
-  let missingField;
+export const plan = (state = initialState, action = {}) => {
+  let set
+  let missingField
 
   if (typeof action.currentWeekNo === 'number' &&
     typeof action.workoutKey === 'number' &&
@@ -14,16 +14,20 @@ export default function plan(state = initialState, action = {}) {
     set = state.data.weeks[action.currentWeekNo].
     workouts[action.workoutKey].
     exerciseGroups[action.exerciseGroupKey].
-    sets[action.setKey];
+    sets[action.setKey]
 
     if (set.c1Missing) {
-      missingField = set.c1FieldName;
+      missingField = set.c1FieldName
     } else if (set.c2Missing) {
-      missingField = set.c2FieldName;
+      missingField = set.c2FieldName
     }
   }
 
   switch (action.type) {
+    case actionTypes.AUTH_CLEAR:
+      return {
+        ...initialState
+      }
     case actionTypes.PLAN_LOAD_FAIL:
     case actionTypes.PLAN_LOAD_SUCCESS:
     case actionTypes.PLAN_END_WORKOUT_SUCCESS:
@@ -32,101 +36,97 @@ export default function plan(state = initialState, action = {}) {
         ...state,
         ...action.response,
         loading: false
-      };
+      }
     case actionTypes.PLAN_LOAD:
       return {
         ...state,
         loading: true
-      };
+      }
     case actionTypes.PLAN_PERSIST_FEEDBACK_SUCCESS:
       state.data.weeks[action.currentWeekNo].
       workouts[action.workoutKey].
-      feedback = action.feedback;
+      feedback = action.feedback
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_CHECK_SET:
     case actionTypes.PLAN_CHECK_SET_SUCCESS:
-      set.dateDT = Date.now();
+      set.dateDT = Date.now()
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_CHECK_SET_WITH_VALUE:
-      set.missingField = false;
-      set.dateDT = Date.now();
+      set.missingField = false
+      set.dateDT = Date.now()
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_CHECK_SET_WITH_VALUE_SUCCESS:
-      set.missingField = false;
-      set.dateDT = Date.now();
-      set[missingField] = action.value;
+      set.missingField = false
+      set.dateDT = Date.now()
+      set[missingField] = action.value
 
       if (set.c1Missing) {
-        set.c1 = action.value;
+        set.c1 = action.value
       } else if (set.c2Missing) {
-        set.c2 = action.value;
+        set.c2 = action.value
       }
 
-      prepareColumns(set);
+      prepareColumns(set)
 
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_CHECK_SET_FAIL:
     case actionTypes.PLAN_CHECK_SET_WITH_VALUE_FAIL:
-      set.dateDT = null;
+      set.dateDT = null
       if (missingField) {
-        set.missingField = missingField;
+        set.missingField = missingField
       }
       return {
         ...state
-      };
+      }
 
     case actionTypes.PLAN_UPDATE_SET:
     // Extract to utils function with comments
-      set.dateDT = Date.now();
-      set[`_${action.field}`] = set[action.field];
+      set.dateDT = Date.now()
+      set[`_${action.field}`] = set[action.field]
 
       if (set.c1FieldName === action.field) {
-        set._c1 = set.c1;
-        set.c1 = action.value;
+        set._c1 = set.c1
+        set.c1 = action.value
       } else if (set.c2FieldName === action.field) {
-        set._c2 = set.c2;
-        set.c2 = action.value;
+        set._c2 = set.c2
+        set.c2 = action.value
       }
 
-      set[action.field] = action.value;
+      set[action.field] = action.value
 
-      prepareColumns(set);
+      prepareColumns(set)
 
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_UPDATE_SET_FAIL:
-      set[action.field] = set[`_${action.field}`];
+      set[action.field] = set[`_${action.field}`]
 
       if (set.c1FieldName === action.field) {
-        set.c1 = set._c1;
+        set.c1 = set._c1
       } else if (set.c2FieldName === action.field) {
-        set.c2 = set._c2;
+        set.c2 = set._c2
       }
 
       return {
         ...state
-      };
+      }
     case actionTypes.PLAN_UPDATE_SET_SUCCESS:
     case actionTypes.PLAN_PERSIST_FEEDBACK:
     case actionTypes.PLAN_START_WORKOUT:
     case actionTypes.PLAN_END_WORKOUT:
       return {
         ...state
-      };
-    case actionTypes.AUTH_CLEAR:
-      return {
-        ...initialState
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -4,4 +4,4 @@ export default {
   'Content-Type': 'application/json',
   'Origin': '',
   'Host': 'app.fitbird.com'
-};
+}

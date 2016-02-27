@@ -1,17 +1,17 @@
-import _ from 'lodash';
-import * as actionTypes from '../constants/action_types';
+import _ from 'lodash'
+import * as actionTypes from '../constants/action_types'
 
-const initialState = {};
+const initialState = {}
 
-export default function network(state = initialState, action = {}) {
+export const network = (state = initialState, action = {}) => {
   switch (action.type) {
     case actionTypes.NETWORK_REQUEST:
-      state[action.id] = Date.now();
-      return _.cloneDeep(state);
+      state[action.id] = Date.now()
+      return _.cloneDeep(state)
     case actionTypes.NETWORK_REQUEST_COMPLETED:
-      delete state[action.id];
-      return _.cloneDeep(state);
+      delete state[action.id]
+      return _.cloneDeep(state)
     default:
-      return state;
+      return state
   }
 }

@@ -1,41 +1,41 @@
-import CookieManager from 'react-native-cookies';
-import { AsyncStorage } from 'react-native';
-import * as actionTypes from '../constants/action_types';
-import { appError, appReceive } from './app_actions';
-import { request } from './network_actions';
-import { check, loginEmail } from '../api/auth';
+import CookieManager from 'react-native-cookies'
+import { AsyncStorage } from 'react-native'
+import * as actionTypes from '../constants/action_types'
+import { appError, appReceive } from './app_actions'
+import { request } from './network_actions'
+import { check, loginEmail } from '../api/auth'
 
-const STORAGE_KEY = '@Fitbird:authCookie';
+const STORAGE_KEY = '@Fitbird:authCookie'
 
-function send(email, password) {
+const send = (email, password) => {
   return {
     type: actionTypes.AUTH_SEND,
     email,
     password
-  };
+  }
 }
 
-export function checkCookie() {
+export const checkCookie = () => {
   return (dispatch) => {
     request(check())(dispatch)
       .then(response => response.json())
       .then(json => {
         dispatch(appReceive(
           json, actionTypes.AUTH_BY_COOKIE_SUCCESS, actionTypes.AUTH_BY_COOKIE_FAIL
-        ));
+        ))
       })
-      .catch(error => appError(error));
-  };
+      .catch(error => appError(error))
+  }
 }
 
-export function storeCookie() {
+export const storeCookie = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.AUTH_STORE_COOKIE, key: STORAGE_KEY });
+    dispatch({ type: actionTypes.AUTH_STORE_COOKIE, key: STORAGE_KEY })
 
     CookieManager.getAll((cookie) => {
       if (!cookie || !cookie.SS) {
-        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL, key: STORAGE_KEY });
-        return;
+        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL, key: STORAGE_KEY })
+        return
       }
 
       try {
@@ -43,22 +43,22 @@ export function storeCookie() {
           dispatch({
             type: actionTypes.AUTH_STORE_COOKIE_SUCCESS,
             key: STORAGE_KEY, cookie: JSON.stringify(cookie.SS)
-          });
-        });
+          })
+        })
       } catch (error) {
-        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL, error });
+        dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL, error })
       }
-    });
-  };
+    })
+  }
 }
 
-export function authByCookie() {
+export const authByCookie = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.AUTH_BY_COOKIE });
+    dispatch({ type: actionTypes.AUTH_BY_COOKIE })
 
     AsyncStorage.getItem(STORAGE_KEY, (err, res) => {
       if (res) {
-        const cookie = JSON.parse(res);
+        const cookie = JSON.parse(res)
 
         CookieManager.set({
           origin: '',
@@ -66,16 +66,16 @@ export function authByCookie() {
           expiration: '9999-12-31T00:00:00.00-05:00', // Some ridiculous time in future
           ...cookie
         }, () => {
-          dispatch(checkCookie());
-        });
+          dispatch(checkCookie())
+        })
       } else {
-        dispatch({ type: actionTypes.AUTH_BY_COOKIE_FAIL });
+        dispatch({ type: actionTypes.AUTH_BY_COOKIE_FAIL })
       }
-    });
-  };
+    })
+  }
 }
 
-export function clear() {
+export const clear = () => {
   return (dispatch) => {
     AsyncStorage.removeItem(STORAGE_KEY)
       .then(() => {
@@ -84,33 +84,33 @@ export function clear() {
             err,
             res,
             type: actionTypes.AUTH_CLEAR
-          });
-        });
-      });
-  };
+          })
+        })
+      })
+  }
 }
 
-export function logout() {
+export const logout = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.AUTH_LOGOUT });
-    dispatch(clear());
-  };
+    dispatch({ type: actionTypes.AUTH_LOGOUT })
+    dispatch(clear())
+  }
 }
 
-export function login(email, password) {
+export const login = (email, password) => {
   return (dispatch) => {
-    dispatch(send(email, password));
+    dispatch(send(email, password))
 
     return request(loginEmail(email, password))(dispatch)
       .then(response => response.json())
       .then(json => {
-        dispatch(storeCookie());
+        dispatch(storeCookie())
         dispatch(appReceive(
           json,
           actionTypes.AUTH_SUCCESS,
           actionTypes.AUTH_FAIL
-        ));
+        ))
       })
-      .catch(error => appError(error));
-  };
+      .catch(error => appError(error))
+  }
 }

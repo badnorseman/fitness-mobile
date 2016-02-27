@@ -1,14 +1,14 @@
-import HEADERS from '../constants/headers';
-import { SERVER } from '../constants/server';
+import HEADERS from '../constants/headers'
+import SERVER from '../constants/server'
 
-export function check() {
+export const check = () => {
   return fetch(`${SERVER}/login/check`, {
     method: 'GET',
     headers: HEADERS
-  });
+  })
 }
 
-export function loginEmail(email, password) {
+export const loginEmail = (email, password) => {
   return fetch(`${SERVER}/login/email`, {
     method: 'POST',
     headers: HEADERS,
@@ -16,5 +16,5 @@ export function loginEmail(email, password) {
       email,
       password
     })
-  });
+  })
 }

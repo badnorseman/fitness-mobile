@@ -105,14 +105,14 @@ export default class EditFeedback extends Component {
       this.state.comments = '';
     }
   }
-  
+
   componentDidMount() {
     DeviceEventEmitter.addListener('keyboardDidShow',(frames) => {
       if (!frames.endCoordinates) return;
       LayoutAnimation.easeInEaseOut();
       this.setState({ keyboardSpace: frames.endCoordinates.height });
     });
-    
+
     DeviceEventEmitter.addListener('keyboardWillHide', (frames) => {
       LayoutAnimation.easeInEaseOut();
       this.setState({ keyboardSpace:0 });

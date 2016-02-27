@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { Component, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(119, 139, 218, 1)'
   }
-});
+})
 
 export default class HabitListRow extends Component {
   static propTypes = {
@@ -25,11 +25,11 @@ export default class HabitListRow extends Component {
   };
 
   handlePress() {
-    this.props.navigator.push({ id: 'habit', title: 'Details', props: this.props });
+    this.props.navigator.push({ id: 'habit', title: 'Details', props: this.props })
   }
 
   render() {
-    const { habit } = this.props;
+    const { habit } = this.props
 
     return (
       <TouchableOpacity style={styles.touchable} onPress={this.handlePress}>
@@ -38,6 +38,6 @@ export default class HabitListRow extends Component {
           <Text style={styles.description}>{habit.nameLong}</Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   }
 }

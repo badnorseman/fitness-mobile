@@ -1,1 +1,1 @@
-export const SERVER = 'http://app.fitbird.com/api';
+export default 'http://app.fitbird.com/api'

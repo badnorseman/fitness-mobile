@@ -1,6 +1,6 @@
-import React, { Component, ListView, Text, View } from 'react-native';
-import HabitListRow from './HabitListRow';
-import NAVBAR_PADDING from '../constants/navbar_padding';
+import React, { Component, ListView, Text, View } from 'react-native'
+import HabitListRow from './HabitListRow'
+import NAVBAR_PADDING from '../constants/navbar_padding'
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   paragraph: {
     color: '#ffffff'
   }
-});
+})
 
 export default class HabitList extends Component {
   static propTypes = {
@@ -33,21 +33,21 @@ export default class HabitList extends Component {
   };
 
   constructor(props) {
-    super(props);
-    this.renderRow = this.renderRow.bind(this);
+    super(props)
+    this.renderRow = this.renderRow.bind(this)
   }
 
   renderRow(rowData, sectionId, rowId) {
-    return <HabitListRow {...this.props} habit={rowData} key={rowId} />;
+    return <HabitListRow {...this.props} habit={rowData} key={rowId} />
   }
 
   render() {
-    const { state } = this.props;
-    const habits = state.habit.all.data;
+    const { state } = this.props
+    const habits = state.habit.all.data
     const ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    });
-    const dataSource = ds.cloneWithRows(habits || []);
+    })
+    const dataSource = ds.cloneWithRows(habits || [])
 
     return (
       <View style={styles.container}>
@@ -67,6 +67,6 @@ export default class HabitList extends Component {
           renderRow={this.renderRow}
         />
       </View>
-    );
+    )
   }
 }
