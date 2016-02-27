@@ -1,6 +1,6 @@
 {
   "name": "FitBird",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "bundleId": "com.fitbird.fitbird",
   "private": true,
   "scripts": {

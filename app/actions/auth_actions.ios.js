@@ -63,7 +63,7 @@ export function authByCookie() {
         CookieManager.set({
           origin: '',
           version: '1',
-          expiration: '3015-05-30T12:30:00.00-05:00', // Some ridiculous time in future
+          expiration: '9999-12-31T00:00:00.00-05:00', // Some ridiculous time in future
           ...cookie
         }, () => {
           dispatch(checkCookie());

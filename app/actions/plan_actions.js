@@ -7,10 +7,6 @@ import { check, checkWithValue, end, loadAll, update, updateFeedback, start } fr
 import processPlan from '../utils/processPlan';
 import { COUNT_DOWN } from '../constants/counter_directions';
 
-function fail(error) {
-  return appError(error);
-}
-
 function processPlanJson(json) {
   if (json.ok && json.data) {
     json.data = processPlan(json.data);
@@ -34,13 +30,13 @@ export function startWorkout(nextWorkoutId) {
         actionTypes.PLAN_START_WORKOUT_FAIL,
         { nextWorkoutId }
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
 export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, field, value) {
   return (dispatch, getState) => {
-    const props = {
+    const data = {
       currentWeekNo,
       workoutKey,
       exerciseGroupKey,
@@ -57,7 +53,7 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
 
     dispatch({
       type: actionTypes.PLAN_UPDATE_SET,
-      ...props
+      ...data
     });
 
     return request(update(set.id, field, value))(dispatch)
@@ -66,15 +62,15 @@ export function updateSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey, f
         processPlanJson(json),
         actionTypes.PLAN_UPDATE_SET_SUCCESS,
         actionTypes.PLAN_UPDATE_SET_FAIL,
-        props
+        data
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
 export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
   return (dispatch, getState) => {
-    const props = {
+    const data = {
       currentWeekNo,
       workoutKey,
       exerciseGroupKey,
@@ -89,7 +85,7 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
 
     dispatch({
       type: actionTypes.PLAN_CHECK_SET,
-      ...props
+      ...data
     });
 
     dispatch(startCounter(set.id, 0, COUNT_DOWN, set.rest));
@@ -100,15 +96,15 @@ export function checkSet(currentWeekNo, workoutKey, exerciseGroupKey, setKey) {
         processPlanJson(json),
         actionTypes.PLAN_CHECK_SET_SUCCESS,
         actionTypes.PLAN_CHECK_SET_FAIL,
-        props
+        data
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
 export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, setKey, value) {
   return (dispatch, getState) => {
-    const props = {
+    const data = {
       currentWeekNo,
       workoutKey,
       exerciseGroupKey,
@@ -124,7 +120,7 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
 
     dispatch({
       type: actionTypes.PLAN_CHECK_SET_WITH_VALUE,
-      ...props
+      ...data
     });
 
     dispatch(startCounter(set.id, 0, COUNT_DOWN, set.rest));
@@ -135,22 +131,22 @@ export function checkSetWithValue(currentWeekNo, workoutKey, exerciseGroupKey, s
         processPlanJson(json),
         actionTypes.PLAN_CHECK_SET_WITH_VALUE_SUCCESS,
         actionTypes.PLAN_CHECK_SET_WITH_VALUE_FAIL,
-        props
+        data
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
 export function endWorkout(workoutKey, feedback) {
   return (dispatch) => {
-    const params = {
+    const data = {
       workoutKey,
       feedback
     };
 
     dispatch({
       type: actionTypes.PLAN_END_WORKOUT,
-      ...params
+      ...data
     });
 
     return request(end(feedback.type, feedback.comments))(dispatch)
@@ -159,15 +155,15 @@ export function endWorkout(workoutKey, feedback) {
         processPlanJson(json),
         actionTypes.PLAN_END_WORKOUT_SUCCESS,
         actionTypes.PLAN_END_WORKOUT_FAIL,
-        params
+        data
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
 export function persistFeedback(currentWeekNo, workoutKey, feedback) {
   return (dispatch, getState) => {
-    const params = {
+    const data = {
       currentWeekNo,
       workoutKey,
       feedback
@@ -179,7 +175,7 @@ export function persistFeedback(currentWeekNo, workoutKey, feedback) {
 
     dispatch({
       type: actionTypes.PLAN_PERSIST_FEEDBACK,
-      ...params
+      ...data
     });
 
     return request(updateFeedback(workoutId, feedback.type, feedback.comments))(dispatch)
@@ -188,9 +184,9 @@ export function persistFeedback(currentWeekNo, workoutKey, feedback) {
         processPlanJson(json),
         actionTypes.PLAN_PERSIST_FEEDBACK_SUCCESS,
         actionTypes.PLAN_PERSIST_FEEDBACK_FAIL,
-        params
+        data
       )))
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }
 
@@ -208,6 +204,6 @@ export function planLoad() {
         ));
         dispatch(initWeek());
       })
-      .catch(error => fail(error));
+      .catch(error => appError(error));
   };
 }

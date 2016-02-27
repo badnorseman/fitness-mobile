@@ -6,14 +6,14 @@ import processHabitsStarted from '../utils/processHabitsStarted';
 
 export function checkHabit(id, occurence) {
   return (dispatch) => {
-    const props = {
+    const data = {
       id,
       occurence
     };
 
     dispatch({
       type: actionTypes.HABIT_CHECK,
-      ...props
+      ...data
     });
 
     return request(check(id, occurence))(dispatch)
@@ -22,7 +22,7 @@ export function checkHabit(id, occurence) {
         json,
         actionTypes.HABIT_CHECK_SUCCESS,
         actionTypes.HABIT_CHECK_FAIL,
-        props
+        data
       )))
       .catch(error => appError(error));
   };

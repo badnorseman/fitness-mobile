@@ -8,12 +8,14 @@ import { SERVER } from '../constants/server';
 
 const STORAGE_KEY = '@Fitbird:authCookieHeader';
 
+// Send auth or authorize?
 function send() {
   return {
     type: actionTypes.AUTH_SEND
   };
 }
 
+// Verify cookie?
 export function checkCookie() {
   return (dispatch) => {
     request(check())(dispatch)
@@ -64,6 +66,7 @@ export function authByCookie() {
   };
 }
 
+// Clear cookie?
 export function clear() {
   AsyncStorage.removeItem(STORAGE_KEY)
     .then(() => {
