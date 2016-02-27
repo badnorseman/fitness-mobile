@@ -1,14 +1,14 @@
-import * as actionTypes from '../constants/action_types';
+import * as actionTypes from '../constants/action_types'
 
-const initialState = {};
+const initialState = {}
 
-export default function auth(state = initialState, action = {}) {
+export const auth = (state = initialState, action = {}) => {
   switch (action.type) {
     case actionTypes.APP_ERROR:
       return {
         ...state
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -1,21 +1,20 @@
-'use strict';
-import * as actionTypes from '../constants/action_types';
-import { appError, appReceive } from './app_actions';
-import { request } from './network_actions';
-import { check, fetchAll, fetchStarted, start } from '../api/habit_api';
-import processHabitsStarted from '../utils/processHabitsStarted';
+import * as actionTypes from '../constants/action_types'
+import { appError, appReceive } from './app_actions'
+import { request } from './network_actions'
+import { check, fetchAll, fetchStarted, start } from '../api/habit'
+import processHabitsStarted from '../utils/processHabitsStarted'
 
-const checkHabit = (id, occurence) => {
+export const checkHabit = (id, occurence) => {
   return (dispatch) => {
-    const props = {
-      id: id,
-      occurence: occurence
-    };
+    const data = {
+      id,
+      occurence
+    }
 
     dispatch({
       type: actionTypes.HABIT_CHECK,
-      ...props
-    });
+      ...data
+    })
 
     return request(check(id, occurence))(dispatch)
       .then(response => response.json())
@@ -23,15 +22,15 @@ const checkHabit = (id, occurence) => {
         json,
         actionTypes.HABIT_CHECK_SUCCESS,
         actionTypes.HABIT_CHECK_FAIL,
-        props
+        data
       )))
-      .catch(error => appError(error));
-  };
-};
+      .catch(error => appError(error))
+  }
+}
 
-const getHabits = () => {
+export const getHabits = () => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABIT_FETCH_ALL });
+    dispatch({ type: actionTypes.HABIT_FETCH_ALL })
 
     return request(fetchAll())(dispatch)
       .then(response => response.json())
@@ -40,15 +39,15 @@ const getHabits = () => {
           json,
           actionTypes.HABIT_FETCH_ALL_SUCCESS,
           actionTypes.HABIT_FETCH_ALL_FAIL
-        ));
+        ))
       })
-      .catch(error => appError(error));
-  };
-};
+      .catch(error => appError(error))
+  }
+}
 
-const getStartedHabits = () => {
+export const getStartedHabits =() => {
   return (dispatch) => {
-    dispatch({ type: actionTypes.HABIT_FETCH_STARTED });
+    dispatch({ type: actionTypes.HABIT_FETCH_STARTED })
 
     return request(fetchStarted())(dispatch)
       .then(response => response.json())
@@ -57,18 +56,18 @@ const getStartedHabits = () => {
           processHabitsStarted(json),
           actionTypes.HABIT_FETCH_STARTED_SUCCESS,
           actionTypes.HABIT_FETCH_STARTED_FAIL
-        ));
+        ))
       })
-      .catch(error => appError(error));
-  };
-};
+      .catch(error => appError(error))
+  }
+}
 
-const startHabit = (id) => {
+export const startHabit = (id) => {
   return (dispatch) => {
     dispatch({
       type: actionTypes.HABIT_START,
-      id: id
-    });
+      id
+    })
 
     return request(start(id))(dispatch)
       .then(response => response.json())
@@ -77,10 +76,8 @@ const startHabit = (id) => {
           processHabitsStarted(json),
           actionTypes.HABIT_START_SUCCESS,
           actionTypes.HABIT_START_FAIL
-        ));
+        ))
       })
-      .catch(error => appError(error));
-  };
-};
-
-export { checkHabit, getHabits, getStartedHabits, startHabit };
+      .catch(error => appError(error))
+  }
+}
