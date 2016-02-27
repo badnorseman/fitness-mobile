@@ -1,15 +1,14 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
-import { check, fetchAll, fetchStarted, start } from '../api/habit_api';
+import { check, fetchAll, fetchStarted, start } from '../api/habit';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
-const checkHabit = (id, occurence) => {
+export function checkHabit(id, occurence) {
   return (dispatch) => {
     const props = {
-      id: id,
-      occurence: occurence
+      id,
+      occurence
     };
 
     dispatch({
@@ -27,9 +26,9 @@ const checkHabit = (id, occurence) => {
       )))
       .catch(error => appError(error));
   };
-};
+}
 
-const getHabits = () => {
+export function getHabits() {
   return (dispatch) => {
     dispatch({ type: actionTypes.HABIT_FETCH_ALL });
 
@@ -44,9 +43,9 @@ const getHabits = () => {
       })
       .catch(error => appError(error));
   };
-};
+}
 
-const getStartedHabits = () => {
+export function getStartedHabits() {
   return (dispatch) => {
     dispatch({ type: actionTypes.HABIT_FETCH_STARTED });
 
@@ -61,13 +60,13 @@ const getStartedHabits = () => {
       })
       .catch(error => appError(error));
   };
-};
+}
 
-const startHabit = (id) => {
+export function startHabit(id) {
   return (dispatch) => {
     dispatch({
       type: actionTypes.HABIT_START,
-      id: id
+      id
     });
 
     return request(start(id))(dispatch)
@@ -81,6 +80,4 @@ const startHabit = (id) => {
       })
       .catch(error => appError(error));
   };
-};
-
-export { checkHabit, getHabits, getStartedHabits, startHabit };
+}

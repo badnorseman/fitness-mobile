@@ -8,13 +8,13 @@ export function check() {
   });
 }
 
-export function loginEmail(email, password){
+export function loginEmail(email, password) {
   return fetch(`${SERVER}/login/email`, {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify({
-      'email': email,
-      'password': password
+      email,
+      password
     })
   });
 }

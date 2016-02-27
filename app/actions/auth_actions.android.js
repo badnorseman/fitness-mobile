@@ -1,10 +1,11 @@
+import CookieManager from 'react-native-cookies';
+import { AsyncStorage } from 'react-native';
 import * as actionTypes from '../constants/action_types';
 import { appError, appReceive } from './app_actions';
 import { request } from './network_actions';
-import CookieManager from 'react-native-cookies';
-import { AsyncStorage } from 'react-native';
 import { check, loginEmail } from '../api/auth';
 import { SERVER } from '../constants/server';
+
 const STORAGE_KEY = '@Fitbird:authCookieHeader';
 
 function send() {
@@ -15,28 +16,14 @@ function send() {
 
 export function checkCookie() {
   return (dispatch) => {
-    return request(check())(dispatch)
+    request(check())(dispatch)
       .then(response => response.json())
       .then(json => {
-        dispatch(appReceive(json, actionTypes.AUTH_BY_COOKIE_SUCCESS, actionTypes.AUTH_BY_COOKIE_FAIL));
+        dispatch(appReceive(
+          json, actionTypes.AUTH_BY_COOKIE_SUCCESS, actionTypes.AUTH_BY_COOKIE_FAIL
+        ));
       })
       .catch(error => appError(error));
-  };
-}
-
-export function authByCookie() {
-  return (dispatch) => {
-    dispatch({ type: actionTypes.AUTH_BY_COOKIE });
-
-    AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
-      if (cookie) {
-        CookieManager.setFromResponse(`${SERVER}/`, cookie, () => {
-          dispatch(checkCookie());
-        });
-      } else {
-        dispatch({ type: actionTypes.AUTH_BY_COOKIE_FAIL });
-      }
-    });
   };
 }
 
@@ -44,7 +31,7 @@ export function storeCookie() {
   return (dispatch) => {
     dispatch({ type: actionTypes.AUTH_STORE_COOKIE });
 
-    CookieManager.get(`${SERVER}/`, (cookie) => {
+    CookieManager.getCookieHeader(`${SERVER}/`, (cookie) => {
       if (!cookie) {
         dispatch({ type: actionTypes.AUTH_STORE_COOKIE_FAIL });
         return;
@@ -61,26 +48,31 @@ export function storeCookie() {
   };
 }
 
-export function clear() {
+export function authByCookie() {
   return (dispatch) => {
-    AsyncStorage.removeItem(STORAGE_KEY)
-      .then(() => {
-        CookieManager.clearAll((err, res) => {
-          dispatch({
-            err: err,
-            res: res,
-            type: actionTypes.AUTH_CLEAR
-          });
+    dispatch({ type: actionTypes.AUTH_BY_COOKIE });
+
+    AsyncStorage.getItem(STORAGE_KEY, (err, cookie) => {
+      if (cookie) {
+        CookieManager.setFromHeader(`${SERVER}/`, cookie, () => {
+          dispatch(checkCookie());
         });
-      });
+      } else {
+        dispatch({ type: actionTypes.AUTH_BY_COOKIE_FAIL });
+      }
+    });
   };
 }
 
-export function logout() {
-  return (dispatch) => {
-    dispatch({ type: actionTypes.AUTH_LOGOUT });
-    dispatch(clear());
-  }
+export function clear() {
+  AsyncStorage.removeItem(STORAGE_KEY)
+    .then(() => {
+      CookieManager.clearAll(() => {});
+    });
+
+  return {
+    type: actionTypes.AUTH_CLEAR
+  };
 }
 
 export function login(email, password) {
@@ -98,5 +90,11 @@ export function login(email, password) {
         ));
       })
       .catch(error => appError(error));
+  };
+}
+
+export function logout() {
+  return {
+    type: actionTypes.AUTH_LOGOUT
   };
 }

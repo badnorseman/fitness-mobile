@@ -1,8 +1,7 @@
-'use strict';
 import React, { Component } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createLogger from 'redux-logger'
+import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
 import Main from './Main';
