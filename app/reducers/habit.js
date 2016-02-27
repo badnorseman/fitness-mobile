@@ -6,11 +6,10 @@ const initialState = {
   started: {}
 };
 
-// Not sure what is going on here with habit2 and occurence,
-// lint is complaining.
 const habit = (state = initialState, action = {}) => {
   let occurence = '';
 
+  // Not sure what is going on here with habit2 and occurence.
   if (action.occurence && action.id) {
     const habit2 = state.started.data.find((h) => h.id === action.id);
     occurence = habit2.occurences.find(
@@ -19,6 +18,37 @@ const habit = (state = initialState, action = {}) => {
   }
 
   switch (action.type) {
+    case actionTypes.HABIT_CHECK:
+      occurence._dateDT = occurence.dateDT;
+
+      if (occurence.dateDT) {
+        occurence.dateDT = null;
+      } else {
+        occurence.dateDT = Date.now();
+      }
+
+      return {
+        ...state
+      };
+    case actionTypes.HABIT_CHECK_FAIL:
+      occurence.dateDT = occurence._dateDT;
+
+      return {
+        ...state
+      };
+    case actionTypes.HABIT_CHECK_SUCCESS:
+      // Lint is complaining.
+      state.started = processHabitsStarted(state.started);
+      return {
+        ...state
+      };
+    case actionTypes.HABIT_FETCH_ALL:
+      return {
+        ...state,
+        all: {
+          loading: true
+        }
+      };
     case actionTypes.HABIT_FETCH_ALL_FAIL:
     case actionTypes.HABIT_FETCH_ALL_SUCCESS:
       return {
@@ -27,6 +57,13 @@ const habit = (state = initialState, action = {}) => {
           ...action.response,
           loading: false,
           loaded: true
+        }
+      };
+    case actionTypes.HABIT_FETCH_STARTED:
+      return {
+        ...state,
+        started: {
+          loading: true
         }
       };
     case actionTypes.HABIT_FETCH_STARTED_FAIL:
@@ -41,44 +78,7 @@ const habit = (state = initialState, action = {}) => {
           loaded: true
         }
       };
-    case actionTypes.HABIT_FETCH_ALL:
-      return {
-        ...state,
-        all: {
-          loading: true
-        }
-      };
-    case actionTypes.HABIT_FETCH_STARTED:
-      return {
-        ...state,
-        started: {
-          loading: true
-        }
-      };
-    case actionTypes.HABIT_CHECK:
-      occurence._dateDT = occurence.dateDT;
-
-      if (occurence.dateDT) {
-        occurence.dateDT = null;
-      } else {
-        occurence.dateDT = Date.now();
-      }
-
-      return {
-        ...state
-      };
-    case actionTypes.HABIT_CHECK_SUCCESS:
-      // Lint is complaining.
-      state.started = processHabitsStarted(state.started);
-      return {
-        ...state
-      };
-    case actionTypes.HABIT_CHECK_FAIL:
-      occurence.dateDT = occurence._dateDT;
-
-      return {
-        ...state
-      };
+      // This looks like a hack.
     case actionTypes.AUTH_CLEAR:
       return {
         ...initialState
