@@ -18,7 +18,11 @@ export function checkCookie() {
     return request(check())(dispatch)
       .then(response => response.json())
       .then(json => {
-        dispatch(appReceive(json, actionTypes.AUTH_BY_COOKIE_SUCCESS, actionTypes.AUTH_BY_COOKIE_FAIL));
+        dispatch(appReceive(
+          json,
+          actionTypes.AUTH_BY_COOKIE_SUCCESS,
+          actionTypes.AUTH_BY_COOKIE_FAIL
+        ));
       })
       .catch(error => appError(error));
   };
@@ -67,8 +71,8 @@ export function clear() {
       .then(() => {
         CookieManager.clearAll((err, res) => {
           dispatch({
-            err: err,
-            res: res,
+            err,
+            res,
             type: actionTypes.AUTH_CLEAR
           });
         });
@@ -80,7 +84,7 @@ export function logout() {
   return (dispatch) => {
     dispatch({ type: actionTypes.AUTH_LOGOUT });
     dispatch(clear());
-  }
+  };
 }
 
 export function login(email, password) {
