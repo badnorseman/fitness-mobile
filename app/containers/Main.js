@@ -1,4 +1,3 @@
-'use strict';
 import React, { Component, Navigator, View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,9 +20,23 @@ import * as dashboardActions from '../actions/dashboard_actions';
 import * as habitActions from '../actions/habit_actions';
 import * as planActions from '../actions/plan_actions';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: 'stretch'
+  }
+});
+
 class Main extends Component {
+  static propTypes = {
+    dispatch: React.PropTypes.func,
+    state: React.PropTypes.object
+  };
+
   constructor(props) {
     super(props);
+    this.logout = this.logout.bind(this);
+    this.renderScene = this.renderScene.bind(this);
   }
 
   componentWillMount() {
@@ -37,11 +50,13 @@ class Main extends Component {
       nextProps.dispatch(planActions.planLoad());
     }
 
-    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.all).length && !nextProps.state.habit.all.loading && !nextProps.state.habit.all.loaded) {
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.all).length
+      && !nextProps.state.habit.all.loading && !nextProps.state.habit.all.loaded) {
       nextProps.dispatch(habitActions.getHabits());
     }
 
-    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.started).length && !nextProps.state.habit.started.loading && !nextProps.state.habit.started.loaded) {
+    if (nextProps.state.auth.ok && !Object.keys(nextProps.state.habit.started).length
+      && !nextProps.state.habit.started.loading && !nextProps.state.habit.started.loaded) {
       nextProps.dispatch(habitActions.getStartedHabits());
     }
 
@@ -57,10 +72,15 @@ class Main extends Component {
     }
 
     if (nextProps.state.auth.ok === false && nextProps.state.auth.ok !== this.props.state.auth.ok) {
-      nextProps.dispatch(appActions.alert('Authentication Failed', 'Please enter a valid e-mail and password'));
+      nextProps.dispatch(
+        appActions.alert('Authentication Failed', 'Please enter a valid email and password'));
       nextProps.dispatch(authActions.clear());
       return nextProps;
     }
+  }
+
+  logout() {
+    this.props.dispatch(authActions.logout());
   }
 
   renderScene(route, navigator) {
@@ -70,7 +90,7 @@ class Main extends Component {
       sharedProps,
       route.props,
       {
-        navigator: navigator,
+        navigator,
         state: this.props.state,
         dispatch: this.props.dispatch
       }
@@ -78,26 +98,42 @@ class Main extends Component {
 
     switch (route.id) {
       case 'dashboard':
-        return <Dashboard {...sharedProps} {...bindActionCreators({ ...dashboardActions, ...habitActions }, this.props.dispatch)}/>;
+        return (<Dashboard {...sharedProps}
+          {...bindActionCreators({ ...dashboardActions, ...habitActions }, this.props.dispatch)}
+        />);
       case 'feedback':
-        return <EditFeedback {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+        return (<EditFeedback {...sharedProps}
+          {...bindActionCreators({ ...planActions }, this.props.dispatch)}
+        />);
       case 'edit':
-        return <EditWorkout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+        return (<EditWorkout {...sharedProps}
+          {...bindActionCreators({ ...planActions }, this.props.dispatch)}
+        />);
       case 'exercise':
-        return <Exercise {...sharedProps} {...bindActionCreators({ ...planActions, ...countersActions }, this.props.dispatch)} />;
+        return (<Exercise {...sharedProps}
+          {...bindActionCreators({ ...planActions, ...countersActions }, this.props.dispatch)}
+        />);
       case 'history':
         return <ExerciseHistory {...sharedProps} />;
       case 'habits':
-        return <Habits {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
+        return (<Habits {...sharedProps}
+          {...bindActionCreators({ ...habitActions }, this.props.dispatch)}
+        />);
       case 'habit':
-        return <ShowHabit {...sharedProps} {...bindActionCreators({ ...habitActions }, this.props.dispatch)} />;
+        return (<ShowHabit {...sharedProps}
+          {...bindActionCreators({ ...habitActions }, this.props.dispatch)}
+        />);
       case 'video':
         return <Video {...sharedProps} />;
       case 'workout':
-        return <Workout {...sharedProps} {...bindActionCreators({ ...planActions }, this.props.dispatch)} />;
+        return (<Workout {...sharedProps}
+          {...bindActionCreators({ ...planActions }, this.props.dispatch)}
+        />);
       case 'login':
       default:
-        return <Login {...sharedProps} {...bindActionCreators({ ...authActions }, this.props.dispatch)}/>;
+        return (<Login {...sharedProps}
+          {...bindActionCreators({ ...authActions }, this.props.dispatch)}
+        />);
     }
   }
 
@@ -112,7 +148,7 @@ class Main extends Component {
             backgroundColor: 'rgba(46, 49, 58, 1)'
           }}
           initialRoute={{ id: 'login', title: 'Fitbird' }}
-          renderScene={this.renderScene.bind(this)}
+          renderScene={this.renderScene}
           navigationBar={
             <Navigator.NavigationBar
               routeMapper={NavigationBarRouteMapper}
@@ -121,23 +157,11 @@ class Main extends Component {
               }}
             />
           }
-          logout={() => this.props.dispatch(authActions.logout())}
+          logout={this.logout}
         />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: 'stretch'
-  }
-});
-
-Main.propTypes = {
-  dispatch: React.PropTypes.func,
-  state: React.PropTypes.object
-};
-
-export default connect(state => ({ state: state }))(Main);
+export default connect(state => ({ state }))(Main);
