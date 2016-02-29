@@ -1,15 +1,14 @@
-'use strict';
-import React, {
-  Component,
-  ListView,
-  StyleSheet
-} from 'react-native';
-
+import React, { Component, ListView } from 'react-native';
 import HabitListRow from './HabitListRow';
 
-class HabitList extends Component {
+export default class HabitList extends Component {
+  static propTypes = {
+    state: React.PropTypes.object
+  };
+
   constructor(props) {
     super(props);
+    this.renderRow = this.renderRow.bind(this);
   }
 
   renderRow(rowData, sectionId, rowId) {
@@ -28,14 +27,8 @@ class HabitList extends Component {
       <ListView
         automaticallyAdjustContentInsets={false}
         dataSource={dataSource}
-        renderRow={this.renderRow.bind(this)}
+        renderRow={this.renderRow}
       />
     );
   }
-};
-
-HabitList.propTypes = {
-  state: React.PropTypes.object
-};
-
-export default HabitList
+}

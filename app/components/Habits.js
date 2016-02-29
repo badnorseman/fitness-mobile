@@ -1,33 +1,6 @@
-'use strict';
-import React, {
-  Component,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
+import React, { Component, StyleSheet, Text, View } from 'react-native';
 import HabitList from './HabitList';
 import NAVBAR_PADDING from '../constants/navbar_padding';
-
-class Habits extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>It’s time to choose a habit</Text>
-        </View>
-        <View style={styles.paragraphContainer}>
-          <Text style={styles.paragraph}>Good habits are the key to long term success regardless what your goal is. Pick one of the habits below to do daily for the next two weeks. Start with something you’re certain you can do and build on it.</Text>
-        </View>
-        <HabitList {...this.props}/>
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -54,4 +27,18 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Habits
+export default class Habits extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>It’s time to choose a habit</Text>
+        </View>
+        <View style={styles.paragraphContainer}>
+          <Text style={styles.paragraph}>Good habits are the key to long term success regardless what your goal is. Pick one of the habits below to do daily for the next two weeks. Start with something you’re certain you can do and build on it.</Text>
+        </View>
+        <HabitList {...this.props} />
+      </View>
+    );
+  }
+}
