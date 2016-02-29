@@ -1,4 +1,3 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 import processHabitsStarted from '../utils/processHabitsStarted';
 
@@ -7,13 +6,13 @@ const initialState = {
   started: {}
 };
 
-const habit = (state = initialState, action = {}) => {
-  let habit;
+export default function habit(state = initialState, action = {}) {
+  let habitStarted;
   let occurence;
 
   if (action.occurence && action.id) {
-    habit = state.started.data.find((h) => { return h.id === action.id; });
-    occurence = habit.occurences.find((o) => {
+    habitStarted = state.started.data.find((h) => { return h.id === action.id; });
+    occurence = habitStarted.occurences.find((o) => {
       return o.day === action.occurence.day && o.week === action.occurence.week;
     });
   }
@@ -85,6 +84,4 @@ const habit = (state = initialState, action = {}) => {
     default:
       return state;
   }
-};
-
-export default habit
+}
