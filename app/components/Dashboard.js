@@ -1,16 +1,10 @@
-import React, {
-  StyleSheet,
-  Component,
-  View,
-  Image
-} from 'react-native';
-
+import React, { Component, Image, StyleSheet, View } from 'react-native';
 import WeekNav from './WeekNav';
 import WeekView from './WeekView';
 import CenteredText from './CenteredText';
 
 const styles = StyleSheet.create({
-  main: {
+  container: {
     flex: 1,
     backgroundColor: 'rgba(41, 44, 53, 0.95)'
   },
@@ -25,23 +19,19 @@ export default class Dashboard extends Component {
     state: React.PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { state } = this.props;
     let loadingText;
 
     if (state && state.plan && state.plan.ok && state.habit.all.ok && state.habit.started.ok) {
       return (
-        <View style={styles.main}>
+        <View style={styles.container}>
           <Image
             style={styles.background}
             source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
           >
-            <WeekView {...this.props}/>
-            <WeekNav {...this.props}/>
+            <WeekView {...this.props} />
+            <WeekNav {...this.props} />
           </Image>
         </View>
       );
@@ -49,12 +39,12 @@ export default class Dashboard extends Component {
 
     if (state && state.plan && state.plan.ok === false) {
       return (
-        <View style={styles.main}>
+        <View style={styles.container}>
           <Image
             style={styles.background}
             source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
           >
-            <CenteredText text="You will recieve an e-mail notification when your coach has reviewed your profile and created your plan."/>
+            <CenteredText text="You will recieve an email notification when your coach has reviewed your profile and created your plan." />
           </Image>
         </View>
       );
@@ -69,12 +59,12 @@ export default class Dashboard extends Component {
     }
 
     return (
-      <View style={styles.main}>
+      <View style={styles.container}>
         <Image
           style={styles.background}
           source={{ uri: 'http://app.fitbird.com/app/static/img/background-bird.png' }}
         >
-          <CenteredText text={loadingText}/>
+          <CenteredText text={loadingText} />
         </Image>
       </View>
     );
