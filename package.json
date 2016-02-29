@@ -17,5 +17,8 @@
     "redux": "3.0.5",
     "redux-logger": "^2.4.0",
     "redux-thunk": "1.0.3"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^4.1.0"
   }
 }
