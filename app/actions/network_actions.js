@@ -1,7 +1,6 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 
-const request = (apiRequest) => {
+export function request(apiRequest) {
   return (dispatch) => {
     dispatch({ type: actionTypes.NETWORK_REQUEST });
 
@@ -9,12 +8,10 @@ const request = (apiRequest) => {
       .then((response) => {
         dispatch({
           type: actionTypes.NETWORK_REQUEST_COMPLETED,
-          response: response
+          response
         });
 
         return response;
       });
   };
-};
-
-export { request };
+}

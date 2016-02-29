@@ -1,7 +1,13 @@
-'use strict';
 import * as actionTypes from '../constants/action_types';
 
-const initWeek = (week = 0) => {
+export function setWeek(week) {
+  return {
+    type: actionTypes.DASHBOARD_SET_WEEK,
+    week
+  };
+}
+
+export function initWeek(week = 0) {
   return (dispatch, getState) => {
     const state = getState();
     let currentWeek = week;
@@ -14,9 +20,9 @@ const initWeek = (week = 0) => {
 
     dispatch(setWeek(currentWeek));
   };
-};
+}
 
-const nextWeek = () => {
+export function nextWeek() {
   return (dispatch, getState) => {
     const state = getState();
     let week = state.dashboard.week;
@@ -29,9 +35,9 @@ const nextWeek = () => {
 
     dispatch(setWeek(week));
   };
-};
+}
 
-const prevWeek = () => {
+export function prevWeek() {
   return (dispatch, getState) => {
     const state = getState();
     let week = state.dashboard.week;
@@ -44,13 +50,4 @@ const prevWeek = () => {
 
     dispatch(setWeek(week));
   };
-};
-
-const setWeek = (week) => {
-  return {
-    type: actionTypes.DASHBOARD_SET_WEEK,
-    week: week
-  };
-};
-
-export { initWeek, nextWeek, prevWeek, setWeek };
+}
